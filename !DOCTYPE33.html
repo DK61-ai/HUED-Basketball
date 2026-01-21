@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <title>HUED BASKETBALL | OFFICIAL</title>
+    <meta name="description" content="Official website of Hacettepe University Faculty of Letters Basketball Team. Roster, Schedule, and Legacy.">
+    <meta property="og:title" content="HUED BASKETBALL">
+    <meta property="og:description" content="Est. 2023. The Official Team of Hacettepe University Faculty of Letters.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        bg: '#050505', 
+                        panel: '#0a0a0a', 
+                        text: '#ffffff',
+                        muted: '#666666',
+                        brand: '#ff0055', 
+                        accent: '#00f7ff',
+                        border: 'rgba(255,255,255,0.1)'
+                    },
+                    fontFamily: { 
+                        display: ['Big Shoulders Display', 'sans-serif'], 
+                        body: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    animation: {
+                        'spin-slow': 'spin 30s linear infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'blink': 'blink 1s step-end infinite'
+                    },
+                    keyframes: {
+                        blink: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } }
+                    },
+                    screens: {
+                        'tall': { 'raw': '(min-aspect-ratio: 1/2)' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* MOBILE OPTIMIZATIONS */
+        * { -webkit-tap-highlight-color: transparent; }
+        body { 
+            background-color: #050505; color: #ffffff; overflow-x: hidden; 
+            padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+            overscroll-behavior-y: none;
+        }
+
+        /* UTILS */
+        [v-cloak] { display: none; }
+        #app-loader { position: fixed; inset: 0; background: #050505; z-index: 10000; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; pointer-events: none; }
+        #app-loader.loaded { opacity: 0; }
+        .clip-notch { clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #ff0055; border-radius: 3px; }
+
+        /* ANIMATIONS & TRANSITIONS */
+        .reveal-item { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-item.active { opacity: 1; transform: translateY(0); }
+        .lang-enter-active, .lang-leave-active, .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+        .lang-enter-from, .lang-leave-to, .fade-enter-from, .fade-leave-to { opacity: 0; }
+        .perspective { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+        
+        /* EFFECTS */
+        .scanline {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px; pointer-events: none;
+        }
+        #webgl-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.3; pointer-events: none; will-change: transform;
+        }
+        .min-h-dvh { min-height: 100vh; min-height: 100dvh; }
+    </style>
+</head>
+<body>
+
+    <div id="app-loader">
+        <div class="font-mono text-brand text-xs">
+            <span class="text-white">SYSTEM.INIT</span><br>
+            LOADING ASSETS... <span class="animate-blink">_</span>
+        </div>
+    </div>
+    
+    <canvas id="webgl-canvas"></canvas>
+    
+    <div id="app" v-cloak class="relative flex flex-col min-h-dvh font-body selection:bg-brand selection:text-white">
+        
+        <app-nav 
+            :current-view="view" :lang="lang" :labels="content[lang].nav" :mobile-open="mobileOpen"
+            @change-view="changeView" @toggle-lang="toggleLang" @toggle-menu="toggleMenu">
+        </app-nav>
+
+        <main class="flex-grow pt-[100px] lg:pt-[120px] px-4 md:px-0 relative">
+            <transition name="fade" mode="out-in">
+                
+                <section v-if="view === 'home'" :key="'home'" class="min-h-[85vh] lg:min-h-dvh flex flex-col justify-center items-center relative overflow-hidden pb-12 lg:pb-0">
+                    <div class="w-full max-w-7xl px-2 sm:px-6 relative z-10" v-reveal>
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-border pb-8 lg:pb-12 mb-8">
+                            <div class="lg:col-span-8">
+                                <div class="flex items-center gap-3 mb-4 lg:mb-6">
+                                    <div class="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-brand animate-pulse-fast"></div>
+                                    <transition name="lang" mode="out-in">
+                                        <span :key="lang" class="font-mono text-[10px] lg:text-xs tracking-widest text-muted">{{ content[lang].hero.meta }}</span>
+                                    </transition>
+                                </div>
+                                <h1 class="font-display font-black text-[clamp(4rem,14vw,9rem)] leading-[0.85] uppercase text-white tracking-tighter mb-4 break-words">
+                                    HUED<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-accent">BASKETBALL</span>
+                                </h1>
+                            </div>
+                            <div class="lg:col-span-4 flex flex-row lg:flex-col items-end justify-between lg:h-full w-full">
+                                <logo-icon class="w-16 h-16 lg:w-24 lg:h-24 text-text mb-0 lg:mb-8 hidden lg:block animate-spin-slow"></logo-icon>
+                                <transition name="lang" mode="out-in">
+                                    <div :key="lang" class="font-mono text-[10px] lg:text-xs text-muted text-right max-w-[200px] lg:max-w-xs leading-relaxed ml-auto">
+                                        {{ content[lang].hero.title_main }}<br>ANKARA, TR<br>EST. 2023
+                                    </div>
+                                </transition>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+                            <button v-for="(btn, i) in heroButtons" :key="btn.key" @click="changeView(btn.key)" 
+                                    class="hover-trigger group border border-border p-5 lg:p-6 transition-all text-left active:scale-95 touch-manipulation"
+                                    :class="btn.classes" :aria-label="'Navigate to ' + btn.key">
+                                <div class="font-mono text-[10px] lg:text-xs text-muted mb-2 transition-colors" :class="btn.textClass">0{{ i + 1 }}</div>
+                                <div class="font-display font-bold text-xl lg:text-2xl uppercase transition-colors" :class="btn.textClass">
+                                    <transition name="lang" mode="out-in">
+                                        <span :key="lang">{{ content[lang].nav[btn.key] }}</span>
+                                    </transition>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section v-else-if="view === 'about'" :key="'about'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32">
+                        <div class="space-y-8 lg:space-y-12" v-reveal>
+                            <transition name="lang" mode="out-in">
+                                <h2 :key="lang" class="font-display font-black text-6xl lg:text-8xl text-text leading-[0.85] uppercase break-words">
+                                    {{ content[lang].about.title }}
+                                </h2>
+                            </transition>
+                            <transition name="lang" mode="out-in">
+                                <p :key="lang" class="font-body text-base lg:text-xl text-muted leading-relaxed">
+                                    {{ content[lang].about.desc }}
+                                </p>
+                            </transition>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="w-full sm:w-1/2 p-6 border border-border bg-panel hover-trigger hover:border-brand/50 transition-colors">
+                                    <transition name="lang" mode="out-in">
+                                        <h3 :key="lang" class="font-mono text-brand text-xs mb-2 uppercase">{{ content[lang].about.culture_title }}</h3>
+                                    </transition>
+                                    <transition name="lang" mode="out-in">
+                                        <p :key="lang" class="text-sm text-text leading-relaxed">{{ content[lang].about.culture_desc }}</p>
+                                    </transition>
+                                </div>
+                                <div class="w-full sm:w-1/2 p-6 border border-border bg-panel hover-trigger hover:border-accent/50 transition-colors">
+                                    <transition name="lang" mode="out-in">
+                                        <h3 :key="lang" class="font-mono text-accent text-xs mb-2 uppercase">{{ content[lang].about.future_title }}</h3>
+                                    </transition>
+                                    <transition name="lang" mode="out-in">
+                                        <p :key="lang" class="text-sm text-text leading-relaxed">{{ content[lang].about.future_desc }}</p>
+                                    </transition>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative h-[300px] lg:h-auto min-h-[300px] flex items-center justify-center bg-panel border border-border clip-notch group" v-reveal>
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                            <logo-icon class="w-48 h-48 lg:w-64 lg:h-64 text-text opacity-10 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"></logo-icon>
+                            <div class="absolute bottom-6 right-6 font-mono text-xs text-brand">/// FIG.01 TACTICAL MAP</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section v-else-if="view === 'roster'" :key="'roster'" class="py-12 lg:py-16 px-4 md:px-12 relative">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-border pb-6 mb-12 gap-6">
+                        <h2 class="font-display font-black text-6xl md:text-8xl text-text uppercase leading-none" v-reveal>The Unit</h2>
+                        <div class="flex flex-wrap gap-2" v-reveal>
+                            <button v-for="type in ['men', 'women']" :key="type" @click="rosterFilter = type" 
+                                    class="hover-trigger px-6 py-3 lg:py-2 font-mono text-xs font-bold uppercase border transition-all"
+                                    :class="rosterFilter === type ? 'bg-text text-bg border-text' : 'text-muted border-border hover:text-text'">
+                                <transition name="lang" mode="out-in">
+                                    <span :key="lang">{{ content[lang].roster[type + '_league'] }}</span>
+                                </transition>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-24">
+                        <player-card v-for="(p, i) in activeRoster" :key="p.id" :player="p" :index="i" :filter="rosterFilter"></player-card>
+                    </div>
+                    <transition name="fade">
+                        <button v-show="scrolled" @click="scrollToTop" aria-label="Scroll to Top"
+                                class="fixed bottom-8 right-8 z-40 w-12 h-12 flex items-center justify-center bg-brand text-white border border-brand hover:bg-white hover:text-brand hover:border-white transition-all duration-300 group shadow-lg hover-trigger">
+                            <svg class="w-6 h-6 transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        </button>
+                    </transition>
+                </section>
+
+                <section v-else-if="view === 'schedule'" :key="'schedule'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-dvh">
+                    <header class="mb-12 lg:mb-20 text-center" v-reveal>
+                        <span class="font-mono text-brand text-xs uppercase tracking-widest mb-4 block">/// OFFICIAL FIXTURE 25-26</span>
+                        <transition name="lang" mode="out-in">
+                            <h2 :key="lang" class="font-display font-black text-5xl sm:text-6xl md:text-8xl text-text uppercase break-words">{{ content[lang].schedule.calendar_title }}</h2>
+                        </transition>
+                    </header>
+                    <div class="space-y-4">
+                        <schedule-row v-for="(m, i) in scheduleData" :key="i" :match="m" :lang-content="content[lang].schedule" :lang="lang"></schedule-row>
+                    </div>
+                </section>
+
+                <section v-else-if="view === 'legacy'" :key="'legacy'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
+                    <div class="mb-16 lg:mb-24" v-reveal>
+                        <transition name="lang" mode="out-in">
+                            <h2 :key="lang" class="font-display font-black text-5xl sm:text-6xl md:text-8xl text-text uppercase mb-12">{{ content[lang].legacy.timeline_title }}</h2>
+                        </transition>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
+                            <div v-for="(stat, i) in legacyStats" :key="i" class="bg-bg p-6 lg:p-8 text-center hover:bg-panel transition-colors group">
+                                <div class="font-display font-bold text-4xl lg:text-5xl text-white group-hover:text-brand transition-colors mb-2" v-counter :data-target="stat.val">0</div>
+                                <transition name="lang" mode="out-in">
+                                    <div :key="lang" class="font-mono text-[10px] text-muted uppercase tracking-widest">{{ stat.label }}</div>
+                                </transition>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative border-l border-border ml-2 lg:ml-12 space-y-16 pb-20">
+                        <div v-for="(item, i) in legacyTimeline" :key="i" class="pl-8 lg:pl-12 relative group hover-trigger" v-reveal>
+                            <span class="absolute -left-[5px] top-3 w-2.5 h-2.5 bg-bg border border-text rounded-full group-hover:bg-brand group-hover:border-brand transition-colors"></span>
+                            <div class="font-mono text-brand text-sm mb-2 font-bold">{{ item.y }}</div>
+                            <h3 class="font-display font-bold text-2xl mb-2">{{ item.title }}</h3>
+                            <p class="font-body text-base lg:text-xl text-text/80 max-w-2xl">{{ item.t }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section v-else-if="view === 'join'" :key="'join'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-7xl mx-auto min-h-dvh">
+                     <header class="mb-12 lg:mb-16" v-reveal>
+                        <transition name="lang" mode="out-in">
+                            <h2 :key="lang" class="font-display font-black text-6xl md:text-8xl text-text uppercase mb-8 leading-none">{{ content[lang].join.title }}</h2>
+                        </transition>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 lg:mb-24">
+                            <a v-for="(link, key) in content[lang].join.links" :key="key" 
+                               :href="key === 'wa' ? 'https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP' : 'https://www.instagram.com/huedbasketbol'" 
+                               target="_blank" class="group hover-trigger border border-border bg-panel p-8 md:p-12 hover:border-brand transition-all relative overflow-hidden active:scale-[0.98]">
+                                <div class="absolute inset-0 scale-0 group-hover:scale-100 transition-transform origin-bottom-left duration-500" :class="key === 'wa' ? 'bg-brand/5' : 'bg-accent/5'"></div>
+                                <span class="font-mono text-xs font-bold uppercase mb-2 block" :class="key === 'wa' ? 'text-brand' : 'text-accent'">/// {{ key === 'wa' ? 'COMMUNITY' : 'MEDIA' }}</span>
+                                <transition name="lang" mode="out-in">
+                                    <h3 :key="lang" class="font-display font-bold text-3xl lg:text-4xl text-white mb-2">{{ link }}</h3>
+                                </transition>
+                            </a>
+                        </div>
+                    </header>
+                    <div v-reveal>
+                        <span class="font-mono text-muted text-xs uppercase tracking-widest mb-8 block border-b border-border pb-4">/// MANAGEMENT</span>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div v-for="(role, key) in content[lang].join.roles" :key="key" class="border border-border p-8 bg-bg hover:bg-panel transition-colors hover-trigger">
+                                <transition name="lang" mode="out-in">
+                                    <span :key="lang" class="font-mono text-[10px] uppercase tracking-widest mb-4 block" 
+                                          :class="key === 'coord' ? 'text-brand' : (key === 'capt' ? 'text-accent' : 'text-muted')">{{ role }}</span>
+                                </transition>
+                                <h3 class="font-display font-bold text-2xl lg:text-3xl text-white uppercase leading-tight">
+                                    {{ key === 'coord' ? 'Esin Özge Esen' : (key === 'capt' ? 'Doruk Kuru' : 'Duygu Serttaş') }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </transition>
+        </main>
+
+        <footer class="mt-auto py-12 border-t border-border bg-panel px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-4">
+                    <logo-icon class="w-10 h-10 text-text"></logo-icon>
+                    <div class="font-mono text-[10px] text-muted uppercase">Hacettepe University<br>Faculty of Letters</div>
+                </div>
+                <div class="flex gap-6 font-mono text-xs">
+                    <a href="https://www.instagram.com/huedbasketbol" target="_blank" rel="noopener noreferrer" class="hover-trigger text-text hover:text-brand transition-colors">INSTAGRAM</a>
+                    <a href="https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP" target="_blank" rel="noopener noreferrer" class="hover-trigger text-text hover:text-brand transition-colors">WHATSAPP</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/x-template" id="tpl-player-card">
+        <div class="group aspect-[3/4] w-full perspective hover-trigger active:scale-[0.98] transition-transform duration-200" @mouseenter="onEnter" @mousemove="handleTilt" @mouseleave="onLeave">
+            <div class="relative w-full h-full transition-transform duration-100 ease-out preserve-3d" :style="cardTransform">
+                <div class="absolute inset-0 backface-hidden bg-panel border border-border overflow-hidden">
+                    <img :src="imageSrc" :alt="player.name" loading="lazy" @load="onLoad" @error="onError" 
+                         class="w-full h-full object-cover object-top grayscale opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
+                    <div class="absolute inset-0 scanline opacity-20"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 text-left">
+                        <div class="flex justify-between items-end border-b border-white/20 pb-2 mb-2">
+                            <span class="font-mono text-accent text-xs font-bold">{{ player.h }} CM</span>
+                            <span class="font-display font-bold text-5xl lg:text-6xl text-white opacity-20">{{ player.n }}</span>
+                        </div>
+                        <span class="font-mono text-brand text-[10px] font-bold bg-white/10 px-2 py-1 mb-2 inline-block">{{ player.role }}</span>
+                        <h3 class="font-display font-bold text-3xl lg:text-4xl text-white uppercase leading-[0.85]">{{ player.name }}</h3>
+                    </div>
+                </div>
+                <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-40 transition-opacity duration-300"
+                     :style="{ background: `radial-gradient(circle at ${shinePosition}, rgba(255,255,255,0.3) 0%, transparent 60%)` }">
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="tpl-schedule">
+        <div class="hover-trigger group w-full bg-panel border border-border hover:bg-white/5 hover:border-brand/50 transition-all duration-300">
+            <div class="flex flex-col md:flex-row items-center p-6 gap-4 md:gap-6">
+                <div class="flex flex-col items-center justify-center w-full md:w-24 shrink-0 border-b md:border-b-0 md:border-r border-border pb-4 md:pb-0 md:pr-6">
+                    <span class="font-display font-bold text-4xl text-text">{{ match.d.split(' ')[1] }}</span>
+                    <span class="font-mono text-xs text-brand uppercase">{{ match.d.split(' ')[0] }}</span>
+                </div>
+                <div class="flex-grow text-center md:text-left w-full">
+                    <div class="font-display font-bold text-3xl sm:text-4xl md:text-5xl uppercase text-text group-hover:text-brand transition-colors break-words leading-none mb-2 md:mb-0">
+                        <span class="text-muted text-2xl mr-2 block sm:inline">VS</span>{{ match.opp }}
+                    </div>
+                    <div class="text-muted font-mono text-xs mt-1 uppercase">{{ match.loc }}</div>
+                </div>
+                <div class="shrink-0 w-full md:w-auto">
+                    <div v-if="!match.past" class="border border-brand/30 text-brand font-mono font-bold text-xs px-6 py-3 uppercase tracking-wider bg-brand/5 cursor-default text-center">
+                        <transition name="lang" mode="out-in">
+                            <span :key="lang">{{ langContent.ticket_btn }}</span>
+                        </transition>
+                    </div>
+                    <span v-else class="font-mono text-xs text-muted block text-center md:text-right">FINAL: {{ match.t }}</span>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="tpl-nav">
+        <nav class="fixed top-0 w-full h-[100px] lg:h-[120px] z-[100] flex items-center px-4 md:px-12 transition-all duration-300 bg-bg/90 backdrop-blur-md border-b border-border">
+            <a href="#home" @click.prevent="onNavClick('home')" class="hover-trigger flex items-center gap-3 mr-auto group" aria-label="Go to Home">
+                <logo-icon class="w-10 h-10 lg:w-12 lg:h-12 group-hover:scale-110 transition-transform duration-300"></logo-icon>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-2xl lg:text-3xl text-text leading-none tracking-wide">HUED</span>
+                    <span class="font-mono text-[9px] text-muted tracking-widest">BASKETBALL</span>
+                </div>
+            </a>
+
+            <div class="hidden lg:flex items-center justify-center gap-1 bg-panel border border-border p-1 rounded-full absolute left-1/2 -translate-x-1/2 min-w-[515px]">
+                <button v-for="(label, key) in labels" :key="key" @click="onNavClick(key)" 
+                    class="hover-trigger font-mono font-bold text-xs px-6 py-2 rounded-full transition-all uppercase"
+                    :class="currentView === key ? 'bg-text text-bg' : 'text-muted hover:text-text'">
+                    <transition name="lang" mode="out-in">
+                        <span :key="lang">{{ label }}</span>
+                    </transition>
+                </button>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-6 ml-auto">
+                <button @click="$emit('toggle-lang')" class="hover-trigger w-8 h-8 flex items-center justify-center border border-border rounded-full overflow-hidden hover:border-brand transition-colors" aria-label="Toggle Language">
+                    <img v-if="lang === 'en'" src="https://flagicons.lipis.dev/flags/4x3/gb.svg" class="w-full h-full object-cover opacity-80" alt="English">
+                    <img v-else src="https://flagicons.lipis.dev/flags/4x3/tr.svg" class="w-full h-full object-cover opacity-80" alt="Turkish">
+                </button>
+            </div>
+            
+            <button @click="$emit('toggle-menu')" class="lg:hidden ml-auto text-white p-4 hover-trigger z-[102]" aria-label="Menu">
+                <div class="space-y-1.5 w-7 flex flex-col justify-center">
+                    <span class="block h-0.5 bg-white w-full transition-transform duration-300 origin-center" :class="mobileOpen ? 'rotate-45 translate-y-2' : ''"></span>
+                    <span class="block h-0.5 bg-white w-full transition-opacity duration-300" :class="mobileOpen ? 'opacity-0' : ''"></span>
+                    <span class="block h-0.5 bg-white w-full transition-transform duration-300 origin-center" :class="mobileOpen ? '-rotate-45 -translate-y-2' : ''"></span>
+                </div>
+            </button>
+
+            <transition name="fade">
+                <div v-if="mobileOpen" class="fixed inset-0 bg-[#050505] z-[90] flex flex-col items-center justify-center gap-8 lg:hidden pb-12 h-[100dvh] overflow-y-auto">
+                    <button v-for="(label, key) in labels" :key="key" @click="onNavClick(key)" 
+                        class="font-display font-black text-5xl sm:text-6xl uppercase text-text hover:text-brand transition-all active:scale-95">
+                        <transition name="lang" mode="out-in">
+                            <span :key="lang">{{ label }}</span>
+                        </transition>
+                    </button>
+                    <div class="w-12 h-1 bg-border rounded-full my-4"></div>
+                    <div class="flex items-center gap-6">
+                        <button @click="$emit('toggle-lang')" class="border border-border px-6 py-3 text-sm font-mono text-text hover:bg-white hover:text-black transition-colors">
+                            {{ lang === 'en' ? 'TÜRKÇE' : 'ENGLISH' }}
+                        </button>
+                    </div>
+                </div>
+            </transition>
+        </nav>
+    </script>
+
+    <script type="text/x-template" id="tpl-logo">
+        <div class="relative flex items-center justify-center">
+            <img src="./logo.png" alt="HUED" class="w-full h-full object-contain pointer-events-none select-none block">
+        </div>
+    </script>
+
+    <script type="module">
+        import { createApp, ref, computed, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+        import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js'
+
+        const observerService = {
+            reveal: null,
+            counter: null,
+            init() {
+                this.reveal = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            this.reveal.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                this.counter = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            const el = entry.target;
+                            const target = parseInt(el.dataset.target);
+                            const duration = 2000;
+                            const start = performance.now();
+                            const animate = (time) => {
+                                const progress = Math.min((time - start) / duration, 1);
+                                const ease = 1 - Math.pow(1 - progress, 4);
+                                el.innerText = Math.floor(ease * target) + (target > 50 ? '+' : '');
+                                if(progress < 1) requestAnimationFrame(animate);
+                            };
+                            requestAnimationFrame(animate);
+                            this.counter.unobserve(el);
+                        }
+                    });
+                });
+            }
+        };
+
+        function use3DScene() {
+            let renderer, scene, camera, mesh, frameId;
+            let mouseX = 0, mouseY = 0;
+            let isVisible = true;
+            
+            document.addEventListener('visibilitychange', () => { isVisible = document.visibilityState === 'visible'; });
+            
+            const init = () => {
+                const canvas = document.getElementById('webgl-canvas');
+                if(!canvas) return;
+
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+                camera.position.set(0, -10, 20);
+                camera.lookAt(0, 0, 0);
+
+                renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+                const geometry = new THREE.PlaneGeometry(60, 40, 30, 30);
+                const material = new THREE.MeshBasicMaterial({ color: 0xff0055, wireframe: true, transparent: true, opacity: 0.15 });
+                mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+
+                if (window.matchMedia("(pointer: fine)").matches) {
+                    document.addEventListener('mousemove', (e) => {
+                        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+                    });
+                }
+
+                window.addEventListener('scroll', () => { 
+                    if (document.visibilityState === 'visible') isVisible = window.scrollY < window.innerHeight * 1.5; 
+                });
+
+                const animate = (time) => {
+                    frameId = requestAnimationFrame(animate);
+                    if(!isVisible) return;
+
+                    const positions = mesh.geometry.attributes.position.array;
+                    const timeFactor = time * 0.002;
+                    const mouseXScaled = mouseX * 20;
+                    const mouseYScaled = mouseY * 20;
+                    
+                    for(let i=0; i<positions.length; i+=3) {
+                        const x = positions[i];
+                        const y = positions[i+1];
+                        positions[i+2] = Math.sin(x/5 + timeFactor) * 2 + Math.cos(y/5 + timeFactor) * 2;
+                        const dx = x - mouseXScaled;
+                        const dy = y - mouseYScaled;
+                        const distSq = dx * dx + dy * dy;
+                        if(distSq < 64) positions[i+2] += (8 - Math.sqrt(distSq)) * 0.5;
+                    }
+                    mesh.geometry.attributes.position.needsUpdate = true;
+                    renderer.render(scene, camera);
+                };
+                animate(0);
+            };
+
+            onMounted(() => { 
+                init(); 
+                window.addEventListener('resize', () => {
+                    if(!camera || !renderer) return;
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            });
+        }
+
+        const CONTENT = Object.freeze({
+            en: {
+                nav: { join: "Join", schedule: "Schedule", roster: "Roster", about: "About", legacy: "Legacy" },
+                hero: { meta: "EST 2023 // FACULTY OF LETTERS", title_pre: "OFFICIAL TEAM", title_main: "HUED" },
+                about: {
+                    title: "THE VISION",
+                    desc: "Established in 2023, the Faculty of Letters Basketball Team is striving to not only achieve success in the bi-annual HODESK 3x3 Tournaments and The Annual Hacettepe Sports Festival, but also to create an environment within which anyone that is interested in the game of basketball can join in and make unforgettable memories throughout their academic journey.",
+                    culture_title: "CULTURE",
+                    culture_desc: "We believe that basketball is more than a game—it is a language. From the asphalt of the outdoor courts to the polished hardwood of the main arena, every dribble resonates with our ambition.",
+                    future_title: "FUTURE",
+                    future_desc: "Our roadmap is clear: dominate the local circuit, expand our roster depth, and establish a legacy that outlasts our tenure at the university."
+                },
+                roster: { men_league: "MEN'S LEAGUE", women_league: "WOMEN'S LEAGUE" },
+                schedule: { calendar_title: "2025-26 SEASON", calendar_sub: "SECURE YOUR SEAT AT THE ARENA", ticket_btn: "FREE ENTRY" },
+                legacy: { 
+                    timeline_title: "TIMELINE",
+                    stats: [ {val:"51", label:"MEMBERS"}, {val:"3", label:"PODIUMS"}, {val:"2", label:"FESTS"}, {val:"20", label:"MATCHES"} ]
+                },
+                join: {
+                    title: "JOIN THE UNIT",
+                    links: { wa: "WHATSAPP GROUP", insta: "INSTAGRAM" },
+                    roles: { coord: "TEAM COORDINATOR", capt: "TEAM CAPTAIN", social: "SOCIAL MEDIA MANAGER" }
+                }
+            },
+            tr: {
+                nav: { join: "Katıl", schedule: "Fikstür", roster: "Kadro", about: "Hakkımızda", legacy: "Tarihçe" },
+                hero: { meta: "KURULUŞ 2023 // EDEBİYAT FAKÜLTESİ", title_pre: "RESMİ TAKIM", title_main: "HUED" },
+                about: {
+                    title: "VİZYONUMUZ",
+                    desc: "2023 yılında kurulan Edebiyat Fakültesi Basketbol Takımı, sadece HODESK 3x3 Turnuvaları ve Geleneksel Hacettepe Spor Festivali'nde başarıya ulaşmayı değil, basketbola ilgi duyan herkesin katılabileceği bir ortam yaratmayı amaçlamaktadır.",
+                    culture_title: "KÜLTÜRÜMÜZ",
+                    culture_desc: "Basketbolun bir oyundan fazlası, bir dil olduğuna inanıyoruz. Açık hava sahalarının asfaltından ana arenanın parkelerine kadar her top sürüşü hırsımızla yankılanıyor.",
+                    future_title: "GELECEK",
+                    future_desc: "Yol haritamız net: yerel turnuvaları domine etmek, kadro derinliğimizi artırmak ve üniversitedeki süremizden daha uzun ömürlü bir miras bırakmak."
+                },
+                roster: { men_league: "ERKEKLER LİGİ", women_league: "KADINLAR LİGİ" },
+                schedule: { calendar_title: "2025-26 SEZONU", calendar_sub: "ARENADAKİ YERİNİZİ AYIRTIN", ticket_btn: "GİRİŞ ÜCRETSİZ" },
+                legacy: { 
+                    timeline_title: "ZAMAN ÇİZELGESİ",
+                    stats: [ {val:"51", label:"ÜYE SAYISI"}, {val:"3", label:"HODESK KÜRSÜSÜ"}, {val:"2", label:"FESTİVAL KATILIMI"}, {val:"20", label:"RESMİ MAÇ"} ]
+                },
+                join: {
+                    title: "ARAMIZA KATIL",
+                    links: { wa: "WHATSAPP GRUBU", insta: "INSTAGRAM" },
+                    roles: { coord: "TAKIM KOORDİNATÖRÜ", capt: "TAKIM KAPTANI", social: "SOSYAL MEDYA SORUMLUSU" }
+                }
+            }
+        });
+
+        const DATA = Object.freeze({
+            men: [
+                { id: 'm1', n: "61", h: "190", name: "DORUK KURU", role: "FORWARD" },
+                { id: 'm2', n: "81", h: "175", name: "ALICAN DOĞAN", role: "GUARD" },
+                { id: 'm3', n: "13", h: "186", name: "MERT ERDOĞDU", role: "FORWARD" },
+                { id: 'm4', n: "3", h: "178", name: "SEÇKİN PEKTAŞ", role: "GUARD" },
+                { id: 'm5', n: "51", h: "195", name: "EMRE KAÇMAZ", role: "CENTER" },
+                { id: 'm6', n: "12", h: "175", name: "NİHAT YÜKSEL", role: "GUARD" },
+                { id: 'm7', n: "24", h: "184", name: "MEHMET ALİ YILMAZ", role: "FORWARD" },
+                { id: 'm8', n: "8", h: "184", name: "SADİ KANDEMİR", role: "FORWARD" },
+                { id: 'm9', n: "9", h: "175", name: "GÖKTÜRK GEREN", role: "GUARD" },
+                { id: 'm10', n: "1", h: "191", name: "TURGAY BİLEN", role: "GUARD" },
+                { id: 'm11', n: "11", h: "185", name: "UTKU UĞURLU", role: "FORWARD" },
+                { id: 'm12', n: "0", h: "176", name: "BURAK KİBAR", role: "GUARD" }
+            ],
+            women: [
+                { id: 'w1', n: "7", h: "162", name: "DUYGU SERTTAŞ", role: "GUARD" },
+                { id: 'w2', n: "8", h: "164", name: "ECEM TEMİZ", role: "GUARD" },
+                { id: 'w3', n: "13", h: "163", name: "ESİN ESEN", role: "GUARD" },
+                { id: 'w4', n: "10", h: "160", name: "TUANA BEKTAŞ", role: "GUARD" },
+                { id: 'w5', n: "15", h: "180", name: "MELİKE KORKMAZ", role: "CENTER" },
+                { id: 'w6', n: "22", h: "163", name: "MELİKE ÖZDEMİR", role: "GUARD" },
+                { id: 'w7', n: "2", h: "166", name: "ZEHRA KANLI", role: "FORWARD" },
+                { id: 'w8', n: "5", h: "172", name: "ELİF YILMAZ", role: "FORWARD" },
+                { id: 'w9', n: "11", h: "175", name: "ZEYNEP DEMİR", role: "FORWARD" },
+                { id: 'w10', n: "23", h: "168", name: "AYŞE KAYA", role: "GUARD" },
+                { id: 'w11', n: "34", h: "182", name: "FATMA ÇELİK", role: "CENTER" },
+                { id: 'w12', n: "6", h: "165", name: "BUSE ARSLAN", role: "GUARD" }
+            ],
+            matches: [
+                { d: 'DEC 2025', opp: 'HODESK 3X3 FALL', loc: 'RESULT: COMPLETE', t: 'SILVER/BRONZE', past: true },
+                { d: 'MAR 2026', opp: 'HODESK 3X3 SPRING', loc: 'BEYTEPE CAMPUS', t: 'TBA', past: false },
+                { d: 'APR 2026', opp: 'HACETTEPE 43RD FEST', loc: 'MAIN ARENA', t: 'TBA', past: false }
+            ],
+            timeline: {
+                en: [
+                    { y: '2023', title: 'The Beginning', t: 'Established as a Men\'s-only unit by Doruk Kuru, Mert Erdoğdu, and Nihat Yüksel.' },
+                    { y: '2024', title: 'First Podium', t: 'Participated in the first Hacettepe Sports Festival and won Silver at the inaugural HODESK 3x3 Tournament.' },
+                    { y: '2025', title: 'Expansion', t: 'Women\'s Team established. Consecutive Silver and Bronze medals won in HODESK 3x3 2025 Tournaments.' }
+                ],
+                tr: [
+                    { y: '2023', title: 'Başlangıç', t: 'Doruk Kuru, Mert Erdoğdu ve Nihat Yüksel tarafından sadece Erkek Takımı olarak kuruldu.' },
+                    { y: '2024', title: 'İlk Kürsü', t: 'Hacettepe Spor Festivali\'ne ilk katılım. İlk HODESK 3x3 Turnuvası\'nda Gümüş madalya kazanıldı.' },
+                    { y: '2025', title: 'Genişleme', t: 'Kadın Takımı kuruldu. HODESK 3x3 2025 turnuvalarında üst üste Gümüş ve Bronz madalya kazanıldı.' }
+                ]
+            }
+        });
+        
+        const HERO_BTNS = Object.freeze([
+            { key: 'join', classes: 'hover:bg-panel hover:border-brand', textClass: 'group-hover:text-white' },
+            { key: 'schedule', classes: 'hover:bg-accent hover:border-accent', textClass: 'group-hover:text-black' },
+            { key: 'roster', classes: 'hover:bg-brand hover:border-brand', textClass: 'group-hover:text-white' },
+            { key: 'about', classes: 'hover:bg-white hover:border-white', textClass: 'group-hover:text-black' }
+        ]);
+
+        const app = createApp({
+            setup() {
+                use3DScene();
+                observerService.init();
+                
+                const lang = ref('en');
+                const view = ref('home');
+                const rosterFilter = ref('men');
+                const scrolled = ref(false);
+                const mobileOpen = ref(false);
+
+                onMounted(() => {
+                    history.replaceState({ view: 'home' }, '', '');
+                    window.addEventListener('popstate', (event) => {
+                        if (mobileOpen.value) mobileOpen.value = false;
+                        if (event.state && event.state.view) view.value = event.state.view;
+                        else view.value = 'home';
+                    });
+
+                    const loader = document.getElementById('app-loader');
+                    if (loader) {
+                        setTimeout(() => {
+                            loader.classList.add('loaded');
+                            setTimeout(() => loader.remove(), 500);
+                        }, 500);
+                    }
+                    window.addEventListener('scroll', () => { scrolled.value = window.scrollY > 150; });
+                });
+
+                const changeView = (v) => { 
+                    if (v !== view.value) { 
+                        view.value = v; mobileOpen.value = false;
+                        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                        history.pushState({ view: v }, '', `#${v}`);
+                    } 
+                };
+
+                const activeRoster = computed(() => DATA[rosterFilter.value]);
+                const scheduleData = computed(() => DATA.matches);
+                const legacyStats = computed(() => CONTENT[lang.value].legacy.stats);
+                const legacyTimeline = computed(() => DATA.timeline[lang.value]);
+
+                const toggleLang = () => lang.value = lang.value === 'en' ? 'tr' : 'en';
+                const onNavClick = (key) => changeView(key);
+                const toggleMenu = () => mobileOpen.value = !mobileOpen.value;
+                const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                return { lang, view, rosterFilter, activeRoster, scheduleData, legacyStats, legacyTimeline, content: CONTENT, toggleLang, changeView, onNavClick, scrolled, scrollToTop, heroButtons: HERO_BTNS, mobileOpen, toggleMenu };
+            }
+        });
+
+        app.directive('reveal', { mounted(el) { observerService.reveal.observe(el); } });
+        app.directive('counter', { mounted(el) { observerService.counter.observe(el); } });
+
+        app.component('app-nav', { 
+            props: ['currentView', 'lang', 'labels', 'mobileOpen'], 
+            template: '#tpl-nav', 
+            emits: ['change-view', 'toggle-lang', 'toggle-menu'], 
+            setup(props, { emit }) {
+                watch(() => props.mobileOpen, (val) => document.body.style.overflow = val ? 'hidden' : '');
+                const onNavClick = (key) => { emit('change-view', key); };
+                return { onNavClick };
+            }
+        });
+
+        app.component('logo-icon', { 
+            template: '#tpl-logo'
+        });
+
+        const IMGS = {
+            men: ['1519861531473-920026393112', '1546519638-68e109498ffc', '1505666287802-931450a60631', '1533561661765-b1a13e5d0d8f'],
+            women: ['1574623452334-1e090b6f588e', '1525091726759-455a5b542036', '1518405523049-72c0570b779c', '1523142096311-155949f7d589']
+        };
+
+        app.component('player-card', {
+            props: ['player', 'index', 'filter'], template: '#tpl-player-card',
+            setup(props) {
+                const loading = ref(true);
+                const hasError = ref(false);
+                const cardTransform = ref({});
+                const shinePosition = ref('0% 0%');
+                let rect = null;
+
+                const onEnter = (e) => { if (window.matchMedia("(pointer: fine)").matches) rect = e.currentTarget.getBoundingClientRect(); };
+                const handleTilt = (e) => {
+                    if (!rect || !window.matchMedia("(pointer: fine)").matches) return;
+                    const x = e.clientX - rect.left, y = e.clientY - rect.top;
+                    const centerX = rect.width / 2, centerY = rect.height / 2;
+                    cardTransform.value = { transform: `perspective(1000px) rotateX(${((y - centerY)/centerY)*-5}deg) rotateY(${((x - centerX)/centerX)*5}deg) scale(1.02)` };
+                    shinePosition.value = `${(x/rect.width)*100}% ${(y/rect.height)*100}%`;
+                };
+                const onLeave = () => { rect = null; cardTransform.value = { transform: 'perspective(1000px) rotateX(0) rotateY(0) scale(1)' }; };
+                const imageSrc = computed(() => hasError.value ? 'https://placehold.co/400x450/1a1529/FFF?text=HUED' : `https://images.unsplash.com/photo-${IMGS[props.filter][props.index % 4]}?auto=format&fit=crop&w=400&q=80`);
+
+                return { loading, imageSrc, onLoad: () => loading.value = false, onError: () => { loading.value = false; hasError.value = true; }, onEnter, handleTilt, onLeave, cardTransform, shinePosition };
+            }
+        });
+
+        app.component('schedule-row', { props: ['match', 'langContent', 'lang'], template: '#tpl-schedule' });
+        
+        app.mount('#app');
+    </script>
+</body>
+</html>
