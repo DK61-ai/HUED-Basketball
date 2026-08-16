@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>HUED HOOPS | Official Platform</title>
+    <meta name="description" content="Official platform of Hacettepe University Faculty of Letters Basketball Team. Roster, Tournaments, and Legacy.">
+    <meta name="theme-color" content="#07040d">
     
-    <title>HUED BASKETBALL | OFFICIAL</title>
-    <meta name="description" content="Official website of Hacettepe University Faculty of Letters Basketball Team. Roster, Schedule, and Legacy.">
-    <meta property="og:title" content="HUED BASKETBALL">
-    <meta property="og:description" content="Est. 2023. The Official Team of Hacettepe University Faculty of Letters.">
+    <!-- Open Graph & Meta Tags -->
+    <meta property="og:title" content="HUED BASKETBALL | OFFICIAL PLATFORM">
+    <meta property="og:description" content="Official varsity basketball platform of Hacettepe University Faculty of Letters. Roster, Tournaments, and Legacy.">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#050505">
-
+    <meta name="twitter:card" content="summary_large_image">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&family=Mr+Dafoe&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -23,737 +23,1466 @@
             theme: {
                 extend: {
                     colors: { 
-                        bg: '#050505', 
-                        panel: '#0a0a0a', 
-                        text: '#ffffff',
-                        muted: '#666666',
-                        brand: '#ff0055', 
-                        accent: '#00f7ff',
-                        border: 'rgba(255,255,255,0.1)'
+                        bg: '#07040d', 
+                        panel: '#10091d', 
+                        card: '#160d29', 
+                        cardLight: '#1f1338',
+                        text: '#ffffff', 
+                        brand: '#00f0ff', 
+                        brandGlow: 'rgba(0, 240, 255, 0.35)',
+                        flamingo: '#ff1493',
+                        flamingoGlow: 'rgba(255, 20, 147, 0.35)',
+                        gold: '#ffd166'
                     },
                     fontFamily: { 
-                        display: ['Big Shoulders Display', 'sans-serif'], 
-                        body: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
+                        display: ['Bebas Neue', 'sans-serif'], 
+                        script: ['Mr Dafoe', 'cursive'], 
+                        sans: ['Montserrat', 'sans-serif'] 
                     },
-                    animation: {
-                        'spin-slow': 'spin 30s linear infinite',
-                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'blink': 'blink 1s step-end infinite'
-                    },
-                    keyframes: {
-                        blink: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } }
-                    },
-                    screens: {
-                        'tall': { 'raw': '(min-aspect-ratio: 1/2)' }
+                    boxShadow: { 
+                        'neon-cyan': '0 0 18px rgba(0, 240, 255, 0.25)', 
+                        'neon-pink': '0 0 18px rgba(255, 20, 147, 0.25)', 
+                        'pop-pink': '3px 3px 0px #ff1493', 
+                        'pop-cyan': '3px 3px 0px #00f0ff',
+                        'glass': '0 8px 28px 0 rgba(0, 0, 0, 0.45)'
                     }
                 }
             }
         }
     </script>
-
     <style>
-        /* MOBILE OPTIMIZATIONS */
-        * { -webkit-tap-highlight-color: transparent; }
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
         body { 
-            background-color: #050505; color: #ffffff; overflow-x: hidden; 
-            padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
-            padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
-            overscroll-behavior-y: none;
+            background: #07040d; 
+            color: #f1f5f9; 
+            overflow-x: hidden; 
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
         }
-
-        /* UTILS */
         [v-cloak] { display: none; }
-        #app-loader { position: fixed; inset: 0; background: #050505; z-index: 10000; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; pointer-events: none; }
+        #app-loader { 
+            position: fixed; inset: 0; background: radial-gradient(circle at center, #160d29 0%, #07040d 100%); 
+            z-index: 10000; display: flex; align-items: center; justify-content: center; 
+            transition: opacity .35s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; 
+        }
         #app-loader.loaded { opacity: 0; }
-        .clip-notch { clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%); }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #ff0055; border-radius: 3px; }
-
-        /* ANIMATIONS & TRANSITIONS */
-        .reveal-item { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        .deco-cut { clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
+        .deco-cut-sm { clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px)); }
+        
+        .jersey-num { 
+            color: #ffffff; 
+            text-shadow: 2px 2px 0px #ff1493, -2px -2px 0px #00f0ff; 
+        }
+        .jersey-trim-top { position: relative; }
+        .jersey-trim-top::before { 
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; 
+            background: linear-gradient(90deg, #ff1493 0%, #ffffff 50%, #00f0ff 100%); 
+        }
+        
+        .medal-silver { 
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 45%, #94a3b8 80%, #334155 100%); 
+            box-shadow: inset 0 0 8px rgba(255,255,255,0.9), 0 4px 14px rgba(148, 163, 184, 0.35); 
+        }
+        .medal-bronze { 
+            background: radial-gradient(circle at 35% 35%, #ffedd5 0%, #fb923c 45%, #c2410c 80%, #431407 100%); 
+            box-shadow: inset 0 0 8px rgba(255,255,255,0.8), 0 4px 14px rgba(234, 88, 12, 0.4); 
+        }
+        
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #07040d; }
+        ::-webkit-scrollbar-thumb { background: #1f1338; border: 1px solid rgba(255, 20, 147, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff1493; }
+        
+        /* REVEAL & TRANSITIONS */
+        .reveal-item { opacity: 0; transform: translateY(14px); transition: opacity .45s cubic-bezier(0.16, 1, 0.3, 1), transform .45s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
         .reveal-item.active { opacity: 1; transform: translateY(0); }
-        .lang-enter-active, .lang-leave-active, .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
-        .lang-enter-from, .lang-leave-to, .fade-enter-from, .fade-leave-to { opacity: 0; }
-        .perspective { perspective: 1000px; }
+        
+        .fade-enter-active, .fade-leave-active { transition: opacity .22s cubic-bezier(0.16, 1, 0.3, 1), transform .22s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-enter-from { opacity: 0; transform: translateY(5px); }
+        .fade-leave-to { opacity: 0; transform: translateY(-5px); }
+        
+        .fade-toggle-enter-active, .fade-toggle-leave-active { transition: opacity .16s ease, transform .16s ease; }
+        .fade-toggle-enter-from { opacity: 0; transform: scale(0.92); }
+        .fade-toggle-leave-to { opacity: 0; transform: scale(1.04); }
+        
+        .fade-grid-enter-active, .fade-grid-leave-active { transition: opacity .2s cubic-bezier(0.16, 1, 0.3, 1), transform .2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-grid-enter-from { opacity: 0; transform: translateY(6px); }
+        .fade-grid-leave-to { opacity: 0; transform: translateY(-6px); }
+
+        .drawer-slide-enter-active, .drawer-slide-leave-active { transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), opacity .25s ease; }
+        .drawer-slide-enter-from, .drawer-slide-leave-to { transform: translateX(100%); opacity: 0; }
+
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-        
-        /* EFFECTS */
-        .scanline {
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
-            background-size: 100% 4px; pointer-events: none;
-        }
-        #webgl-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.3; pointer-events: none; will-change: transform;
-        }
+        #canvas-bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; pointer-events: none; }
         .min-h-dvh { min-height: 100vh; min-height: 100dvh; }
+        .modal-scroll-contain { overscroll-behavior: contain; }
+
+        .card-tilt-wrap {
+            transform: perspective(900px) rotateX(var(--card-rx, 0deg)) rotateY(var(--card-ry, 0deg)) scale(var(--card-s, 1));
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+            will-change: transform;
+        }
+        .card-tilt-wrap.is-tilting {
+            transition: transform 0.04s ease-out;
+        }
+        .card-shine {
+            background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(0,240,255,0.7) 0%, rgba(255,20,147,0.3) 35%, transparent 70%);
+        }
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(22, 13, 41, 0.75) 0%, rgba(13, 7, 24, 0.85) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
-<body>
-
-    <div id="app-loader">
-        <div class="font-mono text-brand text-xs">
-            <span class="text-white">SYSTEM.INIT</span><br>
-            LOADING ASSETS... <span class="animate-blink">_</span>
+<body class="font-sans selection:bg-flamingo selection:text-white">
+    <div id="app-loader" aria-hidden="true">
+        <div class="text-center tracking-widest">
+            <span class="font-script text-5xl sm:text-6xl text-flamingo block -rotate-6 mb-1 drop-shadow-[0_0_24px_rgba(255,20,147,0.8)]">Hacettepe</span>
+            <span class="font-display text-2xl sm:text-3xl tracking-widest text-brand animate-pulse">VARSITY LOADING...</span>
         </div>
     </div>
+    <canvas id="canvas-bg" aria-hidden="true"></canvas>
     
-    <canvas id="webgl-canvas"></canvas>
-    
-    <div id="app" v-cloak class="relative flex flex-col min-h-dvh font-body selection:bg-brand selection:text-white">
-        
-        <app-nav 
-            :current-view="view" :lang="lang" :labels="content[lang].nav" :mobile-open="mobileOpen"
-            @change-view="changeView" @toggle-lang="toggleLang" @toggle-menu="toggleMenu">
-        </app-nav>
+    <div id="app" v-cloak class="relative flex flex-col min-h-dvh">
+        <!-- GLOBAL TOAST -->
+        <transition name="fade">
+            <div v-if="toastMessage" role="status" aria-live="polite" 
+                 class="fixed bottom-6 right-6 z-[300] glass-panel border border-brand/60 px-4 py-2 shadow-neon-cyan deco-cut flex items-center gap-2.5">
+                <span class="text-brand font-bold text-sm">⚡</span>
+                <span class="font-sans font-bold text-xs text-white uppercase tracking-wider">{{ toastMessage }}</span>
+            </div>
+        </transition>
 
-        <main class="flex-grow pt-[100px] lg:pt-[120px] px-4 md:px-0 relative">
+        <!-- UNIFIED TOP NAV -->
+        <app-nav :current-view="view" :lang="lang" :labels="t.nav" :menu-open="menuOpen"
+                 @change-view="changeView" @toggle-lang="toggleLang" @set-lang="setLang" @toggle-menu="menuOpen = !menuOpen" @close-menu="menuOpen = false"></app-nav>
+
+        <main class="flex-grow pt-[72px] sm:pt-[80px] pb-12 px-4 sm:px-6 md:px-8 relative max-w-7xl mx-auto w-full">
             <transition name="fade" mode="out-in">
                 
-                <section v-if="view === 'home'" :key="'home'" class="min-h-[85vh] lg:min-h-dvh flex flex-col justify-center items-center relative overflow-hidden pb-12 lg:pb-0">
-                    <div class="w-full max-w-7xl px-2 sm:px-6 relative z-10" v-reveal>
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-border pb-8 lg:pb-12 mb-8">
-                            <div class="lg:col-span-8">
-                                <div class="flex items-center gap-3 mb-4 lg:mb-6">
-                                    <div class="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-brand animate-pulse-fast"></div>
-                                    <transition name="lang" mode="out-in">
-                                        <span :key="lang" class="font-mono text-[10px] lg:text-xs tracking-widest text-muted">{{ content[lang].hero.meta }}</span>
-                                    </transition>
-                                </div>
-                                <h1 class="font-display font-black text-[clamp(4rem,14vw,9rem)] leading-[0.85] uppercase text-white tracking-tighter mb-4 break-words">
-                                    HUED<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-accent">BASKETBALL</span>
-                                </h1>
+                <!-- 1. HOME -->
+                <section v-if="view === 'home'" :key="'home-' + lang" class="py-4 sm:py-8 max-w-4xl mx-auto flex flex-col items-center text-center">
+                    
+                    <div class="w-full flex flex-col items-center justify-center relative z-10 mb-6" v-reveal>
+                        <span class="font-script text-5xl sm:text-7xl lg:text-8xl text-brand -rotate-3 block mb-1 drop-shadow-[0_4px_32px_rgba(0,240,255,0.85)] leading-none select-none">
+                            {{ t.hero.script }}
+                        </span>
+                        <h1 class="font-display font-black text-[clamp(3rem,10vw,8.5rem)] leading-[0.85] uppercase tracking-wide text-white drop-shadow-[5px_5px_0px_#ff1493] select-none break-words max-w-full">
+                            HUED <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-brand to-flamingo">HOOPS</span>
+                        </h1>
+                    </div>
+
+                    <!-- Spotlight: Latest Campaign Result Card -->
+                    <div class="w-full glass-panel deco-cut p-4 sm:p-6 text-left mb-4 hover:border-brand/60 transition-all duration-300 shadow-glass group" v-reveal>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3 mb-3.5">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 bg-flamingo text-white font-sans font-extrabold text-[9px] uppercase tracking-wider deco-cut-sm shadow-neon-pink">
+                                    {{ lang === 'en' ? 'LATEST CAMPAIGN' : 'SON TURNUVA' }}
+                                </span>
+                                <span class="text-xs font-sans text-neutral-400 font-semibold tracking-wide">SPRING 2026 • 43. SPOR ŞENLİĞİ</span>
                             </div>
-                            <div class="lg:col-span-4 flex flex-row lg:flex-col items-end justify-between lg:h-full w-full">
-                                <logo-icon class="w-16 h-16 lg:w-24 lg:h-24 text-text mb-0 lg:mb-8 hidden lg:block animate-spin-slow"></logo-icon>
-                                <transition name="lang" mode="out-in">
-                                    <div :key="lang" class="font-mono text-[10px] lg:text-xs text-muted text-right max-w-[200px] lg:max-w-xs leading-relaxed ml-auto">
-                                        {{ content[lang].hero.title_main }}<br>ANKARA, TR<br>EST. 2023
+                            <button @click="changeView('tournaments')" class="font-sans text-xs text-brand font-bold hover:text-white transition-colors self-start sm:self-auto flex items-center gap-1 focus:outline-none group/btn">
+                                <span>{{ lang === 'en' ? 'VIEW ALL CAMPAIGNS' : 'TÜM TURNUVALARI GÖR' }}</span>
+                                <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2.5 bg-card/80 p-3.5 border border-white/10 rounded-sm mb-3">
+                            <div class="flex items-center gap-3.5 font-display text-2xl sm:text-3xl tracking-wider tabular-nums">
+                                <span class="text-neutral-300 font-bold">HUED <span class="text-white font-extrabold">53</span></span>
+                                <span class="text-white/20 text-lg font-light">/</span>
+                                <span class="text-brand font-black">58 <span class="text-white font-extrabold">İİBF</span></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 bg-white/10 border border-white/15 text-neutral-300 text-[10px] font-sans font-bold uppercase tracking-wider rounded-xs">
+                                    FINAL
+                                </span>
+                                <span class="text-neutral-400 text-xs font-sans">📍 Hacettepe SBF</span>
+                            </div>
+                        </div>
+                        
+                        <p class="font-sans text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                            {{ lang === 'en' ? 'High-octane 53-58 battle at Hacettepe SBF Hall with a full 13-player varsity rotation.' : 'Hacettepe SBF Salonu\'nda 13 kişilik geniş rotasyonla son topa kadar süren 53-58\'lik nefes kesen eleme maçı.' }}
+                        </p>
+                    </div>
+
+                    <!-- Telemetry Strip -->
+                    <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4" v-reveal>
+                        <div class="glass-panel p-4 deco-cut-sm flex flex-col items-center justify-center hover:border-brand/50 transition-colors">
+                            <div class="font-display font-bold text-3xl sm:text-4xl text-brand leading-none tabular-nums">4x</div>
+                            <div class="font-sans text-[9px] text-neutral-400 font-bold uppercase mt-1 tracking-wider">{{ lang === 'en' ? 'PODIUM FINISHES' : 'KUPA & DERECE' }}</div>
+                        </div>
+                        <div class="glass-panel p-4 deco-cut-sm flex flex-col items-center justify-center hover:border-brand/50 transition-colors">
+                            <div class="font-display font-bold text-3xl sm:text-4xl text-white leading-none tabular-nums">32+</div>
+                            <div class="font-sans text-[9px] text-neutral-400 font-bold uppercase mt-1 tracking-wider">{{ lang === 'en' ? 'TOTAL BALLERS' : 'KAYITLI OYUNCU' }}</div>
+                        </div>
+                        <div class="glass-panel p-4 deco-cut-sm flex flex-col items-center justify-center hover:border-flamingo/50 transition-colors">
+                            <div class="font-display font-bold text-3xl sm:text-4xl text-flamingo leading-none tabular-nums">2023</div>
+                            <div class="font-sans text-[9px] text-neutral-400 font-bold uppercase mt-1 tracking-wider">{{ lang === 'en' ? 'ESTABLISHED' : 'KURULUŞ YILI' }}</div>
+                        </div>
+                        <div class="glass-panel p-4 deco-cut-sm flex flex-col items-center justify-center hover:border-brand/50 transition-colors">
+                            <div class="font-display font-bold text-3xl sm:text-4xl text-white leading-none">BEYTEPE</div>
+                            <div class="font-sans text-[9px] text-neutral-400 font-bold uppercase mt-1 tracking-wider">{{ lang === 'en' ? 'HOME ARENA' : 'EV SAHASI' }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Hub -->
+                    <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3" v-reveal>
+                        <button @click="changeView('roster')" 
+                                class="group p-4 sm:p-5 flex items-center justify-between text-left deco-cut glass-panel hover:border-brand hover:shadow-neon-cyan transition-all duration-300">
+                            <div class="flex items-center gap-3.5">
+                                <span class="text-2xl p-2.5 bg-card border border-white/10 rounded-sm">🏀</span>
+                                <div>
+                                    <div class="font-display text-xl sm:text-2xl uppercase text-white group-hover:text-brand transition-colors leading-tight">
+                                        {{ t.nav.roster }}
                                     </div>
-                                </transition>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
-                            <button v-for="(btn, i) in heroButtons" :key="btn.key" @click="changeView(btn.key)" 
-                                    class="hover-trigger group border border-border p-5 lg:p-6 transition-all text-left active:scale-95 touch-manipulation"
-                                    :class="btn.classes" :aria-label="'Navigate to ' + btn.key">
-                                <div class="font-mono text-[10px] lg:text-xs text-muted mb-2 transition-colors" :class="btn.textClass">0{{ i + 1 }}</div>
-                                <div class="font-display font-bold text-xl lg:text-2xl uppercase transition-colors" :class="btn.textClass">
-                                    <transition name="lang" mode="out-in">
-                                        <span :key="lang">{{ content[lang].nav[btn.key] }}</span>
-                                    </transition>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section v-else-if="view === 'about'" :key="'about'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32">
-                        <div class="space-y-8 lg:space-y-12" v-reveal>
-                            <transition name="lang" mode="out-in">
-                                <h2 :key="lang" class="font-display font-black text-6xl lg:text-8xl text-text leading-[0.85] uppercase break-words">
-                                    {{ content[lang].about.title }}
-                                </h2>
-                            </transition>
-                            <transition name="lang" mode="out-in">
-                                <p :key="lang" class="font-body text-base lg:text-xl text-muted leading-relaxed">
-                                    {{ content[lang].about.desc }}
-                                </p>
-                            </transition>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <div class="w-full sm:w-1/2 p-6 border border-border bg-panel hover-trigger hover:border-brand/50 transition-colors">
-                                    <transition name="lang" mode="out-in">
-                                        <h3 :key="lang" class="font-mono text-brand text-xs mb-2 uppercase">{{ content[lang].about.culture_title }}</h3>
-                                    </transition>
-                                    <transition name="lang" mode="out-in">
-                                        <p :key="lang" class="text-sm text-text leading-relaxed">{{ content[lang].about.culture_desc }}</p>
-                                    </transition>
-                                </div>
-                                <div class="w-full sm:w-1/2 p-6 border border-border bg-panel hover-trigger hover:border-accent/50 transition-colors">
-                                    <transition name="lang" mode="out-in">
-                                        <h3 :key="lang" class="font-mono text-accent text-xs mb-2 uppercase">{{ content[lang].about.future_title }}</h3>
-                                    </transition>
-                                    <transition name="lang" mode="out-in">
-                                        <p :key="lang" class="text-sm text-text leading-relaxed">{{ content[lang].about.future_desc }}</p>
-                                    </transition>
+                                    <div class="font-sans text-xs text-neutral-400">
+                                        {{ lang === 'en' ? 'Explore scouting sheets & heights' : 'Oyuncu kartları, mevkiler ve boy bilgileri' }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="relative h-[300px] lg:h-auto min-h-[300px] flex items-center justify-center bg-panel border border-border clip-notch group" v-reveal>
-                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                            <logo-icon class="w-48 h-48 lg:w-64 lg:h-64 text-text opacity-10 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"></logo-icon>
-                            <div class="absolute bottom-6 right-6 font-mono text-xs text-brand">/// FIG.01 TACTICAL MAP</div>
-                        </div>
-                    </div>
-                </section>
-
-                <section v-else-if="view === 'roster'" :key="'roster'" class="py-12 lg:py-16 px-4 md:px-12 relative">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-border pb-6 mb-12 gap-6">
-                        <h2 class="font-display font-black text-6xl md:text-8xl text-text uppercase leading-none" v-reveal>The Unit</h2>
-                        <div class="flex flex-wrap gap-2" v-reveal>
-                            <button v-for="type in ['men', 'women']" :key="type" @click="rosterFilter = type" 
-                                    class="hover-trigger px-6 py-3 lg:py-2 font-mono text-xs font-bold uppercase border transition-all"
-                                    :class="rosterFilter === type ? 'bg-text text-bg border-text' : 'text-muted border-border hover:text-text'">
-                                <transition name="lang" mode="out-in">
-                                    <span :key="lang">{{ content[lang].roster[type + '_league'] }}</span>
-                                </transition>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-24">
-                        <player-card v-for="(p, i) in activeRoster" :key="p.id" :player="p" :index="i" :filter="rosterFilter"></player-card>
-                    </div>
-                    <transition name="fade">
-                        <button v-show="scrolled" @click="scrollToTop" aria-label="Scroll to Top"
-                                class="fixed bottom-8 right-8 z-40 w-12 h-12 flex items-center justify-center bg-brand text-white border border-brand hover:bg-white hover:text-brand hover:border-white transition-all duration-300 group shadow-lg hover-trigger">
-                            <svg class="w-6 h-6 transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            <span class="font-display text-lg sm:text-xl text-brand group-hover:translate-x-1.5 transition-transform">→</span>
                         </button>
+
+                        <button @click="changeView('join')" 
+                                class="group p-4 sm:p-5 flex items-center justify-between text-left deco-cut glass-panel hover:border-flamingo hover:shadow-neon-pink transition-all duration-300">
+                            <div class="flex items-center gap-3.5">
+                                <span class="text-2xl p-2.5 bg-card border border-white/10 rounded-sm">⚡</span>
+                                <div>
+                                    <div class="font-display text-xl sm:text-2xl uppercase text-white group-hover:text-flamingo transition-colors leading-tight">
+                                        {{ t.nav.join }}
+                                    </div>
+                                    <div class="font-sans text-xs text-neutral-400">
+                                        {{ lang === 'en' ? 'WhatsApp chat & tryout inquiries' : 'WhatsApp oyuncu grubu ve yeni kayıtlar' }}
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="font-display text-lg sm:text-xl text-flamingo group-hover:translate-x-1.5 transition-transform">→</span>
+                        </button>
+                    </div>
+
+                </section>
+
+                <!-- 2. MERGED ABOUT & LEGACY PAGE -->
+                <section v-else-if="view === 'legacy'" :key="'legacy-' + lang" class="py-4 sm:py-8 max-w-5xl mx-auto">
+                    <div class="mb-6 space-y-4" v-reveal>
+                        <div>
+                            <span class="font-script text-3xl sm:text-4xl text-flamingo -rotate-2 block mb-0.5">Heritage & Culture</span>
+                            <h2 class="font-display font-black text-4xl sm:text-6xl text-white uppercase tracking-wide">{{ t.legacy.timeline_title }}</h2>
+                            <p class="font-sans text-xs sm:text-sm text-neutral-300 max-w-3xl mt-1.5 leading-relaxed">{{ t.about.desc }}</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 pt-0.5">
+                            <div class="md:col-span-6 p-4 sm:p-5 glass-panel deco-cut-sm jersey-trim-top">
+                                <h3 class="font-display text-xl sm:text-2xl text-brand mb-1 uppercase tracking-wide">{{ t.about.culture_title }}</h3>
+                                <p class="font-sans text-xs sm:text-sm text-neutral-300 leading-relaxed">{{ t.about.culture_desc }}</p>
+                            </div>
+                            <div class="md:col-span-6 p-4 sm:p-5 glass-panel deco-cut-sm jersey-trim-top flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-display text-xl sm:text-2xl text-flamingo mb-1 uppercase tracking-wide">{{ t.about.future_title }}</h3>
+                                    <p class="font-sans text-xs sm:text-sm text-neutral-300 leading-relaxed mb-3">{{ t.about.future_desc }}</p>
+                                </div>
+                                <a href="https://maps.google.com/?q=Hacettepe+Universitesi+Beytepe+Spor+Salonu" target="_blank" rel="noopener noreferrer"
+                                   class="self-start inline-flex items-center gap-1.5 font-sans font-bold text-xs text-black bg-brand px-3.5 py-2 hover:bg-flamingo hover:text-white transition-all uppercase rounded-xs shadow-neon-cyan hover:-translate-y-0.5 focus:ring-2 focus:ring-brand">
+                                    <span>📍 {{ lang === 'en' ? 'OPEN BEYTEPE COURT GPS' : 'BEYTEPE SAHA KONUMU' }}</span> ↗
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Stats Counters -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-0.5">
+                            <div v-for="(stat, i) in t.legacy.stats" :key="i" class="glass-panel p-4 text-center deco-cut hover:border-brand/60 transition-colors">
+                                <div class="font-display font-bold text-3xl sm:text-4xl text-white mb-0.5 tabular-nums" 
+                                     v-counter :data-target="stat.val" :data-suffix="stat.suffix || ''">0</div>
+                                <div class="font-sans font-bold text-[9px] text-brand uppercase tracking-widest">{{ stat.label }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chronological Varsity Timeline -->
+                    <div class="relative border-l-2 border-flamingo/60 ml-2 sm:ml-6 space-y-5 pb-2">
+                        <div v-for="(item, i) in legacyTimeline" :key="i" class="pl-5 sm:pl-7 relative group" v-reveal>
+                            <span class="absolute -left-[7px] top-2 w-3.5 h-3.5 bg-brand border-2 border-white rotate-45 shadow-neon-cyan"></span>
+                            <div class="font-display text-xl sm:text-2xl text-brand mb-0.5 tracking-wider tabular-nums">{{ item.y }}</div>
+                            <h3 class="font-display font-bold text-xl sm:text-2xl mb-1 text-white uppercase">{{ item.title }}</h3>
+                            <p class="font-sans text-xs sm:text-sm text-neutral-300 max-w-2xl leading-relaxed">{{ item.t }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. ROSTER -->
+                <section v-else-if="view === 'roster'" :key="'roster-' + lang" class="py-4 sm:py-8 relative">
+                    <div class="space-y-3 mb-3" v-reveal>
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 border-b border-white/10 pb-3.5">
+                            <div>
+                                <transition name="fade-toggle" mode="out-in">
+                                    <span :key="rosterStatus + rosterDivision" class="font-script text-2xl sm:text-3xl text-brand -rotate-2 block mb-0.5">
+                                        {{ rosterStatus === 'alumni' ? t.roster.alumni_unit_script : (rosterDivision === 'men' ? t.roster.active_men_script : t.roster.active_women_script) }}
+                                    </span>
+                                </transition>
+                                <transition name="fade-toggle" mode="out-in">
+                                    <h2 :key="rosterStatus + rosterDivision" class="font-display font-black text-4xl sm:text-6xl text-white uppercase leading-none tracking-wide">
+                                        {{ rosterStatus === 'alumni' ? t.roster.the_legends : t.roster.the_squad }}
+                                    </h2>
+                                </transition>
+                            </div>
+
+                            <!-- STREAMLINED HUD TICKER -->
+                            <div class="flex flex-wrap items-center gap-2.5 text-xs font-sans text-neutral-300 glass-panel px-3.5 py-2 rounded-sm shadow-inner" aria-label="Squad Analytics HUD">
+                                <div>
+                                    <span class="text-[9px] font-bold text-neutral-400 uppercase mr-1">{{ t.roster.hud_avg_height }}:</span>
+                                    <span class="font-display text-base sm:text-lg text-white tabular-nums">{{ squadAnalytics.avgHeight }}</span> <span class="text-[9px] text-brand">CM</span>
+                                </div>
+                                <span class="text-white/20" aria-hidden="true">|</span>
+                                <div>
+                                    <span class="text-[9px] font-bold text-neutral-400 uppercase mr-1">{{ t.roster.hud_apex }}:</span>
+                                    <span class="font-display text-base sm:text-lg text-white">{{ squadAnalytics.apexPlayer?.name ? squadAnalytics.apexPlayer.name.split(' ')[0] : 'N/A' }}</span> 
+                                    <span v-if="squadAnalytics.apexPlayer" class="text-[9px] text-flamingo tabular-nums">({{ squadAnalytics.apexPlayer.h }})</span>
+                                </div>
+                                <span class="text-white/20" aria-hidden="true">|</span>
+                                <div>
+                                    <span class="text-[9px] font-bold text-neutral-400 uppercase mr-1">{{ t.roster.hud_hand_ratio }}:</span>
+                                    <span class="font-display text-base sm:text-lg text-brand tabular-nums">{{ squadAnalytics.leftHandPercent }}%</span> <span class="text-[9px] text-neutral-400">LH</span>
+                                </div>
+                                <span class="text-white/20" aria-hidden="true">|</span>
+                                <div>
+                                    <span class="text-[9px] font-bold text-neutral-400 uppercase mr-1">{{ t.roster.hud_squad_size }}:</span>
+                                    <span class="font-display text-base sm:text-lg text-white tabular-nums">{{ squadAnalytics.totalCount }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STICKY FILTER & SEARCH TOOLBAR -->
+                    <div class="sticky top-[66px] sm:top-[74px] z-30 bg-[#07040d]/95 backdrop-blur-xl py-2.5 border-b border-white/10 mb-4 shadow-xl">
+                        <div class="glass-panel p-2.5 rounded-sm space-y-2.5 lg:space-y-0 lg:flex lg:items-center lg:justify-between lg:gap-3">
+                            
+                            <!-- Division & Status Selectors -->
+                            <div class="flex flex-wrap items-center gap-1.5" role="group" aria-label="Roster Unit Filter">
+                                <button @click="setDivision('men')"
+                                        class="px-3 py-1.5 font-display text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 rounded-sm focus:outline-none"
+                                        :class="rosterDivision === 'men' ? 'bg-brand text-black font-black shadow-neon-cyan' : 'text-neutral-300 hover:text-white bg-cardLight/60'">
+                                    🏀 {{ t.roster.men_league }}
+                                </button>
+                                <button @click="setDivision('women')"
+                                        class="px-3 py-1.5 font-display text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 rounded-sm focus:outline-none"
+                                        :class="rosterDivision === 'women' ? 'bg-brand text-black font-black shadow-neon-cyan' : 'text-neutral-300 hover:text-white bg-cardLight/60'">
+                                    🏀 {{ t.roster.women_league }}
+                                </button>
+                                <button @click="toggleStatus"
+                                        class="px-3 py-1.5 font-display text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 rounded-sm focus:outline-none border"
+                                        :class="rosterStatus === 'alumni' ? 'bg-flamingo text-white font-black border-flamingo shadow-neon-pink' : 'text-neutral-300 hover:text-white bg-cardLight/60 border-white/15'">
+                                    🌟 {{ rosterStatus === 'alumni' ? t.roster.alumni_unit : t.roster.active_unit }}
+                                </button>
+                            </div>
+
+                            <!-- Position Pills, Search & Sort -->
+                            <div class="flex flex-wrap items-center gap-2">
+                                <div class="flex items-center gap-1 bg-card p-1 rounded-sm border border-white/10">
+                                    <button v-for="pos in ['ALL', 'GUARD', 'FORWARD', 'CENTER']" :key="pos" @click="setPositionFilter(pos)"
+                                            class="px-2 py-0.5 font-display text-xs uppercase transition-all duration-150 rounded-sm focus:outline-none"
+                                            :class="positionFilter === pos ? 'bg-white/20 text-white font-bold' : 'text-neutral-400 hover:text-white'">
+                                        {{ t.roster.filter_labels[pos] || pos }}
+                                    </button>
+                                </div>
+
+                                <div class="relative flex-grow sm:w-44">
+                                    <input type="text" v-model="searchQuery" ref="searchInput" :placeholder="t.roster.search_placeholder" 
+                                           class="w-full bg-card border border-white/15 px-3 py-1.5 pr-7 text-xs font-sans text-white placeholder-neutral-500 focus:outline-none focus:border-brand rounded-sm">
+                                    <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-2 top-1.5 text-xs text-neutral-400 hover:text-white" aria-label="Clear Search">✕</button>
+                                </div>
+
+                                <select v-model="sortBy" @change="playHapticClick" class="bg-card border border-white/15 text-xs font-sans text-neutral-200 px-2.5 py-1.5 focus:outline-none focus:border-brand rounded-sm cursor-pointer" aria-label="Sort Squad">
+                                    <option value="DEFAULT" class="bg-card text-white">{{ t.roster.sort_default }}</option>
+                                    <option value="NUM" class="bg-card text-white">{{ t.roster.sort_num }}</option>
+                                    <option value="HEIGHT_DESC" class="bg-card text-white">{{ t.roster.sort_height_desc }}</option>
+                                    <option value="HEIGHT_ASC" class="bg-card text-white">{{ t.roster.sort_height_asc }}</option>
+                                    <option value="NAME" class="bg-card text-white">{{ t.roster.sort_name }}</option>
+                                </select>
+
+                                <button v-if="positionFilter !== 'ALL' || searchQuery !== '' || sortBy !== 'DEFAULT'" 
+                                        @click="resetFilters" 
+                                        class="px-2.5 py-1.5 text-[10px] font-sans font-bold text-brand hover:text-white border border-brand/40 bg-card rounded-sm focus:outline-none">
+                                    ✕ CLEAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RESPONSIVE ROSTER GRID -->
+                    <transition name="fade-grid" mode="out-in">
+                        <div :key="rosterDivision + '-' + rosterStatus + '-' + positionFilter + '-' + sortBy">
+                            <div v-if="filteredRoster.length" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 pb-2">
+                                <player-card v-for="p in filteredRoster" :key="p.id" :player="p" :lang-content="t.roster" :lang="lang" @select-player="openScoutingModal(p)"></player-card>
+                            </div>
+                            <div v-else class="py-12 px-4 text-center border border-dashed border-white/20 glass-panel rounded-sm flex flex-col items-center justify-center">
+                                <p class="font-display text-xl sm:text-2xl text-neutral-300 uppercase mb-3">{{ t.roster.empty_msg }}</p>
+                                <button @click="resetFilters" class="px-5 py-2 bg-brand text-black font-display text-sm uppercase tracking-wider hover:bg-flamingo hover:text-white transition-colors rounded-sm font-black shadow-neon-cyan">
+                                    {{ lang === 'en' ? 'RESET ALL FILTERS' : 'FİLTRELERİ SIFIRLA' }}
+                                </button>
+                            </div>
+                        </div>
                     </transition>
                 </section>
 
-                <section v-else-if="view === 'schedule'" :key="'schedule'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-dvh">
-                    <header class="mb-12 lg:mb-20 text-center" v-reveal>
-                        <span class="font-mono text-brand text-xs uppercase tracking-widest mb-4 block">/// OFFICIAL FIXTURE 25-26</span>
-                        <transition name="lang" mode="out-in">
-                            <h2 :key="lang" class="font-display font-black text-5xl sm:text-6xl md:text-8xl text-text uppercase break-words">{{ content[lang].schedule.calendar_title }}</h2>
-                        </transition>
+                <!-- 4. CAMPAIGNS -->
+                <section v-else-if="view === 'tournaments'" :key="'tournaments-' + lang" class="py-4 sm:py-8 max-w-4xl mx-auto">
+                    <header class="mb-6 text-center" v-reveal>
+                        <span class="font-script text-3xl sm:text-4xl text-brand -rotate-2 block mb-0.5">Competitive Archive</span>
+                        <h2 class="font-display font-black text-4xl sm:text-6xl text-white uppercase tracking-wide">{{ t.tournaments.title }}</h2>
+                        <p class="font-sans text-xs sm:text-sm text-neutral-300 max-w-lg mx-auto mt-1 leading-relaxed">{{ t.tournaments.phase_desc }}</p>
                     </header>
-                    <div class="space-y-4">
-                        <schedule-row v-for="(m, i) in scheduleData" :key="i" :match="m" :lang-content="content[lang].schedule" :lang="lang"></schedule-row>
-                    </div>
-                </section>
 
-                <section v-else-if="view === 'legacy'" :key="'legacy'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
-                    <div class="mb-16 lg:mb-24" v-reveal>
-                        <transition name="lang" mode="out-in">
-                            <h2 :key="lang" class="font-display font-black text-5xl sm:text-6xl md:text-8xl text-text uppercase mb-12">{{ content[lang].legacy.timeline_title }}</h2>
-                        </transition>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
-                            <div v-for="(stat, i) in legacyStats" :key="i" class="bg-bg p-6 lg:p-8 text-center hover:bg-panel transition-colors group">
-                                <div class="font-display font-bold text-4xl lg:text-5xl text-white group-hover:text-brand transition-colors mb-2" v-counter :data-target="stat.val">0</div>
-                                <transition name="lang" mode="out-in">
-                                    <div :key="lang" class="font-mono text-[10px] text-muted uppercase tracking-widest">{{ stat.label }}</div>
-                                </transition>
+                    <div class="space-y-4 pb-2" v-reveal>
+                        <div v-for="(camp, i) in tournamentLog" :key="i"
+                             class="p-4 sm:p-6 glass-panel deco-cut hover:border-brand/70 transition-all duration-300 shadow-glass group">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-white/10 pb-3 mb-3">
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full aspect-square shrink-0 flex items-center justify-center shadow-lg transition-transform group-hover:scale-105 overflow-hidden"
+                                         :class="camp.metal === 'silver' ? 'medal-silver border-2 border-slate-200 text-slate-950 font-black' : 
+                                                (camp.metal === 'bronze' ? 'medal-bronze border-2 border-amber-600 text-slate-950 font-black' : 
+                                                'bg-gradient-to-br from-[#2a174f] via-card to-[#0d071a] border-2 border-brand/40 shadow-neon-cyan text-brand')">
+                                        <div v-if="camp.metal === 'silver'" class="font-display font-black text-2xl leading-none text-center">2ND</div>
+                                        <div v-else-if="camp.metal === 'bronze'" class="font-display font-black text-2xl leading-none text-center">3RD</div>
+                                        <div v-else class="flex flex-col items-center justify-center leading-none">
+                                            <span class="text-base text-brand">🏀</span>
+                                            <span class="font-display font-black text-[10px] text-white/90 tracking-widest uppercase mt-0.5">GAME</span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-neutral-400 font-semibold uppercase">
+                                            <span class="font-bold text-brand">{{ camp.edition }}</span>
+                                            <span>•</span>
+                                            <span>{{ camp.venue[lang] }}</span>
+                                        </div>
+                                        <h3 class="font-display font-bold text-2xl sm:text-3xl text-white uppercase tracking-wide leading-tight">{{ camp.title[lang] }}</h3>
+                                    </div>
+                                </div>
+                                <div class="px-2.5 py-1 bg-card border border-white/15 text-neutral-200 font-bold font-sans text-xs rounded-sm shrink-0 tabular-nums"
+                                     :class="camp.metal ? 'border-brand/50 text-brand shadow-neon-cyan' : ''">
+                                    {{ camp.result[lang] }}
+                                </div>
+                            </div>
+                            <p class="font-sans text-xs sm:text-sm text-neutral-200 leading-relaxed mb-3">{{ camp.summary[lang] }}</p>
+                            
+                            <!-- INLINE SQUAD ROSTER -->
+                            <div class="border-t border-white/10 pt-2.5 flex flex-wrap items-center justify-between gap-2 font-sans text-xs text-neutral-400">
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    <span class="text-brand font-bold text-[10px] uppercase mr-1">ROSTER:</span>
+                                    <span v-for="(player, pIdx) in getSortedSquad(camp.squadList)" :key="player.name" 
+                                          @click="hasPlayerRecord(player.name) && openScoutingModalByName(player.name)"
+                                          :class="hasPlayerRecord(player.name) ? 'hover:text-brand hover:underline cursor-pointer text-neutral-200 font-medium' : 'text-neutral-400 cursor-default opacity-80'"
+                                          class="transition-colors tabular-nums">
+                                        #{{ player.n }} {{ player.name }}<span v-if="pIdx < camp.squadList.length - 1" class="text-neutral-600 ml-1.5 no-underline">•</span>
+                                    </span>
+                                </div>
+                                <span class="text-neutral-400 text-[10px] sm:text-[11px]">📍 {{ camp.venue[lang] }}</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-0.5">
+                            <div class="p-4 sm:p-5 glass-panel deco-cut-sm">
+                                <span class="font-sans text-[9px] text-brand font-bold uppercase tracking-widest block mb-0.5">{{ t.tournaments.hodesk.meta }}</span>
+                                <h4 class="font-display text-xl sm:text-2xl text-white uppercase">{{ t.tournaments.hodesk.title }}</h4>
+                                <p class="font-sans text-xs sm:text-sm text-neutral-300 mt-1 leading-relaxed">{{ t.tournaments.hodesk.desc }}</p>
+                            </div>
+                            <div class="p-4 sm:p-5 glass-panel deco-cut-sm">
+                                <span class="font-sans text-[9px] text-flamingo font-bold uppercase tracking-widest block mb-0.5">{{ t.tournaments.fest.meta }}</span>
+                                <h4 class="font-display text-xl sm:text-2xl text-white uppercase">{{ t.tournaments.fest.title }}</h4>
+                                <p class="font-sans text-xs sm:text-sm text-neutral-300 mt-1 leading-relaxed">{{ t.tournaments.fest.desc }}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="relative border-l border-border ml-2 lg:ml-12 space-y-16 pb-20">
-                        <div v-for="(item, i) in legacyTimeline" :key="i" class="pl-8 lg:pl-12 relative group hover-trigger" v-reveal>
-                            <span class="absolute -left-[5px] top-3 w-2.5 h-2.5 bg-bg border border-text rounded-full group-hover:bg-brand group-hover:border-brand transition-colors"></span>
-                            <div class="font-mono text-brand text-sm mb-2 font-bold">{{ item.y }}</div>
-                            <h3 class="font-display font-bold text-2xl mb-2">{{ item.title }}</h3>
-                            <p class="font-body text-base lg:text-xl text-text/80 max-w-2xl">{{ item.t }}</p>
-                        </div>
-                    </div>
                 </section>
 
-                <section v-else-if="view === 'join'" :key="'join'" class="py-12 lg:py-20 px-4 sm:px-6 max-w-7xl mx-auto min-h-dvh">
-                    <header class="mb-12 lg:mb-16" v-reveal>
-                        <transition name="lang" mode="out-in">
-                            <h2 :key="lang" class="font-display font-black text-6xl md:text-8xl text-text uppercase mb-8 leading-none">{{ content[lang].join.title }}</h2>
-                        </transition>
+                <!-- 5. JOIN -->
+                <section v-else-if="view === 'join'" :key="'join-' + lang" class="py-4 sm:py-8 max-w-4xl mx-auto">
+                    <header class="mb-6" v-reveal>
+                        <span class="font-script text-3xl sm:text-4xl text-brand -rotate-2 block mb-0.5">Recruitment</span>
+                        <h2 class="font-display font-black text-4xl sm:text-6xl text-white uppercase mb-3.5 leading-none tracking-wide">{{ t.join.title }}</h2>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <a v-for="(item, i) in content[lang].join.links" :key="i" 
-                               :href="item.url" 
-                               target="_blank" 
-                               class="group hover-trigger border border-border bg-panel p-8 md:p-12 hover:border-brand transition-all relative overflow-hidden active:scale-[0.98]">
-                                <div class="absolute inset-0 scale-0 group-hover:scale-100 transition-transform origin-bottom-left duration-500" :class="item.type === 'brand' ? 'bg-brand/5' : 'bg-accent/5'"></div>
-                                <span class="font-mono text-xs font-bold uppercase mb-2 block" :class="item.type === 'brand' ? 'text-brand' : 'text-accent'">/// {{ item.type === 'brand' ? 'COMMUNITY' : 'MEDIA' }}</span>
-                                <transition name="lang" mode="out-in">
-                                    <h3 :key="lang" class="font-display font-bold text-3xl lg:text-4xl text-white mb-2">{{ item.label }}</h3>
-                                </transition>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                            <a href="https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP" target="_blank" rel="noopener noreferrer"
+                               class="group glass-panel p-4 sm:p-5 hover:border-[#25D366] transition-all duration-300 deco-cut hover:-translate-y-0.5 shadow-glass flex items-center justify-between">
+                                <div>
+                                    <span class="font-sans text-[9px] font-bold uppercase mb-0.5 block text-[#25D366]">COMMUNITY</span>
+                                    <h3 class="font-display font-bold text-xl sm:text-2xl text-white tracking-wide group-hover:text-[#25D366] transition-colors">WHATSAPP ROSTER CHAT</h3>
+                                </div>
+                                <div class="w-11 h-11 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-[#25D366] transition-all text-[#25D366] group-hover:text-black shadow-md">
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.35.49 1.199.534 1.286.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.177.181-.076.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.176L2 22l4.954-1.398C8.423 21.494 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.2c-1.637 0-3.16-.484-4.437-1.319l-.318-.208-2.94.83.84-2.86-.226-.339A8.16 8.16 0 0 1 3.8 12c0-4.522 3.678-8.2 8.2-8.2 4.521 0 8.2 3.678 8.2 8.2 0 4.521-3.679 8.2-8.2 8.2z"/>
+                                    </svg>
+                                </div>
+                            </a>
+
+                            <a href="https://www.instagram.com/huedbasketbol" target="_blank" rel="noopener noreferrer"
+                               class="group glass-panel p-4 sm:p-5 hover:border-flamingo transition-all duration-300 deco-cut hover:-translate-y-0.5 shadow-glass flex items-center justify-between">
+                                <div>
+                                    <span class="font-sans text-[9px] font-bold uppercase mb-0.5 block text-flamingo">MEDIA</span>
+                                    <h3 class="font-display font-bold text-xl sm:text-2xl text-white tracking-wide group-hover:text-flamingo transition-colors">OFFICIAL INSTAGRAM</h3>
+                                </div>
+                                <div class="w-11 h-11 rounded-full bg-flamingo/15 border border-flamingo/40 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-flamingo transition-all text-flamingo group-hover:text-white shadow-neon-pink">
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </div>
                             </a>
                         </div>
 
-                        <a href="mailto:huedbasketbol@gmail.com" class="group hover-trigger block w-full border border-border bg-panel p-8 md:p-10 hover:border-white transition-all relative overflow-hidden mb-16 lg:mb-24 active:scale-[0.99]">
-                            <div class="absolute inset-0 bg-white/5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-                                <div>
-                                    <span class="font-mono text-xs font-bold uppercase mb-2 block text-muted group-hover:text-white transition-colors">
-                                        /// {{ lang === 'en' ? 'DIRECT CONTACT' : 'İLETİŞİM' }}
-                                    </span>
-                                    <h3 class="font-display font-bold text-3xl md:text-5xl text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-muted transition-all">
-                                        huedbasketbol@gmail.com
-                                    </h3>
+                        <div @click="copyEmail" role="button" tabindex="0" @keydown.enter="copyEmail" @keydown.space.prevent="copyEmail" 
+                             class="group block w-full glass-panel p-4 sm:p-5 hover:border-[#EA4335] transition-all duration-300 deco-cut cursor-pointer hover:-translate-y-0.5 shadow-glass focus:ring-2 focus:ring-[#EA4335]">
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-11 h-11 rounded-full bg-[#EA4335]/15 border border-[#EA4335]/40 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-[#EA4335] transition-all text-[#EA4335] group-hover:text-white shadow-md">
+                                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="font-sans text-[9px] font-bold uppercase mb-0.5 block text-[#EA4335]">
+                                            {{ emailCopied ? (lang === 'en' ? 'COPIED TO CLIPBOARD!' : 'E-POSTA KOPYALANDI!') : t.join.email_label }}
+                                        </span>
+                                        <h3 class="font-display font-bold text-xl sm:text-2xl transition-all text-white group-hover:text-[#EA4335]">huedbasketbol@gmail.com</h3>
+                                    </div>
                                 </div>
-                                <div class="w-16 h-16 rounded-full border border-border flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                <div class="px-4 py-2 border border-black flex items-center gap-1.5 bg-brand text-black font-display text-sm uppercase group-hover:bg-flamingo group-hover:text-white transition-all shadow-neon-cyan rounded-xs">
+                                    <span>{{ emailCopied ? 'COPIED' : 'COPY EMAIL' }}</span>
                                 </div>
                             </div>
-                        </a>
-
+                        </div>
                     </header>
+
                     <div v-reveal>
-                        <span class="font-mono text-muted text-xs uppercase tracking-widest mb-8 block border-b border-border pb-4">/// MANAGEMENT</span>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div v-for="(role, key) in content[lang].join.roles" :key="key" class="border border-border p-8 bg-bg hover:bg-panel transition-colors hover-trigger">
-                                <transition name="lang" mode="out-in">
-                                    <span :key="lang" class="font-mono text-[10px] uppercase tracking-widest mb-4 block" 
-                                          :class="key === 'coord' ? 'text-brand' : (key === 'capt' ? 'text-accent' : 'text-muted')">{{ role }}</span>
-                                </transition>
-                                <h3 class="font-display font-bold text-2xl lg:text-3xl text-white uppercase leading-tight">
-                                    {{ key === 'coord' ? 'Esin Özge Esen' : (key === 'capt' ? 'Doruk Kuru' : 'Duygu Serttaş') }}
-                                </h3>
+                        <span class="font-sans text-brand text-xs uppercase tracking-widest mb-3.5 block border-b border-white/10 pb-2.5 font-bold">{{ t.join.mgmt_title }}</span>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                            <div v-for="person in leadershipList" :key="person.id" class="glass-panel p-5 deco-cut hover:border-brand/60 transition-colors">
+                                <span class="font-sans text-[9px] uppercase tracking-widest mb-1.5 block font-extrabold" 
+                                      :class="person.theme === 'brand' ? 'text-brand' : (person.theme === 'accent' ? 'text-flamingo' : 'text-neutral-400')">
+                                    {{ person.roleTitle[lang] }}
+                                </span>
+                                <h3 class="font-display font-bold text-xl sm:text-2xl text-white uppercase leading-tight tracking-wide">{{ person.name }}</h3>
+                                <div class="font-sans text-xs text-neutral-300 mt-1">{{ person.dept[lang] }}</div>
                             </div>
                         </div>
                     </div>
                 </section>
-
             </transition>
         </main>
 
-        <footer class="mt-auto py-12 border-t border-border bg-panel px-6 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="flex items-center gap-4">
-                    <logo-icon class="w-10 h-10 text-text"></logo-icon>
-                    <div class="font-mono text-[10px] text-muted uppercase">Hacettepe University<br>Faculty of Letters</div>
+        <!-- SCOUTING MODAL -->
+        <transition name="fade">
+            <div v-if="selectedPlayer" ref="modalContainer" tabindex="-1" class="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md modal-scroll-contain outline-none" 
+                 role="dialog" aria-modal="true" :aria-labelledby="'modal-player-name-' + selectedPlayer.id"
+                 @click.self="closeScoutingModal" @touchstart="handleTouchStart" @touchend="handleTouchEnd" @keydown="handleModalKeydown">
+                <div class="glass-panel border border-brand/60 max-w-lg w-full p-5 sm:p-7 deco-cut relative shadow-2xl">
+                    <button @click="closeScoutingModal" ref="modalCloseBtn" class="absolute top-3.5 right-3.5 text-neutral-400 hover:text-white font-sans font-bold text-xs focus:ring-1 focus:ring-brand p-1" aria-label="Close modal">✕ [ESC]</button>
+                    
+                    <div class="flex items-center gap-3.5 mb-3.5 border-b border-white/10 pb-3">
+                        <div class="font-display font-black text-4xl sm:text-5xl jersey-num leading-none tabular-nums">#{{ selectedPlayer.n }}</div>
+                        <div class="flex-grow">
+                            <span v-if="selectedPlayer.badge" class="font-sans text-[8px] font-extrabold px-2 py-0.5 bg-flamingo text-white inline-block mb-1 deco-cut-sm shadow-neon-pink">
+                                {{ selectedPlayer.badge[lang] }}
+                            </span>
+                            <h3 :id="'modal-player-name-' + selectedPlayer.id" class="font-display font-black text-2xl sm:text-3xl text-white uppercase leading-none tracking-wide">{{ selectedPlayer.name }}</h3>
+                            <span class="font-sans text-xs text-brand font-bold uppercase">{{ t.roster.filter_labels[selectedPlayer.role] || selectedPlayer.role }} // {{ selectedPlayer.pos }}</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 divide-x divide-white/10 bg-card/80 border border-white/10 p-2.5 rounded-sm mb-3 text-center">
+                        <div>
+                            <span class="text-[8px] text-neutral-400 block font-bold uppercase">{{ t.roster.modal_height }}</span>
+                            <span class="font-display text-xl text-white font-bold leading-tight tabular-nums">{{ selectedPlayer.h }} <span class="text-[10px] text-neutral-400 font-sans">CM</span></span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] text-neutral-400 block font-bold uppercase">{{ t.roster.modal_hand }}</span>
+                            <span class="font-display text-xl text-white font-bold leading-tight">{{ (selectedPlayer.hand || 'RIGHT') === 'LEFT' ? (lang === 'en' ? 'LEFT' : 'SOL') : (lang === 'en' ? 'RIGHT' : 'SAĞ') }}</span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] text-neutral-400 block font-bold uppercase">{{ t.roster.modal_status }}</span>
+                            <span class="font-display text-xl font-bold leading-tight uppercase" :class="selectedPlayer.status === 'ALUMNI' ? 'text-flamingo' : 'text-brand'">
+                                {{ selectedPlayer.status === 'ALUMNI' ? (lang === 'en' ? 'ALUMNI' : 'MEZUN') : t.roster.modal_active }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2.5 font-sans">
+                        <div>
+                            <span class="text-[9px] text-brand uppercase block mb-0.5 font-bold">{{ t.roster.modal_archetype }}</span>
+                            <p class="text-xs text-neutral-200 bg-card/80 p-2.5 border border-white/10 leading-relaxed rounded-sm">{{ selectedPlayer.playstyle?.[lang] || selectedPlayer.playstyle }}</p>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-flamingo uppercase block mb-0.5 font-bold">{{ t.roster.modal_dept }}</span>
+                            <p class="text-xs text-neutral-300 font-semibold">{{ selectedPlayer.dept?.[lang] || (lang === 'en' ? 'Faculty of Letters' : 'Edebiyat Fakültesi') }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 pt-3 border-t border-white/10 flex flex-wrap gap-2 justify-between items-center">
+                        <div class="flex items-center gap-1.5">
+                            <button @click="navigatePlayer(-1)" :disabled="currentRosterList.length <= 1" title="Previous (← Key)" aria-label="Previous Player"
+                                    class="w-7 h-7 flex items-center justify-center border border-white/20 text-white hover:border-brand hover:text-brand transition-colors rounded-sm disabled:opacity-30 disabled:pointer-events-none focus:ring-1 focus:ring-brand">◀</button>
+                            <button @click="navigatePlayer(1)" :disabled="currentRosterList.length <= 1" title="Next (→ Key)" aria-label="Next Player"
+                                    class="w-7 h-7 flex items-center justify-center border border-white/20 text-white hover:border-brand hover:text-brand transition-colors rounded-sm disabled:opacity-30 disabled:pointer-events-none focus:ring-1 focus:ring-brand">▶</button>
+                            <span class="font-sans font-bold text-[10px] text-neutral-400 ml-1.5 tracking-wider tabular-nums">[ {{ currentPlayerIndex + 1 }} / {{ currentRosterList.length }} ]</span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button @click="copyPlayerDeepLink(selectedPlayer.id)" 
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-card border border-white/15 hover:border-brand text-xs font-sans font-bold text-neutral-300 hover:text-white transition-all rounded-sm">
+                                <span>🔗</span>
+                                <span>{{ cardLinkCopied ? (lang === 'en' ? 'COPIED!' : 'KOPYALANDI!') : (lang === 'en' ? 'SHARE' : 'PAYLAŞ') }}</span>
+                            </button>
+
+                            <button @click="closeScoutingModal" class="px-3.5 py-1.5 font-display text-sm uppercase tracking-wider bg-brand text-black hover:bg-flamingo hover:text-white transition-colors shadow-neon-cyan rounded-sm font-bold focus:ring-2 focus:ring-brand">{{ t.roster.modal_close }}</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex gap-6 font-mono text-xs">
-                    <a v-for="(item, i) in content[lang].join.links" :key="i" 
-                       :href="item.url" 
-                       target="_blank" 
-                       class="hover-trigger text-text hover:text-brand transition-colors">
-                        {{ item.label }}
-                    </a>
+            </div>
+        </transition>
+
+        <!-- BACK TO TOP BUTTON -->
+        <transition name="fade">
+            <button v-show="scrolledFar" @click="scrollToTop" title="Back to Top" aria-label="Back to Top"
+                    class="fixed bottom-6 left-6 z-[180] w-9 h-9 glass-panel border border-brand text-brand hover:bg-brand hover:text-black transition-all shadow-neon-cyan rounded-sm flex items-center justify-center font-display text-base font-bold focus:ring-2 focus:ring-brand">
+                ▲
+            </button>
+        </transition>
+
+        <!-- FOOTER -->
+        <footer class="mt-auto py-5 border-t border-white/10 bg-[#07040d]/90 backdrop-blur-xl px-4 sm:px-6 relative z-10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+                <div class="flex items-center gap-2.5">
+                    <logo-icon class="w-7 h-7 text-white"></logo-icon>
+                    <div class="font-sans font-bold text-[10px] text-neutral-300 uppercase leading-tight">Hacettepe University<br><span class="text-brand">Faculty of Letters Basketball</span></div>
+                </div>
+                <div class="flex gap-4 font-display text-xs tracking-wider">
+                    <a href="https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP" target="_blank" rel="noopener noreferrer" class="text-neutral-400 hover:text-[#25D366] transition-colors">WHATSAPP</a>
+                    <a href="https://www.instagram.com/huedbasketbol" target="_blank" rel="noopener noreferrer" class="text-neutral-400 hover:text-flamingo transition-colors">INSTAGRAM</a>
                 </div>
             </div>
         </footer>
     </div>
 
+    <!-- TEMPLATES -->
     <script type="text/x-template" id="tpl-player-card">
-        <div class="group aspect-[3/4] w-full perspective hover-trigger active:scale-[0.98] transition-transform duration-200" @mouseenter="onEnter" @mousemove="handleTilt" @mouseleave="onLeave">
-            <div class="relative w-full h-full transition-transform duration-100 ease-out preserve-3d" :style="cardTransform">
-                <div class="absolute inset-0 backface-hidden bg-panel border border-border overflow-hidden">
-                    <img :src="imageSrc" :alt="player.name" loading="lazy" @load="onLoad" @error="onError" 
-                         class="w-full h-full object-cover object-top grayscale opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
-                    <div class="absolute inset-0 scanline opacity-20"></div>
-                    <div class="absolute bottom-0 left-0 w-full p-6 text-left">
-                        <div class="flex justify-between items-end border-b border-white/20 pb-2 mb-2">
-                            <span class="font-mono text-accent text-xs font-bold">{{ player.h }} CM</span>
-                            <span class="font-display font-bold text-5xl lg:text-6xl text-white opacity-20">{{ player.n }}</span>
+        <div class="group aspect-[3/4] w-full active:scale-[0.98] cursor-pointer deco-cut outline-none focus-visible:ring-2 focus-visible:ring-brand" 
+             tabindex="0" role="button" :aria-label="player.name + ' - #' + player.n"
+             @keydown.enter="$emit('select-player', player, $el)" @keydown.space.prevent="$emit('select-player', player, $el)"
+             @mousemove="handleTilt" @mouseleave="onLeave" @click="$emit('select-player', player, $el)">
+            <div ref="cardRef" class="relative w-full h-full card-tilt-wrap preserve-3d">
+                <div class="absolute inset-0 backface-hidden bg-card border border-white/15 group-hover:border-brand/70 overflow-hidden transition-colors shadow-glass">
+                    
+                    <div class="w-full h-full flex items-center justify-center bg-gradient-to-b from-[#2a174f] via-card to-[#07040d] relative">
+                        <img v-if="player.photo" :src="player.photo" :alt="player.name" loading="lazy" class="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                        <span v-else class="font-display font-black text-6xl sm:text-8xl lg:text-9xl text-white/10 group-hover:text-brand/20 transition-colors select-none tabular-nums">{{ player.n }}</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#07040d] via-[#07040d]/50 to-transparent"></div>
+                    </div>
+                    
+                    <div class="absolute top-2 left-2 right-2 sm:top-2.5 sm:left-2.5 sm:right-2.5 flex justify-between items-center gap-1">
+                        <span class="font-display text-xs sm:text-base lg:text-lg text-brand font-bold shrink-0 tabular-nums">{{ player.h }} CM</span>
+                        <span v-if="player.badge" class="font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 uppercase tracking-wider deco-cut-sm truncate"
+                              :class="player.status === 'ALUMNI' ? 'bg-white/20 text-neutral-200 border border-white/20' : 'bg-flamingo text-white shadow-neon-pink'">
+                            {{ player.badge[lang] }}
+                        </span>
+                    </div>
+
+                    <div class="absolute bottom-0 left-0 w-full p-2.5 sm:p-3.5 text-left">
+                        <span class="font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 mb-1 inline-block uppercase tracking-wider rounded-xs truncate max-w-full"
+                              :class="player.status === 'ALUMNI' ? 'bg-flamingo/20 text-flamingo border border-flamingo/40' : (player.role === 'CENTER' ? 'bg-amber-500/20 text-gold border border-amber-500/40' : 'bg-brand/20 text-brand border border-brand/40')">
+                            {{ player.status === 'ALUMNI' ? (lang === 'en' ? 'ALUMNI' : 'MEZUN') : (langContent.filter_labels[player.role] || player.role) }}
+                        </span>
+                        <h3 class="font-display font-bold text-base sm:text-xl lg:text-2xl text-white uppercase leading-tight tracking-wide line-clamp-1 sm:line-clamp-none">{{ player.name }}</h3>
+                        <div class="font-sans font-bold text-[8px] sm:text-[9px] text-neutral-300 mt-0.5 sm:mt-1 group-hover:text-brand transition-colors flex items-center gap-1">
+                            <span>{{ langContent.view_sheet }}</span> →
                         </div>
-                        <span class="font-mono text-brand text-[10px] font-bold bg-white/10 px-2 py-1 mb-2 inline-block">{{ player.role }}</span>
-                        <h3 class="font-display font-bold text-3xl lg:text-4xl text-white uppercase leading-[0.85]">{{ player.name }}</h3>
                     </div>
                 </div>
-                <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-40 transition-opacity duration-300"
-                     :style="{ background: `radial-gradient(circle at ${shinePosition}, rgba(255,255,255,0.3) 0%, transparent 60%)` }">
-                </div>
+
+                <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-30 transition-opacity duration-300 card-shine"></div>
             </div>
         </div>
     </script>
 
-    <script type="text/x-template" id="tpl-schedule">
-        <div class="hover-trigger group w-full bg-panel border border-border hover:bg-white/5 hover:border-brand/50 transition-all duration-300">
-            <div class="flex flex-col md:flex-row items-center p-6 gap-4 md:gap-6">
-                <div class="flex flex-col items-center justify-center w-full md:w-24 shrink-0 border-b md:border-b-0 md:border-r border-border pb-4 md:pb-0 md:pr-6">
-                    <span class="font-display font-bold text-4xl text-text">{{ match.d.split(' ')[1] }}</span>
-                    <span class="font-mono text-xs text-brand uppercase">{{ match.d.split(' ')[0] }}</span>
-                </div>
-                <div class="flex-grow text-center md:text-left w-full">
-                    <div class="font-display font-bold text-3xl sm:text-4xl md:text-5xl uppercase text-text group-hover:text-brand transition-colors break-words leading-none mb-2 md:mb-0">
-                        <span class="text-muted text-2xl mr-2 block sm:inline">VS</span>{{ match.opp }}
-                    </div>
-                    <div class="text-muted font-mono text-xs mt-1 uppercase">{{ match.loc }}</div>
-                </div>
-                <div class="shrink-0 w-full md:w-auto">
-                    <div v-if="!match.past" class="border border-brand/30 text-brand font-mono font-bold text-xs px-6 py-3 uppercase tracking-wider bg-brand/5 cursor-default text-center">
-                        <transition name="lang" mode="out-in">
-                            <span :key="lang">{{ langContent.ticket_btn }}</span>
-                        </transition>
-                    </div>
-                    <span v-else class="font-mono text-xs text-muted block text-center md:text-right">FINAL: {{ match.t }}</span>
-                </div>
-            </div>
-        </div>
-    </script>
-
+    <!-- UNIFIED TOP NAV TEMPLATE -->
     <script type="text/x-template" id="tpl-nav">
-        <nav class="fixed top-0 w-full h-[100px] lg:h-[120px] z-[100] flex items-center px-4 md:px-12 transition-all duration-300 bg-bg/90 backdrop-blur-md border-b border-border">
-            <a href="#home" @click.prevent="onNavClick('home')" class="hover-trigger flex items-center gap-3 mr-auto group" aria-label="Go to Home">
-                <logo-icon class="w-10 h-10 lg:w-12 lg:h-12 group-hover:scale-110 transition-transform duration-300"></logo-icon>
-                <div class="flex flex-col">
-                    <span class="font-display font-bold text-2xl lg:text-3xl text-text leading-none tracking-wide">HUED</span>
-                    <span class="font-mono text-[9px] text-muted tracking-widest">BASKETBALL</span>
-                </div>
-            </a>
-
-            <div class="hidden lg:flex items-center justify-center gap-1 bg-panel border border-border p-1 rounded-full absolute left-1/2 -translate-x-1/2 min-w-[515px]">
-                <button v-for="(label, key) in labels" :key="key" @click="onNavClick(key)" 
-                    class="hover-trigger font-mono font-bold text-xs px-6 py-2 rounded-full transition-all uppercase"
-                    :class="currentView === key ? 'bg-text text-bg' : 'text-muted hover:text-text'">
-                    <transition name="lang" mode="out-in">
-                        <span :key="lang">{{ label }}</span>
-                    </transition>
-                </button>
-            </div>
-
-            <div class="hidden lg:flex items-center gap-6 ml-auto">
-                <button @click="$emit('toggle-lang')" class="hover-trigger w-8 h-8 flex items-center justify-center border border-border rounded-full overflow-hidden hover:border-brand transition-colors" aria-label="Toggle Language">
-                    <img v-if="lang === 'en'" src="https://flagicons.lipis.dev/flags/4x3/gb.svg" class="w-full h-full object-cover opacity-80" alt="English">
-                    <img v-else src="https://flagicons.lipis.dev/flags/4x3/tr.svg" class="w-full h-full object-cover opacity-80" alt="Turkish">
-                </button>
-            </div>
-            
-            <button @click="$emit('toggle-menu')" class="lg:hidden ml-auto text-white p-4 hover-trigger z-[102]" aria-label="Menu">
-                <div class="space-y-1.5 w-7 flex flex-col justify-center">
-                    <span class="block h-0.5 bg-white w-full transition-transform duration-300 origin-center" :class="mobileOpen ? 'rotate-45 translate-y-2' : ''"></span>
-                    <span class="block h-0.5 bg-white w-full transition-opacity duration-300" :class="mobileOpen ? 'opacity-0' : ''"></span>
-                    <span class="block h-0.5 bg-white w-full transition-transform duration-300 origin-center" :class="mobileOpen ? '-rotate-45 -translate-y-2' : ''"></span>
-                </div>
-            </button>
-
-            <transition name="fade">
-                <div v-if="mobileOpen" class="fixed inset-0 bg-[#050505] z-[90] flex flex-col items-center justify-center gap-8 lg:hidden pb-12 h-[100dvh] overflow-y-auto">
-                    <button v-for="(label, key) in labels" :key="key" @click="onNavClick(key)" 
-                        class="font-display font-black text-5xl sm:text-6xl uppercase text-text hover:text-brand transition-all active:scale-95">
-                        <transition name="lang" mode="out-in">
-                            <span :key="lang">{{ label }}</span>
-                        </transition>
-                    </button>
-                    <div class="w-12 h-1 bg-border rounded-full my-4"></div>
-                    <div class="flex items-center gap-6">
-                        <button @click="$emit('toggle-lang')" class="border border-border px-6 py-3 text-sm font-mono text-text hover:bg-white hover:text-black transition-colors">
-                            {{ lang === 'en' ? 'TÜRKÇE' : 'ENGLISH' }}
-                        </button>
+        <div>
+            <nav class="fixed top-0 left-0 w-full h-[62px] sm:h-[68px] z-[100] flex items-center justify-between px-4 sm:px-6 md:px-8 bg-[#07040d]/90 backdrop-blur-xl border-b border-white/10 shadow-lg">
+                <!-- Brand Anchor -->
+                <a href="#home" @click.prevent="$emit('change-view', 'home')" class="flex items-center gap-2.5 group">
+                    <logo-icon class="w-8 h-8 sm:w-9 sm:h-9 group-hover:scale-105 transition-transform duration-300"></logo-icon>
+                    <div class="flex flex-col">
+                        <span class="font-display font-black text-xl sm:text-2xl text-white leading-none tracking-wider">HUED</span>
+                        <span class="font-script text-xs sm:text-sm text-flamingo -mt-0.5 leading-none">Basketball</span>
                     </div>
-                </div>
-            </transition>
-        </nav>
-    </script>
+                </a>
 
-    <script type="text/x-template" id="tpl-logo">
-        <div class="relative flex items-center justify-center">
-            <img src="./logo.png" alt="HUED" class="w-full h-full object-contain pointer-events-none select-none block">
+                <!-- Unified Right Controls: Quick Lang Toggle + Drawer Menu Trigger -->
+                <div class="flex items-center gap-2.5">
+                    <button @click="$emit('toggle-lang')" 
+                            class="px-2.5 py-1.5 border border-white/15 rounded-sm glass-panel hover:border-brand transition-all text-xs font-sans font-bold text-neutral-200 flex items-center gap-1.5 shadow-sm active:scale-95 deco-cut-sm">
+                        <span>{{ lang === 'tr' ? '🇹🇷 TR' : '🇬🇧 EN' }}</span>
+                    </button>
+
+                    <button @click="$emit('toggle-menu')" 
+                            class="w-10 h-10 flex flex-col items-center justify-center gap-1.5 border border-white/15 rounded-sm glass-panel hover:border-brand transition-all shadow-neon-cyan active:scale-95 focus:ring-1 focus:ring-brand deco-cut-sm group"
+                            :aria-label="menuOpen ? 'Close Menu' : 'Open Menu'"
+                            :aria-expanded="menuOpen">
+                        <span class="w-5 h-0.5 bg-brand transition-all duration-300 origin-center"
+                              :class="menuOpen ? 'rotate-45 translate-y-2 bg-flamingo' : 'group-hover:w-6'"></span>
+                        <span class="w-5 h-0.5 bg-white transition-all duration-200"
+                              :class="menuOpen ? 'opacity-0 scale-x-0' : ''"></span>
+                        <span class="w-5 h-0.5 bg-brand transition-all duration-300 origin-center"
+                              :class="menuOpen ? '-rotate-45 -translate-y-2 bg-flamingo' : 'group-hover:w-4'"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Slide-Out Glass Menu Drawer & Backdrop -->
+            <transition name="fade">
+                <div v-if="menuOpen" class="fixed inset-0 z-[240] bg-black/80 backdrop-blur-md" 
+                     @click="$emit('close-menu')" aria-hidden="true"></div>
+            </transition>
+
+            <transition name="drawer-slide">
+                <aside v-if="menuOpen" class="fixed top-0 right-0 w-[300px] sm:w-[380px] h-full z-[250] bg-[#0c0717]/95 border-l border-white/15 p-6 sm:p-7 flex flex-col justify-between backdrop-blur-2xl shadow-2xl overflow-y-auto">
+                    <div>
+                        <!-- Drawer Header -->
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                            <div class="flex items-center gap-2.5">
+                                <logo-icon class="w-7 h-7 text-white"></logo-icon>
+                                <span class="font-display font-bold text-lg sm:text-xl text-white tracking-wider uppercase">VARSITY MENU</span>
+                            </div>
+                            <button @click="$emit('close-menu')" class="text-neutral-400 hover:text-white font-sans font-bold text-xs p-1">✕ [ESC]</button>
+                        </div>
+
+                        <!-- Main Nav Items inside Drawer -->
+                        <div class="space-y-2.5 mb-6" role="menu">
+                            <button v-for="(label, key) in labels" :key="key" @click="$emit('change-view', key)"
+                                    class="w-full text-left p-3.5 font-display text-xl sm:text-2xl uppercase tracking-wider flex items-center justify-between border border-transparent rounded-sm transition-all"
+                                    :class="currentView === key ? 'bg-brand text-black font-black shadow-neon-cyan' : 'text-neutral-300 hover:text-white hover:bg-card/70 hover:border-white/10'">
+                                <span>{{ label }}</span>
+                                <span class="text-sm font-sans" :class="currentView === key ? 'text-black' : 'text-brand'">→</span>
+                            </button>
+                        </div>
+
+                        <!-- Language Switcher inside Menu -->
+                        <div class="border-t border-white/10 pt-5">
+                            <span class="font-sans font-bold text-[10px] text-neutral-400 uppercase tracking-widest block mb-2.5">LANGUAGE / DİL SEÇİMİ</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button @click="$emit('set-lang', 'tr')" 
+                                        class="p-2.5 flex items-center justify-center gap-2 border rounded-sm transition-all deco-cut-sm font-sans font-bold text-xs"
+                                        :class="lang === 'tr' ? 'bg-brand text-black border-brand shadow-neon-cyan' : 'bg-card border-white/15 text-neutral-300 hover:text-white'">
+                                    <span class="text-base">🇹🇷</span>
+                                    <span>TÜRKÇE</span>
+                                </button>
+                                <button @click="$emit('set-lang', 'en')" 
+                                        class="p-2.5 flex items-center justify-center gap-2 border rounded-sm transition-all deco-cut-sm font-sans font-bold text-xs"
+                                        :class="lang === 'en' ? 'bg-flamingo text-white border-flamingo shadow-neon-pink' : 'bg-card border-white/15 text-neutral-300 hover:text-white'">
+                                    <span class="text-base">🇬🇧</span>
+                                    <span>ENGLISH</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drawer Footer Links -->
+                    <div class="pt-6 border-t border-white/10">
+                        <div class="flex items-center justify-between text-xs font-display tracking-wider">
+                            <a href="https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP" target="_blank" rel="noopener noreferrer" class="text-neutral-400 hover:text-[#25D366] transition-colors">WHATSAPP</a>
+                            <a href="https://www.instagram.com/huedbasketbol" target="_blank" rel="noopener noreferrer" class="text-neutral-400 hover:text-flamingo transition-colors">INSTAGRAM</a>
+                        </div>
+                    </div>
+                </aside>
+            </transition>
         </div>
     </script>
 
+    <!-- SCRIPTS -->
     <script type="module">
-        import { createApp, ref, computed, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-        import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js'
+        import { createApp, ref, computed, watch, onMounted, nextTick } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js';
 
-        const observerService = {
-            reveal: null,
-            counter: null,
-            init() {
-                this.reveal = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if(entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                            this.reveal.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
+        const trCollator = new Intl.Collator('tr', { numeric: true, sensitivity: 'base' });
+        const L = (en, tr) => ({ en, tr });
+        
+        // ROBUST STRING NORMALIZATION (Folds Turkish İ/I/ı seamlessly to guarantee exact matches)
+        const normalizeStr = (str) => (str || '')
+            .replace(/İ/g, 'i')
+            .replace(/I/g, 'i')
+            .replace(/ı/g, 'i')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/["“”]/g, '')
+            .trim();
 
-                this.counter = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if(entry.isIntersecting) {
-                            const el = entry.target;
-                            const target = parseInt(el.dataset.target);
-                            const duration = 2000;
-                            const start = performance.now();
-                            const animate = (time) => {
-                                const progress = Math.min((time - start) / duration, 1);
-                                const ease = 1 - Math.pow(1 - progress, 4);
-                                el.innerText = Math.floor(ease * target) + (target > 50 ? '+' : '');
-                                if(progress < 1) requestAnimationFrame(animate);
-                            };
-                            requestAnimationFrame(animate);
-                            this.counter.unobserve(el);
-                        }
-                    });
-                });
+        let audioCtx = null;
+        const playAcousticTick = (freq = 750, duration = 0.015) => {
+            try {
+                const AudioClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioClass) return;
+                if (!audioCtx) audioCtx = new AudioClass();
+                if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        };
+
+        const triggerHapticFeedback = (intensity = 6) => {
+            try { navigator.vibrate?.(intensity); } catch (e) {}
+            playAcousticTick(850, 0.012);
+        };
+
+        const P = (id, n, h, name, role, pos, [pEn, pTr], x = {}) => {
+            const badge = x.badge ? L(x.badge[0], x.badge[1]) : null;
+            const dept = x.dept ? L(x.dept[0], x.dept[1]) : null;
+            const status = x.status || 'ACTIVE';
+            const hand = x.hand || 'RIGHT';
+            const searchIndex = normalizeStr(`${name} ${n} ${role} ${pos} ${badge?.en || ''} ${badge?.tr || ''} ${dept?.en || ''} ${dept?.tr || ''} ${status}`);
+            
+            return {
+                id, n, h, name, role, pos, playstyle: L(pEn, pTr),
+                badge, hand, dept, status, searchIndex
+            };
+        };
+
+        const T = (edition, metal, [tEn, tTr], [vEn, vTr], [rEn, rTr], squadList, [sEn, sTr]) => ({
+            edition, metal, title: L(tEn, tTr), venue: L(vEn, vTr), result: L(rEn, rTr), squadList, summary: L(sEn, sTr)
+        });
+        const M = (id, name, [dEn, dTr], theme, [rEn, rTr]) => ({ id, name, dept: L(dEn, dTr), theme, roleTitle: L(rEn, rTr) });
+
+        function useGridCanvas() {
+            const canvas = document.getElementById('canvas-bg');
+            if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const ctx = canvas.getContext('2d', { alpha: true });
+            let w = 0, h = 0, targetMx = 0, targetMy = 0, currentMx = 0, currentMy = 0;
+            let isVis = true, isScreenVis = true, lastFrame = 0;
+            const cols = 24, rows = 24, fps = 1000 / 30;
+
+            const totalPoints = (rows + 1) * (cols + 1);
+            const ptsBuffer = new Float32Array(totalPoints * 2);
+
+            const resize = () => { 
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                w = window.innerWidth; 
+                h = window.innerHeight;
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                ctx.resetTransform?.() || ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.scale(dpr, dpr);
+            };
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+            window.addEventListener('mousemove', e => { 
+                targetMx = (e.clientX / w) * 2 - 1; 
+                targetMy = (e.clientY / h) * 2 - 1; 
+            }, { passive: true });
+            
+            document.addEventListener('visibilitychange', () => isVis = !document.hidden);
+            new IntersectionObserver(([e]) => isScreenVis = e.isIntersecting).observe(canvas);
+
+            const render = (time) => {
+                requestAnimationFrame(render);
+                if (!isVis || !isScreenVis || (time - lastFrame < fps)) return;
+                lastFrame = time - ((time - lastFrame) % fps);
+                
+                currentMx += (targetMx - currentMx) * 0.08;
+                currentMy += (targetMy - currentMy) * 0.08;
+
+                ctx.clearRect(0, 0, w, h);
+                const t = time * 0.0012, ox = currentMx * 12, oy = currentMy * 12;
+                
+                let ptr = 0;
+                for (let r = 0; r <= rows; r++) {
+                    for (let c = 0; c <= cols; c++) {
+                        const x = (c / cols - 0.5) * 60, y = (r / rows - 0.5) * 40;
+                        let z = Math.sin(x / 5 + t) * 1.5 + Math.cos(y / 5 + t) * 1.5;
+                        const dSq = (x - ox) ** 2 + (y - oy) ** 2;
+                        if (dSq < 50) z += (6.5 - Math.sqrt(dSq)) * 0.35;
+                        const s = 340 / Math.max(22 - z, 1);
+                        ptsBuffer[ptr] = w / 2 + x * s;
+                        ptsBuffer[ptr + 1] = h / 2 + ((y + 14) * 0.7 - z * 0.5) * s;
+                        ptr += 2;
+                    }
+                }
+
+                ctx.lineWidth = 1.0;
+                for (let r = 0; r <= rows; r++) {
+                    ctx.strokeStyle = r % 2 === 0 ? 'rgba(255, 20, 147, 0.25)' : 'rgba(0, 240, 255, 0.25)';
+                    ctx.beginPath();
+                    for (let c = 0; c <= cols; c++) {
+                        const idx = (r * (cols + 1) + c) * 2;
+                        const px = ptsBuffer[idx], py = ptsBuffer[idx + 1];
+                        if (!c) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+                    }
+                    ctx.stroke();
+                }
+            };
+            requestAnimationFrame(render);
+        }
+
+        const T_DICT = {
+            nav: { home: ["Home","Giriş"], legacy: ["Legacy","Tarihçe"], roster: ["Roster","Kadro"], tournaments: ["Campaigns","Turnuva"], join: ["Join","Katıl"] },
+            hero: { script: ["Faculty of Letters", "Edebiyat Fakültesi"] },
+            about: {
+                desc: ["Established in 2023, the Faculty of Letters Basketball Team unites athletic ambition with academic camaraderie. Competing in the semesterly HODESK 3x3 blitz tournaments and the annual university-wide Spor Şenliği knockout cup, we build a lasting competitive culture across Beytepe.", "2023 yılında kurulan Edebiyat Fakültesi Basketbol Takımı, sportif rekabeti akademik dostlukla buluşturuyor. Dönemlik HODESK 3x3 turnuvaları ve geleneksel Hacettepe Spor Şenliği eleme kupasında mücadele ederek Beytepe'de kalıcı bir basketbol kültürü inşa ediyoruz."],
+                culture_title: ["VARSITY CULTURE", "TAKIM KÜLTÜRÜ"], culture_desc: ["Basketball is a universal language. From the Beytepe Çadır Saha outdoor courts to the main indoor sports hall, every possession reflects our collective discipline and focus.", "Basketbol ortak dilimizdir. Beytepe Çadır Saha'dan ana spor salonunun parkelerine kadar her hücum takım disiplinimizi ve sahadaki ortak odaklanmamızı yansıtır."],
+                future_title: ["THE OBJECTIVE", "HEDEFİMİZ"], future_desc: ["Establish a lasting varsity standard across men's and women's divisions, expand roster depth, and compete for championship honors every season.", "Kadın ve erkek takımlarımızda kadro derinliğini artırmak, turnuva tecrübesini pekiştirmek ve fakültemizi her organizasyonda kürsüye taşımak."]
+            },
+            roster: {
+                active_unit: ["ACTIVE ROSTER", "AKTİF KADRO"], alumni_unit: ["LEGACY ALUMNI", "MEZUN KADRO"], the_squad: ["The Squad", "Güncel Kadro"], the_legends: ["Legacy Alumni", "Mezun Kadro"],
+                active_men_script: ["Men's Division", "Erkek Takımı"], active_women_script: ["Women's Division", "Kadın Takımı"], alumni_unit_script: ["Graduated Ballers", "Tarihi Kadro"],
+                men_league: ["MEN'S SQUAD", "ERKEK TAKIMI"], women_league: ["WOMEN'S SQUAD", "KADIN TAKIMI"],
+                view_sheet: ["SCOUTING SHEET", "OYUNCU KARTI"], search_placeholder: ["SEARCH BY NAME OR #...", "İSİM VEYA NO İLE ARA..."], empty_msg: ["NO PLAYERS MATCH YOUR SEARCH QUERY.", "ARAMANIZA UYGUN OYUNCU BULUNAMADI."],
+                hud_avg_height: ["AVG HT", "ORT. BOY"], hud_apex: ["APEX", "EN UZUN"], hud_hand_ratio: ["LEFT-HAND", "SOLAK"], hud_squad_size: ["BALLERS", "KİŞİ"],
+                modal_height: ["HEIGHT", "BOY"], modal_hand: ["DOMINANT HAND", "BASKETBOL ELİ"], modal_status: ["STATUS", "DURUM"], modal_active: ["ACTIVE SQUAD", "AKTİF KADRO"],
+                modal_archetype: ["PLAYING ARCHETYPE", "OYUN TARZI VE ROL"], modal_dept: ["FACULTY DEPARTMENT", "AKADEMİK BÖLÜM"], modal_close: ["CLOSE SHEET", "KAPAT"],
+                sort_default: ["DEFAULT SORT", "VARSAYILAN"], sort_num: ["NUMBER (#)", "FORMA NO (#)"], sort_height_desc: ["HEIGHT (APEX)", "BOY (UZUNDAN)"], sort_height_asc: ["HEIGHT (ASC)", "BOY (KISADAN)"], sort_name: ["NAME (A-Z)", "İSİM (A-Z)"],
+                filter_labels: { ALL: "ALL", GUARD: "GUARD", FORWARD: "FORWARD", CENTER: "CENTER" }
+            },
+            tournaments: {
+                title: ["CAMPAIGNS", "TURNUVALAR"], phase_desc: ["The complete chronological record of official varsity championship runs, podium finishes, and tournament squad rosters.", "Edebiyat Fakültesi Basketbol Takımı'nın resmi şampiyona dereceleri, madalyaları ve turnuva kadroları."],
+                hodesk: { meta: ["BI-ANNUAL 3X3 CIRCUIT", "DÖNEMLİK 3X3 ŞAMPİYONASI"], title: ["HODESK 3x3 CHAMPIONSHIP", "HODESK 3x3 TURNUVALARI"], desc: ["High-paced half-court championship held once every semester at Beytepe Çadır Saha with intense group stages and medal playoffs.", "Her akademik dönem Beytepe Çadır Saha'da düzenlenen yüksek tempolu grup ve eleme maçlarıyla tek günlük kupa maratonu."] },
+                fest: { meta: ["ANNUAL VARSITY CUP", "GELENEKSEL FAKÜLTE KUPASI"], title: ["SPOR ŞENLİĞİ KNOCKOUT", "SPOR ŞENLİĞİ ELEME KUPASI"], desc: ["The grand university-wide faculty knockout tournament at Hacettepe SBF Salonu. Single-elimination tree across 4 rounds to claim campus honors.", "Hacettepe SBF Salonu'nda düzenlenen 4 maçlık tek maç eleme usulü prestijli fakülteler arası eleme turnuvası."] }
+            },
+            legacy: {
+                timeline_title: ["OUR LEGACY", "TARİHÇEMİZ"],
+                stats: [ {val:"58", suffix:"+", label:"SQUAD MEMBERS"}, {val:"4", suffix:"x", label:"PODIUM FINISHES"}, {val:"3", suffix:"", label:"ANNUAL FESTS"}, {val:"28", suffix:"+", label:"TOTAL MATCHES"} ]
+            },
+            join: {
+                title: ["JOIN THE UNIT", "ARAMIZA KATIL"], email_label: ["DIRECT INQUIRIES & RECRUITMENT", "İLETİŞİM VE KAYIT"], mgmt_title: ["TEAM LEADERSHIP", "TAKIM YÖNETİMİ"]
             }
         };
 
-        function use3DScene() {
-            let renderer, scene, camera, mesh, frameId;
-            let mouseX = 0, mouseY = 0;
-            let isVisible = true;
-            
-            document.addEventListener('visibilitychange', () => { isVisible = document.visibilityState === 'visible'; });
-            
-            const init = () => {
-                const canvas = document.getElementById('webgl-canvas');
-                if(!canvas) return;
-
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-                camera.position.set(0, -10, 20);
-                camera.lookAt(0, 0, 0);
-
-                renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-
-                const geometry = new THREE.PlaneGeometry(60, 40, 30, 30);
-                const material = new THREE.MeshBasicMaterial({ color: 0xff0055, wireframe: true, transparent: true, opacity: 0.15 });
-                mesh = new THREE.Mesh(geometry, material);
-                scene.add(mesh);
-
-                if (window.matchMedia("(pointer: fine)").matches) {
-                    document.addEventListener('mousemove', (e) => {
-                        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-                    });
-                }
-
-                window.addEventListener('scroll', () => { 
-                    if (document.visibilityState === 'visible') isVisible = window.scrollY < window.innerHeight * 1.5; 
-                });
-
-                const animate = (time) => {
-                    frameId = requestAnimationFrame(animate);
-                    if(!isVisible) return;
-
-                    const positions = mesh.geometry.attributes.position.array;
-                    const timeFactor = time * 0.002;
-                    const mouseXScaled = mouseX * 20;
-                    const mouseYScaled = mouseY * 20;
-                    
-                    for(let i=0; i<positions.length; i+=3) {
-                        const x = positions[i];
-                        const y = positions[i+1];
-                        positions[i+2] = Math.sin(x/5 + timeFactor) * 2 + Math.cos(y/5 + timeFactor) * 2;
-                        const dx = x - mouseXScaled;
-                        const dy = y - mouseYScaled;
-                        const distSq = dx * dx + dy * dy;
-                        if(distSq < 64) positions[i+2] += (8 - Math.sqrt(distSq)) * 0.5;
-                    }
-                    mesh.geometry.attributes.position.needsUpdate = true;
-                    renderer.render(scene, camera);
-                };
-                animate(0);
-            };
-
-            onMounted(() => { 
-                init(); 
-                window.addEventListener('resize', () => {
-                    if(!camera || !renderer) return;
-                    camera.aspect = window.innerWidth / window.innerHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                });
-            });
-        }
-
-        const CONTENT = Object.freeze({
-            en: {
-                nav: { join: "Join", schedule: "Schedule", roster: "Roster", about: "About", legacy: "Legacy" },
-                hero: { meta: "EST 2023 // FACULTY OF LETTERS", title_pre: "OFFICIAL TEAM", title_main: "HUED" },
-                about: {
-                    title: "THE VISION",
-                    desc: "Established in 2023, the Faculty of Letters Basketball Team is striving to not only achieve success in the bi-annual HODESK 3x3 Tournaments and The Annual Hacettepe Sports Festival, but also to create an environment within which anyone that is interested in the game of basketball can join in and make unforgettable memories throughout their academic journey.",
-                    culture_title: "CULTURE",
-                    culture_desc: "We believe that basketball is more than a game—it is a language. From the asphalt of the outdoor courts to the polished hardwood of the main arena, every dribble resonates with our ambition.",
-                    future_title: "FUTURE",
-                    future_desc: "Our roadmap is clear: dominate the local circuit, expand our roster depth, and establish a legacy that outlasts our tenure at the university."
-                },
-                roster: { men_league: "MEN'S LEAGUE", women_league: "WOMEN'S LEAGUE" },
-                schedule: { calendar_title: "2025-26 SEASON", calendar_sub: "SECURE YOUR SEAT AT THE ARENA", ticket_btn: "FREE ENTRY" },
-                legacy: { 
-                    timeline_title: "TIMELINE",
-                    stats: [ {val:"51", label:"MEMBERS"}, {val:"3", label:"PODIUMS"}, {val:"2", label:"FESTS"}, {val:"20", label:"MATCHES"} ]
-                },
-                join: {
-                    title: "JOIN THE UNIT",
-                    links: [
-                        { label: "WHATSAPP GROUP", url: "https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP", type: "brand" },
-                        { label: "INSTAGRAM", url: "https://www.instagram.com/huedbasketbol", type: "accent" }
-                    ],
-                    roles: { coord: "TEAM COORDINATOR", capt: "TEAM CAPTAIN", social: "SOCIAL MEDIA MANAGER" }
-                }
-            },
-            tr: {
-                nav: { join: "Katıl", schedule: "Fikstür", roster: "Kadro", about: "Hakkımızda", legacy: "Tarihçe" },
-                hero: { meta: "KURULUŞ 2023 // EDEBİYAT FAKÜLTESİ", title_pre: "RESMİ TAKIM", title_main: "HUED" },
-                about: {
-                    title: "VİZYONUMUZ",
-                    desc: "2023 yılında kurulan Edebiyat Fakültesi Basketbol Takımı, sadece HODESK 3x3 Turnuvaları ve Geleneksel Hacettepe Spor Festivali'nde başarıya ulaşmayı değil, basketbola ilgi duyan herkesin katılabileceği bir ortam yaratmayı amaçlamaktadır.",
-                    culture_title: "KÜLTÜRÜMÜZ",
-                    culture_desc: "Basketbolun bir oyundan fazlası, bir dil olduğuna inanıyoruz. Açık hava sahalarının asfaltından ana arenanın parkelerine kadar her top sürüşü hırsımızla yankılanıyor.",
-                    future_title: "GELECEK",
-                    future_desc: "Yol haritamız net: yerel turnuvaları domine etmek, kadro derinliğimizi artırmak ve üniversitedeki süremizden daha uzun ömürlü bir miras bırakmak."
-                },
-                roster: { men_league: "ERKEKLER LİGİ", women_league: "KADINLAR LİGİ" },
-                schedule: { calendar_title: "2025-26 SEZONU", calendar_sub: "ARENADAKİ YERİNİZİ AYIRTIN", ticket_btn: "GİRİŞ ÜCRETSİZ" },
-                legacy: { 
-                    timeline_title: "ZAMAN ÇİZELGESİ",
-                    stats: [ {val:"51", label:"ÜYE SAYISI"}, {val:"3", label:"HODESK KÜRSÜSÜ"}, {val:"2", label:"FESTİVAL KATILIMI"}, {val:"20", label:"RESMİ MAÇ"} ]
-                },
-                join: {
-                    title: "ARAMIZA KATIL",
-                    links: [
-                        { label: "WHATSAPP GRUBU", url: "https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP", type: "brand" },
-                        { label: "INSTAGRAM", url: "https://www.instagram.com/huedbasketbol", type: "accent" }
-                    ],
-                    roles: { coord: "TAKIM KOORDİNATÖRÜ", capt: "TAKIM KAPTANI", social: "SOSYAL MEDYA SORUMLUSU" }
-                }
+        const mapLangTree = (obj, l) => {
+            if (!obj || typeof obj !== 'object') return obj;
+            if (Array.isArray(obj)) {
+                return (typeof obj[0] === 'string' && obj.length === 2) ? (l === 'en' ? obj[0] : obj[1]) : obj.map(x => mapLangTree(x, l));
             }
-        });
+            const res = {};
+            for (const k in obj) res[k] = mapLangTree(obj[k], l);
+            return res;
+        };
 
         const DATA = Object.freeze({
+            management: [
+                M('lead1', 'Esin Özge Esen', ['Faculty of Letters', 'Edebiyat Fakültesi'], 'brand', ['TEAM COORDINATOR', 'TAKIM KOORDİNATÖRÜ']),
+                M('lead2', 'Doruk Kuru', ['International Relations', 'Uluslararası İlişkiler'], 'accent', ['FOUNDING CAPTAIN', 'KURUCU KAPTAN']),
+                M('lead3', 'Duygu Serttaş', ['Faculty of Letters', 'Edebiyat Fakültesi'], 'muted', ['COMMUNICATIONS LEAD', 'SOSYAL MEDYA SORUMLUSU'])
+            ],
             men: [
-                { id: 'm1', n: "61", h: "190", name: "DORUK KURU", role: "FORWARD" },
-                { id: 'm2', n: "81", h: "175", name: "ALICAN DOĞAN", role: "GUARD" },
-                { id: 'm3', n: "13", h: "186", name: "MERT ERDOĞDU", role: "FORWARD" },
-                { id: 'm4', n: "3", h: "178", name: "SEÇKİN PEKTAŞ", role: "GUARD" },
-                { id: 'm5', n: "51", h: "195", name: "EMRE KAÇMAZ", role: "CENTER" },
-                { id: 'm6', n: "12", h: "175", name: "NİHAT YÜKSEL", role: "GUARD" },
-                { id: 'm7', n: "24", h: "184", name: "MEHMET ALİ YILMAZ", role: "FORWARD" },
-                { id: 'm8', n: "8", h: "184", name: "SADİ KANDEMİR", role: "FORWARD" },
-                { id: 'm9', n: "9", h: "175", name: "GÖKTÜRK GEREN", role: "GUARD" },
-                { id: 'm10', n: "1", h: "191", name: "TURGAY BİLEN", role: "GUARD" },
-                { id: 'm11', n: "11", h: "185", name: "UTKU UĞURLU", role: "FORWARD" },
-                { id: 'm12', n: "0", h: "176", name: "BURAK KİBAR", role: "GUARD" }
+                P('m2', '81', '175', 'ALİCAN DOĞAN', 'GUARD', 'PG', ['Floor general with exceptional court vision, playmaking, and transition speed.', 'Yüksek saha görüşü, oyun kurma becerisi ve hızlı hücum liderliği.'], { badge: ['STARTER', 'İLK 5'] }),
+                P('m4', '3', '178', 'SEÇKİN PEKTAŞ', 'GUARD', 'SG', ['Perimeter lock defender with quick lateral footwork and ball disruption.', 'Baskılı perimetre savunmacısı, çabuk ayaklar ve top kapma uzmanlığı.'], { badge: ['STARTER', 'İLK 5'] }),
+                P('m8', '8', '184', 'SADİ KANDEMİR', 'FORWARD', 'SF / PF', ['Slashing wing capable of finishing through contact inside the paint.', 'Temas üzerinden boyalı alanda sayı üretebilen kanat oyuncusu.'], { badge: ['STARTER', 'İLK 5'] }),
+                P('m10', '1', '191', 'TURGAY BİLEN', 'GUARD', 'SG / SF', ['Tall perimeter guard with versatile defensive length and rebounding.', 'Uzun guard fiziği, perimetrede ribaund katkısı ve savunma genişliği.'], { badge: ['STARTER', 'İLK 5'] }),
+                P('m5', '51', '195', 'EMRE KAÇMAZ', 'CENTER', 'C', ['Paint rim protector, defensive rebound anchor, and pick-and-roll finisher.', 'Pota altı çember savunması, savunma ribaundu lideri ve devrilme bitiricisi.'], { badge: ['BIG MAN', 'PİVOT'] }),
+                P('m12', '0', '176', 'BURAK KİBAR', 'GUARD', 'PG', ['Shifty secondary ball handler and pick-and-roll playmaker.', 'İkili oyun yönlendiricisi ve çevik top taşıyıcı.'], { badge: ['6TH MAN', '6. ADAM'] }),
+                P('m18', '26', '191', 'BARIŞ "HOCAM"', 'CENTER', 'C', ['Physical post anchor, interior defensive voice, and offensive glass presence.', 'Fiziksel boyalı alan savunucusu, pota altı tecrübesi ve hücum ribaundu katkısı.'], { badge: ['VARSITY', 'KADRO'] }),
+                P('m19', '44', '180', 'ALİ CEYLAN', 'GUARD', 'PG / SG', ['High-tempo on-ball defender with aggressive transition driving lanes.', 'Topa baskı kuran yüksek tempolu savunmacı ve hızlı hücum delici guard.'], { badge: ['VARSITY', 'KADRO'] }),
+                P('m1', '61', '190', 'DORUK KURU', 'FORWARD', 'SF / PF', ['Mid-range shot creator, versatile wing defender, and vocal founding captain.', 'Orta mesafe skor tehdidi, çok yönlü kanat savunması ve kurucu kaptan.'], { badge: ['FOUNDER / ALUMNI', 'KURUCU / MEZUN'], hand: 'LEFT', dept: ['International Relations', 'Uluslararası İlişkiler'], status: 'ALUMNI' }),
+                P('m3', '13', '186', 'MERT ERDOĞDU', 'FORWARD', 'SF', ['Perimeter spacer with consistent corner shooting and transition scoring.', 'Köşe üçlük tehdidi, alan açma becerisi ve etkili geçiş hücumu bitiriciliği.'], { badge: ['CO-FOUNDER / ALUMNI', 'KURUCU / MEZUN'], status: 'ALUMNI' }),
+                P('m6', '12', '175', 'NİHAT YÜKSEL', 'GUARD', 'PG / SG', ['High-tempo guard with aggressive ball-handling and drive creation.', 'Tempolu top yönlendirici, agresif penetreler ve potaya atak yeteneği.'], { badge: ['CO-FOUNDER / ALUMNI', 'KURUCU / MEZUN'], status: 'ALUMNI' }),
+                P('m7', '24', '184', 'MEHMET ALİ YILMAZ', 'FORWARD', 'PF', ['Active post player with interior footwork and offensive board energy.', 'Boyalı alan ayak hareketleri ve hücum ribaundu energisi.'], { badge: ['ALUMNI', 'MEZUN'], status: 'ALUMNI' }),
+                P('m9', '9', '175', 'GÖKTÜRK GEREN', 'GUARD', 'SG', ['Quick-release spot-up shooter and active perimeter defender.', 'Çabuk şut çıkaran ceza şutörü ve hareketli perimetre savunması.'], { badge: ['ALUMNI', 'MEZUN'], status: 'ALUMNI' }),
+                P('m11', '69', '184', 'UTKU UĞURLU', 'GUARD', 'SG', ['Perimeter scoring guard with quick transition pace and shot-making ability.', 'Hızlı hücum bitiricisi, hareketli dış şut tehdidi ve guard rotasyonu.'], { badge: ['ALUMNI', 'MEZUN'], status: 'ALUMNI' }),
+                P('m13', '7', '194', 'ALİ MEŞHUR', 'CENTER', 'C', ['Towering paint anchor, interior rebound collector, and post-up scorer.', 'Pota altı fiziksel çember savunucusu, ribaund hakimi ve post bitiricisi.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('m14', '1', '188', 'EMRE "HALFCOURT"', 'FORWARD', 'SF / PF', ['Deep shooting range, clutch shot making, and versatile wing forward.', 'Uzak mesafe şut tehdidi, kritik anlarda skor üretimi ve çok yönlü forvet oyunu.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('m15', '2', '186', 'AHMET İNEM', 'FORWARD', 'SF', ['Dynamic perimeter cutter, fast-break finisher, and transition scorer.', 'Hareketli topsuz katlar, hızlı hücum bitiriciliği ve orta mesafe oyunu.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('m16', '3', '180', 'CEMAL "WILDCARD"', 'GUARD', 'PG / SG', ['Unpredictable ball-handling, shifty playmaking, and perimeter sparkplug.', 'Tahmin edilemez yön değiştirmeler, energik top yönlendirme ve dış şut tehdidi.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('m17', '4', '182', 'GÜRHAN "GHOST"', 'FORWARD', 'SF', ['Sneaky baseline cuts, perimeter floor spacing, and disciplined defense.', 'Sessiz dip çizgi katları, hücum alan açma ve disiplinli kanat savunması.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('m20', '10', '185', 'EMİR BEKTEMUR', 'FORWARD', 'SF', ['Athletic wing forward, active in defensive rotations and transition scoring.', 'Atletik kanat forveti, ribaund takipçisi ve geçiş hücumlarında etkili bitirici.'], { badge: ['ALUMNI', 'MEZUN'], status: 'ALUMNI' })
             ],
             women: [
-                { id: 'w1', n: "7", h: "162", name: "DUYGU SERTTAŞ", role: "GUARD" },
-                { id: 'w2', n: "8", h: "164", name: "ECEM TEMİZ", role: "GUARD" },
-                { id: 'w3', n: "13", h: "163", name: "ESİN ESEN", role: "GUARD" },
-                { id: 'w4', n: "10", h: "160", name: "TUANA BEKTAŞ", role: "GUARD" },
-                { id: 'w5', n: "15", h: "180", name: "MELİKE KORKMAZ", role: "CENTER" },
-                { id: 'w6', n: "22", h: "163", name: "MELİKE ÖZDEMİR", role: "GUARD" },
-                { id: 'w7', n: "2", h: "166", name: "ZEHRA KANLI", role: "FORWARD" },
-                { id: 'w8', n: "5", h: "172", name: "ELİF YILMAZ", role: "FORWARD" },
-                { id: 'w9', n: "11", h: "175", name: "ZEYNEP DEMİR", role: "FORWARD" },
-                { id: 'w10', n: "23", h: "168", name: "AYŞE KAYA", role: "GUARD" },
-                { id: 'w11', n: "34", h: "182", name: "FATMA ÇELİK", role: "CENTER" },
-                { id: 'w12', n: "6", h: "165", name: "BUSE ARSLAN", role: "GUARD" }
+                P('w1', '7', '162', 'DUYGU SERTTAŞ', 'GUARD', 'PG', ['Dynamic floor commander with perimeter shooting and full-court pacing.', 'Dinamik saha komutanı, dış şut tehdidi ve tam saha oyun temposu.'], { badge: ['CAPTAIN', 'KAPTAN'] }),
+                P('w2', '8', '164', 'ECEM TEMİZ', 'GUARD', 'SG', ['Sharpshooter with perimeter scoring instincts and off-ball movement.', 'Topsuz katlar, keskin dış şutlar ve skor içgüdüsü.'], { badge: ['STARTER', 'İLK 5'] }),
+                P('w3', '13', '163', 'ESİN ESEN', 'GUARD', 'PG / SG', ['Vocal organizer, clutch playmaker, and high-energy defensive guard.', 'Saha içi organizatör, kritik anlarda skor ve yüksek savunma energisi.'], { badge: ['COORDINATOR', 'KOORDİNATÖR'] }),
+                P('w4', '10', '160', 'TUANA BEKTAŞ', 'GUARD', 'PG', ['Agile on-ball defender capable of initiating rapid counter-attacks.', 'Topa baskı kuran çevik savunmacı ve hızlı hücum başlatıcısı.'], { badge: ['6TH WOMAN', '6. OYUNCU'] }),
+                P('w5', '15', '180', 'MELİKE KORKMAZ', 'CENTER', 'C', ['Defensive paint anchor with interior shot blocking and rebound control.', 'Çember koruyucusu, boyalı alanda blok tehdidi ve ribaund hakimiyeti.'], { badge: ['STARTER', 'İLK 5'] }),
+                P('w6', '22', '163', 'MELİKE ÖZDEMİR', 'GUARD', 'SG', ['Quick-trigger perimeter shooter with active defensive hands.', 'Hızlı el üstü şut tehdidi ve top çalan savunma aksiyonları.'], { badge: ['ALUMNI \'25', 'MEZUN \'25'], status: 'ALUMNI' }),
+                P('w7', '2', '166', 'ZEHRA KANLI', 'FORWARD', 'SF / PF', ['Physical forward with baseline cuts and mid-range jumper consistency.', 'Fiziksel forvet oyunu, dip çizgi penetreleri ve orta mesafe isabeti.'], { badge: ['ALUMNI \'25', 'MEZUN \'25'], status: 'ALUMNI' }),
+                P('w8', '5', '172', 'ELİF YILMAZ', 'FORWARD', 'SF', ['Two-way wing player providing rebounding support and floor spacing.', 'İki yönlü kanat oyunu, ribaund desteği ve hücum alan açma katkısı.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('w9', '11', '175', 'ZEYNEP DEMİR', 'FORWARD', 'PF', ['Strong post presence and reliable high-low passing forward.', 'Kuvvetli post oyunu ve forvetler arası yüksek pas kalitesi.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('w10', '23', '168', 'AYŞE KAYA', 'GUARD', 'SG', ['Perimeter defender specializing in disrupting opponent passing lanes.', 'Pas arası savunması ve perimetrede adam adama baskı.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('w11', '34', '182', 'FATMA ÇELİK', 'CENTER', 'C', ['Tall rim protector with fundamental screening and box-out execution.', 'Perdeleme kalitesi, box-out disiplini ve uzun boy avantajı.'], { badge: ['ALUMNI \'24', 'MEZUN \'24'], status: 'ALUMNI' }),
+                P('w12', '6', '165', 'BUSE ARSLAN', 'GUARD', 'PG', ['Disciplined ball handler with steady pace control and vision.', 'Sakin oyun kurulumu, top kaybı yapmayan kontrol ve saha görüşü.'])
             ],
-            matches: [
-                { d: 'DEC 2025', opp: 'HODESK 3X3 FALL', loc: 'RESULT: COMPLETE', t: 'SILVER/BRONZE', past: true },
-                { d: 'MAR 2026', opp: 'HODESK 3X3 SPRING', loc: 'BEYTEPE CAMPUS', t: 'TBA', past: false },
-                { d: 'APR 2026', opp: 'HACETTEPE 43RD FEST', loc: 'MAIN ARENA', t: 'TBA', past: false }
+            tournamentLog: [
+                T('SPRING 2026', null, ['43RD HACETTEPE SPOR ŞENLİĞİ', '43. GELENEKSEL SPOR ŞENLİĞİ'], ['HACETTEPE SBF HALL', 'HACETTEPE SBF SALONU'], ['53-58 VS İİBF', '53-58 VS İİBF'],
+                  [{n:'44', name:'Ali Ceylan'}, {n:'81', name:'Alican Doğan'}, {n:'26', name:'Barış "Hocam"'}, {n:'0', name:'Burak Kibar'}, {n:'61', name:'Doruk Kuru'}, {n:'10', name:'Emir Bektemur'}, {n:'51', name:'Emre Kaçmaz'}, {n:'9', name:'Göktürk Geren'}, {n:'24', name:'Mehmet Ali Yılmaz'}, {n:'13', name:'Mert Erdoğdu'}, {n:'8', name:'Sadi Kandemir'}, {n:'3', name:'Seçkin Pektaş'}, {n:'69', name:'Utku Uğurlu'}],
+                  ['Gripping down-to-the-wire 53-58 knockout battle against İİBF, executed with a massive 13-player rotation and high team resilience.', 'İİBF\'ye karşı son periyodun son saniyelerine kadar başa baş geçen, 13 kişilik geniş kadro rotasyonuyla mücadele edilen 53-58\'lik eleme maçı.']),
+                T('FALL 2025', null, ['4TH HODESK 3X3 CHAMPIONSHIP', '4. HODESK 3X3 GÜZ TURNUVASI'], ['BEYTEPE TENT ARENA', 'BEYTEPE ÇADIR SAHA'], ['GROUP STAGE', 'GRUP AŞAMASI'], 
+                  [{n:'81', name:'Alican Doğan'}, {n:'61', name:'Doruk Kuru'}, {n:'51', name:'Emre Kaçmaz'}, {n:'13', name:'Mert Erdoğdu'}],
+                  ['Fielded two concurrent squads in the tournament; bowed out narrowly in the group stage via a triple-tiebreaker point differential.', 'Turnuvaya iki takımla katılım sağlandı; gruptan çıkma mücadelesinde üçlü averaj hesabı sonucu averaj farkıyla veda edildi.']),
+                T('SPRING 2025', null, ['42ND HACETTEPE SPOR ŞENLİĞİ', '42. GELENEKSEL SPOR ŞENLİĞİ'], ['HACETTEPE SBF HALL', 'HACETTEPE SBF SALONU'], ['47-85 VS FACULTY OF SCIENCE', '47-85 VS FEN FAKÜLTESİ'],
+                  [{n:'7', name:'Ali Meşhur'}, {n:'81', name:'Alican Doğan'}, {n:'51', name:'Emre Kaçmaz'}, {n:'9', name:'Göktürk Geren'}, {n:'24', name:'Mehmet Ali Yılmaz'}, {n:'13', name:'Mert Erdoğdu'}, {n:'12', name:'Nihat Yüksel'}, {n:'8', name:'Sadi Kandemir'}],
+                  ['Challenging 47-85 defeat against the Faculty of Science, heavily shaped by an early injury to founding captain Doruk Kuru.', 'Fen Fakültesi karşısında kurucu kaptan Doruk Kuru\'nun erken sakatlığı sebebiyle ritim kaybedilen ve 47-85\'lik skorla sonuçlanan zorlu eleme mücadelesi.']),
+                T('SPRING 2025', 'bronze', ['3RD HODESK 3X3 SPRING CUP', '3. HODESK 3X3 BAHAR KUPASI'], ['BEYTEPE TENT ARENA', 'BEYTEPE ÇADIR SAHA'], ['🥉 3RD PLACE (BRONZE)', '🥉 3.LÜK (BRONZ MADALYA)'], 
+                  [{n:'7', name:'Ali Meşhur'}, {n:'81', name:'Alican Doğan'}, {n:'61', name:'Doruk Kuru'}, {n:'51', name:'Emre Kaçmaz'}],
+                  ['Secured the podium finish with a decisive 21-16 victory in the Bronze Medal game behind perimeter shooting.', 'Bronz madalya maçında dış şut isabetleriyle 21-16 galip gelerek fakültemize getirilen üçüncülük kupası.']),
+                T('FALL 2024', 'silver', ['2ND HODESK 3X3 TOURNAMENT', '2. HODESK 3X3 GÜZ TURNUVASI'], ['BEYTEPE TENT ARENA', 'BEYTEPE ÇADIR SAHA'], ['🥈 RUNNER-UP (SILVER)', '🥈 2.LİK (GÜMÜŞ MADALYA)'], 
+                  [{n:'7', name:'Ali Meşhur'}, {n:'81', name:'Alican Doğan'}, {n:'61', name:'Doruk Kuru'}, {n:'51', name:'Emre Kaçmaz'}],
+                  ['Captured back-to-back Silver Medals at Beytepe Çadır Saha with the established core unit battling through to the championship finals.', 'Beytepe Çadır Saha\'da kemik dörtlü kadroyla finale kadar yükselerek üst üste ikinci kez kazanılan Gümüş Madalya.']),
+                T('SPRING 2024', null, ['41ST HACETTEPE SPOR ŞENLİĞİ', '41. GELENEKSEL SPOR ŞENLİĞİ'], ['HACETTEPE SBF HALL', 'HACETTEPE SBF SALONU'], ['55-62 VS FACULTY OF SCIENCE', '55-62 VS FEN FAKÜLTESİ'], 
+                  [{n:'2', name:'Ahmet İnem'}, {n:'7', name:'Ali Meşhur'}, {n:'3', name:'Cemal "Wildcard"'}, {n:'61', name:'Doruk Kuru'}, {n:'1', name:'Emre "Halfcourt"'}, {n:'51', name:'Emre Kaçmaz'}, {n:'9', name:'Göktürk Geren'}, {n:'4', name:'Gürhan "Ghost"'}, {n:'24', name:'Mehmet Ali Yılmaz'}, {n:'13', name:'Mert Erdoğdu'}, {n:'8', name:'Sadi Kandemir'}],
+                  ['Fierce single-elimination debut battle against the Faculty of Science, ending in a narrow 55-62 finish after high-octane fourth quarter drama.', 'Fen Fakültesi\'ne karşı yüksek tempolu ve başa baş geçen ilk şenlik mücadelesinde son periyottaki çekişmeyle 55-62 sonuçlanan tarihi karşılaşma.']),
+                T('SPRING 2024', 'silver', ['1ST HODESK 3X3 CHAMPIONSHIP', '1. HODESK 3X3 ŞAMPİYONASI'], ['BEYTEPE TENT ARENA', 'BEYTEPE ÇADIR SAHA'], ['🥈 RUNNER-UP (SILVER)', '🥈 2.LİK (GÜMÜŞ MADALYA)'], 
+                  [{n:'61', name:'Doruk Kuru'}, {n:'77', name:'Kaan Çolakoğlu'}, {n:'5', name:'Sami Diğler'}, {n:'99', name:'Volkan "Kamikaze"'}],
+                  ['Doruk Kuru and fellow Law School teammates captured 2nd place in the inaugural HODESK tournament, securing the historical first silver trophy.', 'Doruk Kuru ve Hukuk Fakültesi takım arkadaşları Sami Diğler, Kaan Çolakoğlu ve Volkan "Kamikaze" ile 1. HODESK turnuvasında finale yükselerek kazanılan tarihi Gümüş Madalya.'])
             ],
-            timeline: {
-                en: [
-                    { y: '2023', title: 'The Beginning', t: 'Established as a Men\'s-only unit by Doruk Kuru, Mert Erdoğdu, and Nihat Yüksel.' },
-                    { y: '2024', title: 'First Podium', t: 'Participated in the first Hacettepe Sports Festival and won Silver at the inaugural HODESK 3x3 Tournament.' },
-                    { y: '2025', title: 'Expansion', t: 'Women\'s Team established. Consecutive Silver and Bronze medals won in HODESK 3x3 2025 Tournaments.' }
-                ],
-                tr: [
-                    { y: '2023', title: 'Başlangıç', t: 'Doruk Kuru, Mert Erdoğdu ve Nihat Yüksel tarafından sadece Erkek Takımı olarak kuruldu.' },
-                    { y: '2024', title: 'İlk Kürsü', t: 'Hacettepe Spor Festivali\'ne ilk katılım. İlk HODESK 3x3 Turnuvası\'nda Gümüş madalya kazanıldı.' },
-                    { y: '2025', title: 'Genişleme', t: 'Kadın Takımı kuruldu. HODESK 3x3 2025 turnuvalarında üst üste Gümüş ve Bronz madalya kazanıldı.' }
-                ]
-            }
+            timeline: [
+                { y: '2023', title: L('Foundation of the Unit', 'Takımın Kuruluşu'), t: L('Established as a dedicated basketball team for the Faculty of Letters by Doruk Kuru, Mert Erdoğdu, and Nihat Yüksel.', 'Doruk Kuru, Mert Erdoğdu ve Nihat Yüksel tarafından Edebiyat Fakültesi bünyesinde resmi basketbol takımı olarak kuruldu.') },
+                { y: '2024', title: L('Back-to-Back Silvers & Varsity Debut', 'Çifte Gümüş Madalya ve Şenlik Çıkışı'), t: L('Captured Silver at the inaugural 1st HODESK 3x3 with the Law cohort, debuted at the 41st Sports Festival (55-62 vs Science), and secured another Silver Medal in the 2nd HODESK tournament.', '1. HODESK 3x3 Turnuvası\'nda Gümüş Madalya kazanıldı, 41. Spor Şenliği\'nde (55-62 vs Fen) ilk kez sahaya çıkıldı ve 2. HODESK Güz turnuvasında da finale çıkılarak ikinci Gümüş Madalya elde edildi.') },
+                { y: '2025', title: L('Women\'s Unit, Bronze Podium & Dual Squads', 'Kadın Takımı, Bronz Kupa ve Çift Takım'), t: L('Founded the official Women\'s Team, captured Bronze at 3rd HODESK Spring, competed in the 42nd Sports Festival (47-85 vs Science), and fielded two concurrent rosters in the 4th HODESK tournament.', 'Kadın Basketbol Takımı kuruldu, 3. HODESK Bahar\'da Bronz Madalya kazanıldı, 42. Spor Şenliği\'nde mücadele edildi ve 4. HODESK Güz turnuvasına iki ayrı takımla katılım sağlandı.') },
+                { y: '2026', title: L('13-Man Rotation & 43rd Fest Battle', 'Geniş Kadro ve 43. Spor Şenliği'), t: L('Competed in the 43rd Hacettepe Sports Festival in a high-intensity 53-58 thriller against İİBF at SBF Sports Hall with a 13-man rotation, cementing varsity roster depth.', '43. Hacettepe Spor Şenliği\'nde SBF Salonu parkelerinde İİBF\'ye karşı 13 kişilik geniş rotasyonla son ana kadar 53-58\'lik başa baş bir mücadele sergilendi.') }
+            ]
         });
-        
-        const HERO_BTNS = Object.freeze([
-            { key: 'join', classes: 'hover:bg-panel hover:border-brand', textClass: 'group-hover:text-white' },
-            { key: 'schedule', classes: 'hover:bg-accent hover:border-accent', textClass: 'group-hover:text-black' },
-            { key: 'roster', classes: 'hover:bg-brand hover:border-brand', textClass: 'group-hover:text-white' },
-            { key: 'about', classes: 'hover:bg-white hover:border-white', textClass: 'group-hover:text-black' }
-        ]);
+
+        const SORT_MAP = {
+            NUM: (a, b) => parseInt(a.n, 10) - parseInt(b.n, 10),
+            HEIGHT_DESC: (a, b) => parseInt(b.h, 10) - parseInt(a.h, 10),
+            HEIGHT_ASC: (a, b) => parseInt(a.h, 10) - parseInt(b.h, 10),
+            NAME: (a, b) => trCollator.compare(a.name, b.name)
+        };
 
         const app = createApp({
             setup() {
-                use3DScene();
-                observerService.init();
+                useGridCanvas();
+                const lang = ref('tr'), view = ref('home'), menuOpen = ref(false);
+                const rosterStatus = ref('active'), rosterDivision = ref('men'), positionFilter = ref('ALL'), sortBy = ref('DEFAULT');
+                const searchQuery = ref(''), searchInput = ref(null), selectedPlayer = ref(null), emailCopied = ref(false), cardLinkCopied = ref(false);
+                const toastMessage = ref(''), scrolledFar = ref(false);
+                const modalContainer = ref(null), modalCloseBtn = ref(null);
                 
-                const lang = ref('en');
-                const view = ref('home');
-                const rosterFilter = ref('men');
-                const scrolled = ref(false);
-                const mobileOpen = ref(false);
+                let lastFocusedEl = null;
+                let toastTimer = null;
+                let touchStartX = 0, touchStartY = 0;
+
+                const t = computed(() => mapLangTree(T_DICT, lang.value));
+
+                const updateDocumentMeta = () => {
+                    const viewNames = {
+                        home: lang.value === 'en' ? 'Official Platform' : 'Resmi Platform',
+                        legacy: lang.value === 'en' ? 'Heritage & Culture' : 'Tarihçe',
+                        roster: lang.value === 'en' ? 'Squad Roster' : 'Takım Kadrosu',
+                        tournaments: lang.value === 'en' ? 'Campaigns Archive' : 'Turnuvalar',
+                        join: lang.value === 'en' ? 'Join the Unit' : 'Katıl'
+                    };
+                    document.title = `HUED HOOPS | ${viewNames[view.value] || 'Official Platform'}`;
+                    document.documentElement.lang = lang.value;
+                };
+
+                watch([view, lang], updateDocumentMeta);
+
+                const updateBodyScrollLock = (shouldLock) => {
+                    if (shouldLock) {
+                        const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+                        document.body.style.overflow = 'hidden';
+                        if (scrollBarWidth > 0) document.body.style.paddingRight = `${scrollBarWidth}px`;
+                    } else {
+                        document.body.style.overflow = '';
+                        document.body.style.paddingRight = '';
+                    }
+                };
+
+                watch(selectedPlayer, (p) => {
+                    updateBodyScrollLock(!!p || menuOpen.value);
+                    if (p) {
+                        nextTick(() => {
+                            modalContainer.value?.focus();
+                            modalCloseBtn.value?.focus();
+                        });
+                    } else if (lastFocusedEl) {
+                        lastFocusedEl.focus?.();
+                        lastFocusedEl = null;
+                    }
+                });
+
+                watch(menuOpen, o => updateBodyScrollLock(o || !!selectedPlayer.value));
+
+                const triggerToast = (msg, d = 2200) => {
+                    if (toastTimer) clearTimeout(toastTimer);
+                    toastMessage.value = msg;
+                    toastTimer = setTimeout(() => { toastMessage.value = ''; toastTimer = null; }, d);
+                };
+
+                const checkUrlDeepLink = () => {
+                    const hash = window.location.hash || '';
+                    const match = hash.match(/[?&#]player=([^&]+)/);
+                    if (match && match[1]) {
+                        const id = match[1];
+                        const player = [...DATA.men, ...DATA.women].find(p => p.id === id);
+                        if (player) {
+                            view.value = 'roster';
+                            rosterDivision.value = DATA.men.some(p => p.id === id) ? 'men' : 'women';
+                            rosterStatus.value = player.status === 'ALUMNI' ? 'alumni' : 'active';
+                            selectedPlayer.value = player;
+                            return;
+                        }
+                    }
+                    if (hash) {
+                        const target = hash.replace('#', '').split('?')[0].split('&')[0];
+                        if (target === 'about') view.value = 'legacy';
+                        else if (['home', 'legacy', 'roster', 'tournaments', 'join'].includes(target)) view.value = target;
+                    }
+                };
 
                 onMounted(() => {
-                    history.replaceState({ view: 'home' }, '', '');
-                    window.addEventListener('popstate', (event) => {
-                        if (mobileOpen.value) mobileOpen.value = false;
-                        if (event.state && event.state.view) view.value = event.state.view;
-                        else view.value = 'home';
+                    checkUrlDeepLink();
+                    updateDocumentMeta();
+
+                    const handleScroll = () => {
+                        scrolledFar.value = (window.scrollY || window.pageYOffset) > 380;
+                    };
+
+                    window.addEventListener('scroll', handleScroll, { passive: true });
+
+                    window.addEventListener('popstate', (e) => {
+                        if (selectedPlayer.value && !e.state?.modalOpen) { selectedPlayer.value = null; return; }
+                        if (menuOpen.value) menuOpen.value = false;
+                        checkUrlDeepLink();
+                    });
+                    
+                    window.addEventListener('keydown', (e) => {
+                        if (e.key === '/' && view.value === 'roster' && !selectedPlayer.value && document.activeElement !== searchInput.value) {
+                            e.preventDefault();
+                            searchInput.value?.focus();
+                        } else if (e.key === 'Escape') {
+                            if (selectedPlayer.value) closeScoutingModal();
+                            menuOpen.value = false;
+                        } else if (e.key === 'ArrowRight' && selectedPlayer.value) navigatePlayer(1);
+                        else if (e.key === 'ArrowLeft' && selectedPlayer.value) navigatePlayer(-1);
                     });
 
                     const loader = document.getElementById('app-loader');
-                    if (loader) {
-                        setTimeout(() => {
-                            loader.classList.add('loaded');
-                            setTimeout(() => loader.remove(), 500);
-                        }, 500);
-                    }
-                    window.addEventListener('scroll', () => { scrolled.value = window.scrollY > 150; });
+                    if (loader) setTimeout(() => { loader.classList.add('loaded'); setTimeout(() => loader.remove(), 350); }, 150);
                 });
 
                 const changeView = (v) => { 
                     if (v !== view.value) { 
-                        view.value = v; mobileOpen.value = false;
+                        triggerHapticFeedback(6);
+                        view.value = v; 
+                        menuOpen.value = false;
                         window.scrollTo({ top: 0, behavior: 'smooth' }); 
                         history.pushState({ view: v }, '', `#${v}`);
-                    } 
+                    } else {
+                        menuOpen.value = false;
+                    }
                 };
 
-                const activeRoster = computed(() => DATA[rosterFilter.value]);
-                const scheduleData = computed(() => DATA.matches);
-                const legacyStats = computed(() => CONTENT[lang.value].legacy.stats);
-                const legacyTimeline = computed(() => DATA.timeline[lang.value]);
+                const scrollToTop = () => {
+                    triggerHapticFeedback(4);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
 
-                const toggleLang = () => lang.value = lang.value === 'en' ? 'tr' : 'en';
-                const onNavClick = (key) => changeView(key);
-                const toggleMenu = () => mobileOpen.value = !mobileOpen.value;
-                const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+                const setDivision = (division) => {
+                    triggerHapticFeedback(6);
+                    rosterDivision.value = division;
+                };
 
-                return { lang, view, rosterFilter, activeRoster, scheduleData, legacyStats, legacyTimeline, content: CONTENT, toggleLang, changeView, onNavClick, scrolled, scrollToTop, heroButtons: HERO_BTNS, mobileOpen, toggleMenu };
+                const toggleStatus = () => {
+                    triggerHapticFeedback(6);
+                    rosterStatus.value = rosterStatus.value === 'active' ? 'alumni' : 'active';
+                };
+
+                const setPositionFilter = (pos) => {
+                    triggerHapticFeedback(4);
+                    positionFilter.value = pos;
+                };
+
+                const playHapticClick = () => triggerHapticFeedback(4);
+
+                const resetFilters = () => {
+                    triggerHapticFeedback(5);
+                    searchQuery.value = '';
+                    positionFilter.value = 'ALL';
+                    sortBy.value = 'DEFAULT';
+                };
+
+                const filteredRoster = computed(() => {
+                    let squad = DATA[rosterDivision.value].filter(p => rosterStatus.value === 'alumni' ? p.status === 'ALUMNI' : p.status !== 'ALUMNI');
+                    if (positionFilter.value !== 'ALL') squad = squad.filter(p => p.role.toUpperCase() === positionFilter.value);
+                    if (searchQuery.value.trim()) {
+                        const tokens = normalizeStr(searchQuery.value).split(/\s+/).filter(Boolean);
+                        squad = squad.filter(p => tokens.every(tok => p.searchIndex.includes(tok)));
+                    }
+                    if (SORT_MAP[sortBy.value]) squad.sort(SORT_MAP[sortBy.value]);
+                    return squad;
+                });
+
+                const currentRosterList = computed(() => {
+                    const activePool = DATA[rosterDivision.value].filter(p => rosterStatus.value === 'alumni' ? p.status === 'ALUMNI' : p.status !== 'ALUMNI');
+                    return filteredRoster.value.length ? filteredRoster.value : activePool;
+                });
+
+                const currentPlayerIndex = computed(() => {
+                    if (!selectedPlayer.value) return 0;
+                    const idx = currentRosterList.value.findIndex(p => p.id === selectedPlayer.value.id);
+                    return idx >= 0 ? idx : 0;
+                });
+
+                const squadAnalytics = computed(() => {
+                    const squad = DATA[rosterDivision.value].filter(p => rosterStatus.value === 'alumni' ? p.status === 'ALUMNI' : p.status !== 'ALUMNI');
+                    if (!squad.length) return { avgHeight: '0.0', apexPlayer: null, leftHandPercent: 0, totalCount: 0 };
+                    let totalH = 0, leftCount = 0, apex = squad[0];
+                    for (const p of squad) {
+                        const h = parseInt(p.h, 10) || 0;
+                        totalH += h;
+                        if (p.hand === 'LEFT') leftCount++;
+                        if (h > (parseInt(apex.h, 10) || 0)) apex = p;
+                    }
+                    return {
+                        avgHeight: (totalH / squad.length).toFixed(1),
+                        apexPlayer: apex,
+                        leftHandPercent: Math.round((leftCount / squad.length) * 100),
+                        totalCount: squad.length
+                    };
+                });
+
+                const toggleLang = () => { 
+                    triggerHapticFeedback(6); 
+                    lang.value = lang.value === 'en' ? 'tr' : 'en';
+                };
+
+                const setLang = (l) => {
+                    triggerHapticFeedback(6);
+                    lang.value = l;
+                };
+                
+                const openScoutingModal = (p, originatingElement = null) => { 
+                    triggerHapticFeedback(6);
+                    lastFocusedEl = originatingElement || document.activeElement;
+                    selectedPlayer.value = p; 
+                    history.pushState({ modalOpen: true, playerId: p.id }, '', `#roster?player=${p.id}`);
+                };
+
+                const hasPlayerRecord = (rawName) => {
+                    const cleanTarget = normalizeStr(rawName);
+                    return [...DATA.men, ...DATA.women].some(p => {
+                        const pName = normalizeStr(p.name);
+                        return pName.includes(cleanTarget) || cleanTarget.includes(pName);
+                    });
+                };
+
+                const openScoutingModalByName = (rawName) => {
+                    const cleanTarget = normalizeStr(rawName);
+                    const found = [...DATA.men, ...DATA.women].find(p => {
+                        const pName = normalizeStr(p.name);
+                        return pName.includes(cleanTarget) || cleanTarget.includes(pName);
+                    });
+                    if (found) {
+                        rosterDivision.value = DATA.men.some(p => p.id === found.id) ? 'men' : 'women';
+                        rosterStatus.value = found.status === 'ALUMNI' ? 'alumni' : 'active';
+                        searchQuery.value = '';
+                        positionFilter.value = 'ALL';
+                        openScoutingModal(found);
+                    }
+                };
+                
+                const closeScoutingModal = () => { 
+                    if (selectedPlayer.value) {
+                        triggerHapticFeedback(4);
+                        selectedPlayer.value = null; 
+                        if (window.location.hash.includes('player=')) history.replaceState({ view: 'roster' }, '', '#roster');
+                    }
+                };
+
+                const navigatePlayer = (direction) => {
+                    const list = currentRosterList.value;
+                    if (!list.length || !selectedPlayer.value) return;
+                    let idx = list.findIndex(p => p.id === selectedPlayer.value.id);
+                    if (idx === -1) idx = 0;
+                    let next = (idx + direction + list.length) % list.length;
+                    selectedPlayer.value = list[next];
+                    history.replaceState({ modalOpen: true, playerId: selectedPlayer.value.id }, '', `#roster?player=${selectedPlayer.value.id}`);
+                    triggerHapticFeedback(4);
+                };
+
+                const getSortedSquad = (squadList) => [...squadList].sort((a, b) => trCollator.compare(a.name, b.name));
+                
+                const handleTouchStart = (e) => { 
+                    touchStartX = e.changedTouches[0].clientX; 
+                    touchStartY = e.changedTouches[0].clientY; 
+                };
+                
+                const handleTouchEnd = (e) => {
+                    const diffX = touchStartX - e.changedTouches[0].clientX;
+                    const diffY = touchStartY - e.changedTouches[0].clientY;
+                    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+                        navigatePlayer(diffX > 0 ? 1 : -1);
+                    }
+                };
+
+                const handleModalKeydown = (e) => {
+                    if (e.key !== 'Tab' || !modalContainer.value) return;
+                    const focusables = modalContainer.value.querySelectorAll('button:not([disabled]), [tabindex="0"]');
+                    if (!focusables.length) return;
+                    const first = focusables[0], last = focusables[focusables.length - 1];
+                    if (e.shiftKey && document.activeElement === first) {
+                        last.focus();
+                        e.preventDefault();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        first.focus();
+                        e.preventDefault();
+                    }
+                };
+
+                const copyPlayerDeepLink = async (playerId) => {
+                    triggerHapticFeedback(8);
+                    const url = `${window.location.origin}${window.location.pathname}#roster?player=${playerId}`;
+                    try {
+                        if (navigator.clipboard && window.isSecureContext) {
+                            await navigator.clipboard.writeText(url);
+                        } else {
+                            const ta = document.createElement('textarea');
+                            ta.value = url;
+                            ta.style.position = 'fixed';
+                            ta.style.top = '0';
+                            ta.style.left = '0';
+                            ta.style.opacity = '0';
+                            document.body.appendChild(ta);
+                            ta.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(ta);
+                        }
+                    } catch (err) {}
+                    cardLinkCopied.value = true;
+                    triggerToast(lang.value === 'en' ? 'PLAYER CARD LINK COPIED!' : 'OYUNCU KARTI LİNKİ KOPYALANDI!');
+                    setTimeout(() => cardLinkCopied.value = false, 2000);
+                };
+
+                const copyEmail = async () => {
+                    triggerHapticFeedback(8);
+                    const email = 'huedbasketbol@gmail.com';
+                    try {
+                        if (navigator.clipboard && window.isSecureContext) {
+                            await navigator.clipboard.writeText(email);
+                        } else {
+                            const ta = document.createElement('textarea');
+                            ta.value = email;
+                            ta.style.position = 'fixed';
+                            ta.style.top = '0';
+                            ta.style.left = '0';
+                            ta.style.opacity = '0';
+                            document.body.appendChild(ta);
+                            ta.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(ta);
+                        }
+                    } catch (err) {}
+                    
+                    emailCopied.value = true;
+                    triggerToast(lang.value === 'en' ? 'EMAIL COPIED TO CLIPBOARD' : 'E-POSTA PANOLARA KOPYALANDI');
+                    setTimeout(() => emailCopied.value = false, 2000);
+                };
+
+                return { 
+                    lang, view, menuOpen, rosterStatus, rosterDivision, positionFilter, sortBy,
+                    searchQuery, searchInput, filteredRoster, currentRosterList, currentPlayerIndex,
+                    squadAnalytics, selectedPlayer, modalContainer, modalCloseBtn,
+                    legacyTimeline: computed(() => DATA.timeline.map(x => ({ y: x.y, title: x.title[lang.value], t: x.t[lang.value] }))),
+                    leadershipList: DATA.management, tournamentLog: DATA.tournamentLog,
+                    t, toggleLang, setLang, changeView, setDivision, toggleStatus, setPositionFilter, playHapticClick, resetFilters, scrollToTop,
+                    openScoutingModal, hasPlayerRecord, openScoutingModalByName, closeScoutingModal, navigatePlayer,
+                    getSortedSquad, handleTouchStart, handleTouchEnd, handleModalKeydown,
+                    emailCopied, copyEmail, cardLinkCopied, copyPlayerDeepLink, toastMessage, scrolledFar
+                };
             }
         });
 
-        app.directive('reveal', { mounted(el) { observerService.reveal.observe(el); } });
-        app.directive('counter', { mounted(el) { observerService.counter.observe(el); } });
+        const globalObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                if (el._reveal) el.classList.add('active');
+                else if (el._counter) {
+                    const target = parseInt(el.dataset.target, 10) || 0, suffix = el.dataset.suffix || '';
+                    let start = null;
+                    const anim = (now) => {
+                        if (!start) start = now;
+                        const p = Math.min((now - start) / 1200, 1);
+                        el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target) + suffix;
+                        if (p < 1) requestAnimationFrame(anim);
+                    };
+                    requestAnimationFrame(anim);
+                }
+                globalObserver.unobserve(el);
+            });
+        }, { threshold: 0.08 });
+
+        app.directive('reveal', { 
+            mounted(el) { el._reveal = true; el.classList.add('reveal-item'); globalObserver.observe(el); },
+            unmounted(el) { globalObserver.unobserve(el); }
+        });
+        app.directive('counter', { 
+            mounted(el) { el._counter = true; globalObserver.observe(el); },
+            unmounted(el) { globalObserver.unobserve(el); }
+        });
 
         app.component('app-nav', { 
-            props: ['currentView', 'lang', 'labels', 'mobileOpen'], 
-            template: '#tpl-nav', 
-            emits: ['change-view', 'toggle-lang', 'toggle-menu'], 
-            setup(props, { emit }) {
-                watch(() => props.mobileOpen, (val) => document.body.style.overflow = val ? 'hidden' : '');
-                const onNavClick = (key) => { emit('change-view', key); };
-                return { onNavClick };
-            }
+            props: ['currentView', 'lang', 'labels', 'menuOpen'], 
+            template: '#tpl-nav', emits: ['change-view', 'toggle-lang', 'set-lang', 'toggle-menu', 'close-menu']
         });
-
+        
         app.component('logo-icon', { 
-            template: '#tpl-logo'
+            template: `<div class="relative flex items-center justify-center">
+                <img src="./logo.png" alt="HUED" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="w-full h-full object-contain pointer-events-none select-none block">
+                <div style="display:none" class="w-full h-full border border-brand/60 bg-panel flex items-center justify-center font-display font-black text-flamingo text-xl rounded-sm">H</div>
+            </div>`
         });
-
-        const IMGS = {
-            men: ['1519861531473-920026393112', '1546519638-68e109498ffc', '1505666287802-931450a60631', '1533561661765-b1a13e5d0d8f'],
-            women: ['1574623452334-1e090b6f588e', '1525091726759-455a5b542036', '1518405523049-72c0570b779c', '1523142096311-155949f7d589']
-        };
 
         app.component('player-card', {
-            props: ['player', 'index', 'filter'], template: '#tpl-player-card',
-            setup(props) {
-                const loading = ref(true);
-                const hasError = ref(false);
-                const cardTransform = ref({});
-                const shinePosition = ref('0% 0%');
-                let rect = null;
+            props: ['player', 'langContent', 'lang'], 
+            template: '#tpl-player-card', emits: ['select-player'],
+            setup() {
+                const cardRef = ref(null);
+                let isTilting = false;
 
-                const onEnter = (e) => { if (window.matchMedia("(pointer: fine)").matches) rect = e.currentTarget.getBoundingClientRect(); };
                 const handleTilt = (e) => {
-                    if (!rect || !window.matchMedia("(pointer: fine)").matches) return;
-                    const x = e.clientX - rect.left, y = e.clientY - rect.top;
-                    const centerX = rect.width / 2, centerY = rect.height / 2;
-                    cardTransform.value = { transform: `perspective(1000px) rotateX(${((y - centerY)/centerY)*-5}deg) rotateY(${((x - centerX)/centerX)*5}deg) scale(1.02)` };
-                    shinePosition.value = `${(x/rect.width)*100}% ${(y/rect.height)*100}%`;
+                    if (!window.matchMedia('(pointer:fine)').matches || !cardRef.value) return;
+                    const r = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - r.left, y = e.clientY - r.top;
+                    const rx = ((y - r.height / 2) / (r.height / 2)) * -4;
+                    const ry = ((x - r.width / 2) / (r.width / 2)) * 4;
+                    
+                    if (!isTilting) {
+                        cardRef.value.classList.add('is-tilting');
+                        isTilting = true;
+                    }
+                    cardRef.value.style.setProperty('--card-rx', `${rx}deg`);
+                    cardRef.value.style.setProperty('--card-ry', `${ry}deg`);
+                    cardRef.value.style.setProperty('--card-s', '1.015');
+                    cardRef.value.style.setProperty('--shine-x', `${(x / r.width) * 100}%`);
+                    cardRef.value.style.setProperty('--shine-y', `${(y / r.height) * 100}%`);
                 };
-                const onLeave = () => { rect = null; cardTransform.value = { transform: 'perspective(1000px) rotateX(0) rotateY(0) scale(1)' }; };
-                const imageSrc = computed(() => hasError.value ? 'https://placehold.co/400x450/1a1529/FFF?text=HUED' : `https://images.unsplash.com/photo-${IMGS[props.filter][props.index % 4]}?auto=format&fit=crop&w=400&q=80`);
 
-                return { loading, imageSrc, onLoad: () => loading.value = false, onError: () => { loading.value = false; hasError.value = true; }, onEnter, handleTilt, onLeave, cardTransform, shinePosition };
+                const onLeave = () => {
+                    if (!cardRef.value) return;
+                    cardRef.value.classList.remove('is-tilting');
+                    isTilting = false;
+                    cardRef.value.style.setProperty('--card-rx', '0deg');
+                    cardRef.value.style.setProperty('--card-ry', '0deg');
+                    cardRef.value.style.setProperty('--card-s', '1');
+                    cardRef.value.style.setProperty('--shine-x', '50%');
+                    cardRef.value.style.setProperty('--shine-y', '50%');
+                };
+
+                return { cardRef, handleTilt, onLeave };
             }
         });
 
-        app.component('schedule-row', { props: ['match', 'langContent', 'lang'], template: '#tpl-schedule' });
-        
         app.mount('#app');
     </script>
 </body>
