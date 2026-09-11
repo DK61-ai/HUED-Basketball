@@ -6,10 +6,13 @@
     <title>HUED HOOPS | Hacettepe University Basketball</title>
     <meta name="description" content="Official platform of Hacettepe University Faculty of Letters Basketball Team. Roster, Tournaments, and Legacy.">
     
-    <!-- Google Fonts -->
+    <!-- Favicon referencing the repository logo -->
+    <link rel="icon" type="image/png" href="./logo.png">
+
+    <!-- Google Fonts: Unified to Plus Jakarta Sans with full weight range -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,800&family=Syne:wght@700;800;900&family=Cabinet+Grotesk:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS with Custom Neon Palette -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -46,9 +49,9 @@
                         }
                     },
                     fontFamily: {
-                        display: ['Syne', 'sans-serif'],
-                        impact: ['Cabinet Grotesk', 'sans-serif'],
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        impact: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     keyframes: {
                         floatSlow: {
@@ -113,7 +116,8 @@
         }
 
         .jersey-watermark {
-            font-family: 'Cabinet Grotesk', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 900;
             line-height: 0.8;
             -webkit-text-stroke: 3px rgba(0, 210, 255, 0.25);
             color: transparent;
@@ -126,7 +130,6 @@
             transform: scale(1.05) rotate(-2deg);
         }
 
-        /* View & Translation Morph Animations */
         .view-morph-enter-active, .view-morph-leave-active {
             transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1), transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -139,7 +142,6 @@
             transform: translateY(-8px) scale(0.99);
         }
 
-        /* Single Flag 3D Flip */
         .flag-rotate-enter-active, .flag-rotate-leave-active {
             transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
         }
@@ -152,7 +154,6 @@
             opacity: 0;
         }
 
-        /* Ambient Court Background */
         #interactive-court {
             position: fixed;
             inset: 0;
@@ -171,10 +172,8 @@
     </style>
 </head>
 <body class="selection:bg-neonPink-400 selection:text-white relative min-h-screen">
-    <!-- Ambient Canvas -->
     <canvas id="interactive-court"></canvas>
 
-    <!-- Background Glows -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div class="absolute -top-36 -left-36 w-[32rem] h-[32rem] bg-neonBlue-200/25 rounded-full blur-3xl animate-pulse-glow"></div>
         <div class="absolute top-1/3 -right-36 w-[34rem] h-[34rem] bg-neonPink-200/20 rounded-full blur-3xl animate-pulse-glow" style="animation-delay: 2.5s;"></div>
@@ -190,23 +189,27 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neonPink-400 opacity-80"></span>
                     <span class="relative inline-flex rounded-full h-3 w-3 bg-neonPink-500"></span>
                 </span>
-                <span class="text-xs font-extrabold tracking-wide uppercase text-ink-900">{{ toast }}</span>
+                <span class="text-xs font-black tracking-wide uppercase text-ink-900">{{ toast }}</span>
             </div>
         </transition>
 
         <!-- FLOATING NAVIGATION CAPSULE -->
         <header class="fixed top-5 inset-x-0 mx-auto max-w-4xl w-[94%] z-40">
-            <nav class="glass-pill rounded-full p-2 pl-5 pr-2 flex items-center justify-between transition-all duration-300 shadow-neon-combo">
+            <nav class="glass-pill rounded-full p-2 pl-4 sm:pl-5 pr-2 flex items-center justify-between transition-all duration-300 shadow-neon-combo">
                 
-                <!-- Brand Anchor -->
+                <!-- Brand Anchor with Team Logo -->
                 <button @click="setView('home')" class="flex items-center gap-3 group text-left focus:outline-none">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-[2px] shadow-sm transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
-                        <div class="w-full h-full bg-white rounded-full flex items-center justify-center font-impact font-black text-neonBlue-500 text-sm tracking-tighter">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-[2px] shadow-sm transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 flex items-center justify-center overflow-hidden shrink-0">
+                        <img src="./logo.png" 
+                             alt="HUED Hoops Logo" 
+                             class="w-full h-full object-contain rounded-full bg-white p-0.5"
+                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+                        <div class="hidden w-full h-full bg-white rounded-full items-center justify-center font-black text-neonBlue-500 text-xs tracking-tighter">
                             HU
                         </div>
                     </div>
                     <div>
-                        <div class="font-display font-black text-sm text-ink-900 tracking-wider flex items-center gap-1.5 leading-none">
+                        <div class="font-black text-sm text-ink-900 tracking-wider flex items-center gap-1.5 leading-none">
                             HUED<span class="inline-block w-2 h-2 rounded-full bg-neonPink-400 animate-ping"></span>HOOPS
                         </div>
                         <span class="text-[10px] font-bold text-neonBlue-600 uppercase tracking-widest leading-tight">
@@ -218,7 +221,7 @@
                 <!-- Desktop Route Tabs -->
                 <div class="hidden md:flex items-center gap-1 bg-neonBlue-50/80 p-1.5 rounded-full border border-neonBlue-200">
                     <button v-for="item in navItems" :key="item.id" @click="setView(item.id)"
-                            class="relative px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider transition-all duration-300 focus:outline-none"
+                            class="relative px-4 py-1.5 rounded-full text-xs font-black tracking-wider transition-all duration-300 focus:outline-none"
                             :class="currentView === item.id ? 'text-white' : 'text-ink-500 hover:text-ink-900'">
                         <span v-if="currentView === item.id" class="absolute inset-0 rounded-full bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 shadow-neon-pink"></span>
                         <span class="relative z-10 uppercase">{{ item.label[lang] }}</span>
@@ -265,7 +268,7 @@
             <transition enter-active-class="transition duration-250 ease-out" enter-from-class="opacity-0 -translate-y-4 scale-95" enter-to-class="opacity-100 translate-y-0 scale-100" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 -translate-y-4">
                 <div v-if="mobileMenu" class="md:hidden mt-2 p-3.5 glass-pill rounded-3xl flex flex-col gap-2 shadow-2xl border-neonBlue-200">
                     <button v-for="item in navItems" :key="item.id" @click="setView(item.id)"
-                            class="w-full py-3 px-5 rounded-2xl text-sm font-extrabold text-left transition-all flex items-center justify-between"
+                            class="w-full py-3 px-5 rounded-2xl text-sm font-black text-left transition-all flex items-center justify-between"
                             :class="currentView === item.id ? 'bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 text-white shadow-neon-pink' : 'text-ink-700 hover:bg-neonBlue-50'">
                         <span class="uppercase tracking-wider">{{ item.label[lang] }}</span>
                         <span>⚡</span>
@@ -283,13 +286,13 @@
                     <div class="relative pt-6 sm:pt-12 text-center flex flex-col items-center">
                         <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white border border-neonBlue-200 shadow-neon-blue text-xs font-bold text-ink-700 mb-6 animate-float">
                             <span class="w-2.5 h-2.5 rounded-full bg-neonPink-400 animate-ping"></span>
-                            <span class="tracking-wide uppercase text-neonBlue-600 font-extrabold">Hacettepe Varsity Hoops</span>
+                            <span class="tracking-wide uppercase text-neonBlue-600 font-black">Hacettepe Varsity Hoops</span>
                             <span class="text-ink-300">•</span>
-                            <span class="font-extrabold text-neonPink-500">Est. 2023</span>
+                            <span class="font-black text-neonPink-500">Est. 2023</span>
                         </div>
 
                         <div class="relative select-none max-w-5xl">
-                            <h1 class="font-impact text-6xl sm:text-8xl md:text-9xl text-ink-900 tracking-tight leading-none uppercase">
+                            <h1 class="font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-ink-900 tracking-tight leading-none uppercase">
                                 <template v-if="lang === 'en'">
                                     FACULTY <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 drop-shadow-[0_0_20px_rgba(255,42,133,0.3)]">OF LETTERS</span>
                                 </template>
@@ -297,16 +300,16 @@
                                     EDEBİYAT <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 drop-shadow-[0_0_20px_rgba(255,42,133,0.3)]">FAKÜLTESİ</span>
                                 </template>
                             </h1>
-                            <p class="font-display font-black text-2xl sm:text-4xl text-neonBlue-500 tracking-widest mt-3 uppercase drop-shadow-[0_0_12px_rgba(0,210,255,0.35)]">
+                            <p class="font-black text-xl sm:text-3xl md:text-4xl text-neonBlue-500 tracking-wider mt-4 uppercase drop-shadow-[0_0_12px_rgba(0,210,255,0.35)]">
                                 {{ lang === 'en' ? 'BASKETBALL UNIT' : 'BASKETBOL TAKIMI' }}
                             </p>
                         </div>
 
                         <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <button @click="setView('roster')" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 text-white font-extrabold text-sm tracking-wider uppercase shadow-neon-pink hover:shadow-neon-combo hover:scale-105 active:scale-95 transition-all">
+                            <button @click="setView('roster')" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 text-white font-black text-sm tracking-wider uppercase shadow-neon-pink hover:shadow-neon-combo hover:scale-105 active:scale-95 transition-all">
                                 {{ lang === 'en' ? 'Explore 2026 Roster' : 'Kadroya Göz At' }} →
                             </button>
-                            <button @click="setView('tournaments')" class="px-7 py-3.5 rounded-full bg-white text-ink-800 hover:text-neonBlue-500 border-2 border-neonBlue-200 font-extrabold text-sm tracking-wider uppercase shadow-neon-blue hover:border-neonBlue-400 hover:scale-105 active:scale-95 transition-all">
+                            <button @click="setView('tournaments')" class="px-7 py-3.5 rounded-full bg-white text-ink-800 hover:text-neonBlue-500 border-2 border-neonBlue-200 font-black text-sm tracking-wider uppercase shadow-neon-blue hover:border-neonBlue-400 hover:scale-105 active:scale-95 transition-all">
                                 {{ lang === 'en' ? 'Game Archives' : 'Turnuva Arşivi' }} 🏆
                             </button>
                         </div>
@@ -314,16 +317,16 @@
 
                     <!-- KINETIC TICKER TAPE -->
                     <div class="w-full overflow-hidden py-3 bg-gradient-to-r from-neonBlue-100 via-neonPink-100 to-neonBlue-100 rounded-2xl border-2 border-white rotate-[-1deg] shadow-neon-combo">
-                        <div class="flex whitespace-nowrap animate-marquee gap-8 font-impact text-xs sm:text-sm uppercase tracking-widest text-ink-900">
+                        <div class="flex whitespace-nowrap animate-marquee gap-8 font-black text-xs sm:text-sm uppercase tracking-widest text-ink-900">
                             <span v-for="i in 4" :key="i" class="flex items-center gap-8">
                                 <span>🏀 {{ lang === 'en' ? 'Beytepe Tent Arena' : 'Beytepe Çadır Saha' }}</span>
-                                <span class="text-neonPink-500 font-black">★</span>
+                                <span class="text-neonPink-500">★</span>
                                 <span>HODESK 3x3 {{ lang === 'en' ? 'Silver & Bronze' : 'Gümüş & Bronz' }}</span>
-                                <span class="text-neonBlue-500 font-black">★</span>
+                                <span class="text-neonBlue-500">★</span>
                                 <span>{{ lang === 'en' ? 'Sports Festival 53-58 Thriller' : 'Spor Şenliği 53-58 Maçı' }}</span>
-                                <span class="text-neonPink-500 font-black">★</span>
+                                <span class="text-neonPink-500">★</span>
                                 <span>{{ lang === 'en' ? 'Men & Women Divisions' : 'Kadın ve Erkek Takımları' }}</span>
-                                <span class="text-neonBlue-500 font-black">★</span>
+                                <span class="text-neonBlue-500">★</span>
                                 <span>{{ lang === 'en' ? 'Vibrant Neon Hoops' : 'Canlı Neon Renkler' }}</span>
                             </span>
                         </div>
@@ -333,7 +336,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                         <div class="lg:col-span-7 bubble-card p-6 sm:p-8 relative overflow-hidden bg-gradient-to-br from-white via-white to-neonBlue-50">
                             <div class="flex items-center justify-between pb-4 border-b border-neonBlue-100">
-                                <span class="px-3.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-extrabold text-[11px] uppercase tracking-wider shadow-sm">
+                                <span class="px-3.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-black text-[11px] uppercase tracking-wider shadow-sm">
                                     {{ lang === 'en' ? 'LATEST CAMPAIGN' : 'SON TURNUVA' }}
                                 </span>
                                 <span class="text-xs font-bold text-ink-400">
@@ -343,19 +346,19 @@
 
                             <div class="my-6 flex items-center justify-between gap-4">
                                 <div class="text-left">
-                                    <div class="font-impact text-4xl sm:text-5xl text-ink-900">HUED</div>
-                                    <div class="text-xs font-extrabold text-neonBlue-500 uppercase">{{ t.hero.script }}</div>
+                                    <div class="font-black text-4xl sm:text-5xl text-ink-900 tracking-tight">HUED</div>
+                                    <div class="text-xs font-black text-neonBlue-500 uppercase">{{ t.hero.script }}</div>
                                 </div>
 
                                 <div class="flex flex-col items-center">
-                                    <div class="px-4 py-2 rounded-2xl bg-neonBlue-100/90 border border-neonBlue-300 font-impact text-2xl sm:text-3xl text-ink-900 tracking-wider shadow-sm">
+                                    <div class="px-4 py-2 rounded-2xl bg-neonBlue-100/90 border border-neonBlue-300 font-black text-2xl sm:text-3xl text-ink-900 tracking-wider shadow-sm">
                                         53 <span class="text-neonPink-400 font-light">-</span> 58
                                     </div>
-                                    <span class="text-[10px] font-extrabold text-neonPink-500 uppercase mt-1">FINAL OVERTIME</span>
+                                    <span class="text-[10px] font-black text-neonPink-500 uppercase mt-1">FINAL OVERTIME</span>
                                 </div>
 
                                 <div class="text-right">
-                                    <div class="font-impact text-4xl sm:text-5xl text-ink-900">{{ lang === 'en' ? 'FEAS' : 'İİBF' }}</div>
+                                    <div class="font-black text-4xl sm:text-5xl text-ink-900 tracking-tight">{{ lang === 'en' ? 'FEAS' : 'İİBF' }}</div>
                                     <div class="text-xs font-bold text-ink-400 uppercase">{{ lang === 'en' ? 'Economics & Admin' : 'İktisadi İdari Bilimler' }}</div>
                                 </div>
                             </div>
@@ -366,7 +369,7 @@
                                     : 'Hacettepe SBF Salonu\'nda 13 kişilik geniş kadro rotasyonuyla son saniyeye kadar süren 53-58\'lik nefes kesen eleme maçı.' }}
                             </p>
 
-                            <div class="mt-5 pt-4 border-t border-neonBlue-100 flex items-center justify-between text-xs font-extrabold">
+                            <div class="mt-5 pt-4 border-t border-neonBlue-100 flex items-center justify-between text-xs font-black">
                                 <span class="text-ink-400">📍 Hacettepe SBF Hall</span>
                                 <button @click="setView('tournaments')" class="text-neonBlue-500 hover:text-neonPink-500 flex items-center gap-1 transition-colors">
                                     <span>{{ lang === 'en' ? 'Tournament recap' : 'Turnuva detayları' }}</span> →
@@ -378,32 +381,32 @@
                             <div class="bubble-card p-5 flex flex-col justify-between bg-gradient-to-br from-white to-neonPink-50 hover:border-neonPink-300">
                                 <div class="w-11 h-11 rounded-2xl bg-neonPink-100 text-neonPink-500 flex items-center justify-center text-xl font-bold shadow-neon-pink">🏆</div>
                                 <div>
-                                    <div class="font-impact text-4xl text-ink-900 leading-none">4x</div>
-                                    <div class="text-xs font-extrabold text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Podium Honors' : 'Kupa & Derece' }}</div>
+                                    <div class="font-black text-4xl text-ink-900 leading-none">4x</div>
+                                    <div class="text-xs font-black text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Podium Honors' : 'Kupa & Derece' }}</div>
                                 </div>
                             </div>
 
                             <div class="bubble-card p-5 flex flex-col justify-between bg-gradient-to-br from-white to-neonBlue-50 hover:border-neonBlue-300">
                                 <div class="w-11 h-11 rounded-2xl bg-neonBlue-100 text-neonBlue-500 flex items-center justify-center text-xl font-bold shadow-neon-blue">⚡</div>
                                 <div>
-                                    <div class="font-impact text-4xl text-ink-900 leading-none">32+</div>
-                                    <div class="text-xs font-extrabold text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Ballers Registered' : 'Kayıtlı Oyuncu' }}</div>
+                                    <div class="font-black text-4xl text-ink-900 leading-none">32+</div>
+                                    <div class="text-xs font-black text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Ballers Registered' : 'Kayıtlı Oyuncu' }}</div>
                                 </div>
                             </div>
 
                             <div class="bubble-card p-5 flex flex-col justify-between bg-gradient-to-br from-white to-neonBlue-50 hover:border-neonBlue-300">
                                 <div class="w-11 h-11 rounded-2xl bg-neonBlue-100 text-neonBlue-500 flex items-center justify-center text-xl font-bold shadow-neon-blue">📍</div>
                                 <div>
-                                    <div class="font-impact text-2xl sm:text-3xl text-ink-900 leading-none">BEYTEPE</div>
-                                    <div class="text-xs font-extrabold text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Home Arena' : 'Ev Sahası' }}</div>
+                                    <div class="font-black text-2xl sm:text-3xl text-ink-900 leading-none tracking-tight">BEYTEPE</div>
+                                    <div class="text-xs font-black text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Home Arena' : 'Ev Sahası' }}</div>
                                 </div>
                             </div>
 
                             <div class="bubble-card p-5 flex flex-col justify-between bg-gradient-to-br from-white to-neonPink-50 hover:border-neonPink-300">
                                 <div class="w-11 h-11 rounded-2xl bg-neonPink-100 text-neonPink-500 flex items-center justify-center text-xl font-bold shadow-neon-pink">🤍</div>
                                 <div>
-                                    <div class="font-impact text-4xl text-ink-900 leading-none">2023</div>
-                                    <div class="text-xs font-extrabold text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Established' : 'Kuruluş Yılı' }}</div>
+                                    <div class="font-black text-4xl text-ink-900 leading-none">2023</div>
+                                    <div class="text-xs font-black text-ink-400 uppercase mt-1">{{ lang === 'en' ? 'Established' : 'Kuruluş Yılı' }}</div>
                                 </div>
                             </div>
                         </div>
@@ -414,9 +417,9 @@
                         <div @click="setView('roster')" class="bubble-card p-6 cursor-pointer group bg-white hover:bg-neonBlue-50/50">
                             <div class="flex justify-between items-start">
                                 <span class="text-3xl group-hover:scale-125 transition-transform duration-300">🎽</span>
-                                <span class="text-xs font-extrabold text-neonBlue-500 group-hover:translate-x-1 transition-transform">EXPLORE →</span>
+                                <span class="text-xs font-black text-neonBlue-500 group-hover:translate-x-1 transition-transform">EXPLORE →</span>
                             </div>
-                            <h3 class="font-display font-extrabold text-xl text-ink-900 mt-4 uppercase">{{ t.nav.roster }}</h3>
+                            <h3 class="font-black text-xl text-ink-900 mt-4 uppercase tracking-tight">{{ t.nav.roster }}</h3>
                             <p class="text-xs text-ink-500 mt-1 leading-relaxed">
                                 {{ lang === 'en' ? 'Active Men & Women rosters, player scouting sheets, and alumni legends.' : 'Erkek ve Kadın takımı oyuncu kartları, mevkiler ve mezunlar.' }}
                             </p>
@@ -425,9 +428,9 @@
                         <div @click="setView('legacy')" class="bubble-card p-6 cursor-pointer group bg-white hover:bg-neonPink-50/50">
                             <div class="flex justify-between items-start">
                                 <span class="text-3xl group-hover:scale-125 transition-transform duration-300">📜</span>
-                                <span class="text-xs font-extrabold text-neonPink-500 group-hover:translate-x-1 transition-transform">TIMELINE →</span>
+                                <span class="text-xs font-black text-neonPink-500 group-hover:translate-x-1 transition-transform">TIMELINE →</span>
                             </div>
-                            <h3 class="font-display font-extrabold text-xl text-ink-900 mt-4 uppercase">{{ t.nav.legacy }}</h3>
+                            <h3 class="font-black text-xl text-ink-900 mt-4 uppercase tracking-tight">{{ t.nav.legacy }}</h3>
                             <p class="text-xs text-ink-500 mt-1 leading-relaxed">
                                 {{ lang === 'en' ? 'Origins from 2023, court memories at Beytepe, and historical silver runs.' : '2023\'teki kuruluş maceramız, Beytepe anıları ve gümüş madalyalı yürüyüşler.' }}
                             </p>
@@ -436,9 +439,9 @@
                         <div @click="setView('join')" class="bubble-card p-6 cursor-pointer group bg-white hover:bg-neonBlue-50/50">
                             <div class="flex justify-between items-start">
                                 <span class="text-3xl group-hover:scale-125 transition-transform duration-300">⚡</span>
-                                <span class="text-xs font-extrabold text-neonBlue-500 group-hover:translate-x-1 transition-transform">CONNECT →</span>
+                                <span class="text-xs font-black text-neonBlue-500 group-hover:translate-x-1 transition-transform">CONNECT →</span>
                             </div>
-                            <h3 class="font-display font-extrabold text-xl text-ink-900 mt-4 uppercase">{{ t.nav.join }}</h3>
+                            <h3 class="font-black text-xl text-ink-900 mt-4 uppercase tracking-tight">{{ t.nav.join }}</h3>
                             <p class="text-xs text-ink-500 mt-1 leading-relaxed">
                                 {{ lang === 'en' ? 'Official WhatsApp roster channel, email contacts, and tryout details.' : 'WhatsApp oyuncu grubu, takım koordinasyonu ve seçme duyuruları.' }}
                             </p>
@@ -451,12 +454,12 @@
                     <div class="bubble-card p-6 sm:p-8 bg-white/90">
                         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-neonBlue-100">
                             <div>
-                                <div class="inline-flex items-center gap-2 text-xs font-extrabold text-neonPink-500 uppercase tracking-widest mb-1">
+                                <div class="inline-flex items-center gap-2 text-xs font-black text-neonPink-500 uppercase tracking-widest mb-1">
                                     <span>{{ activeDivisionLabel }}</span>
                                     <span>•</span>
                                     <span>{{ rosterStatus === 'alumni' ? (lang === 'en' ? 'Honored Legends' : 'Mezun Kadro') : (lang === 'en' ? 'Active Squad' : 'Aktif Kadro') }}</span>
                                 </div>
-                                <h2 class="font-impact text-4xl sm:text-6xl text-ink-900 uppercase tracking-tight">
+                                <h2 class="font-black text-4xl sm:text-6xl text-ink-900 uppercase tracking-tight">
                                     {{ rosterStatus === 'alumni' ? t.roster.the_legends : t.roster.the_squad }}
                                 </h2>
                             </div>
@@ -464,24 +467,24 @@
                             <!-- Live Analytics HUD -->
                             <div class="flex flex-wrap items-center gap-3 text-xs font-bold text-ink-700 bg-neonBlue-50/80 p-3.5 rounded-2xl border border-neonBlue-200 shadow-sm">
                                 <div>
-                                    <span class="text-[10px] text-ink-400 uppercase font-extrabold block">{{ t.roster.hud_avg_height }}</span>
-                                    <span class="font-impact text-lg text-ink-900">{{ squadStats.avgHeight }}</span> <span class="text-neonBlue-500 font-extrabold">CM</span>
+                                    <span class="text-[10px] text-ink-400 uppercase font-black block">{{ t.roster.hud_avg_height }}</span>
+                                    <span class="font-black text-lg text-ink-900">{{ squadStats.avgHeight }}</span> <span class="text-neonBlue-500 font-black">CM</span>
                                 </div>
                                 <div class="h-6 w-[1.5px] bg-neonBlue-200"></div>
                                 <div>
-                                    <span class="text-[10px] text-ink-400 uppercase font-extrabold block">{{ t.roster.hud_apex }}</span>
-                                    <span class="font-impact text-lg text-neonPink-500">{{ squadStats.apexPlayer ? formatDisplayName(squadStats.apexPlayer.name).split(' ')[0] : 'N/A' }}</span>
+                                    <span class="text-[10px] text-ink-400 uppercase font-black block">{{ t.roster.hud_apex }}</span>
+                                    <span class="font-black text-lg text-neonPink-500">{{ squadStats.apexPlayer ? formatDisplayName(squadStats.apexPlayer.name).split(' ')[0] : 'N/A' }}</span>
                                     <span class="text-[10px] text-ink-400" v-if="squadStats.apexPlayer">({{ squadStats.apexPlayer.h }}cm)</span>
                                 </div>
                                 <div class="h-6 w-[1.5px] bg-neonBlue-200"></div>
                                 <div>
-                                    <span class="text-[10px] text-ink-400 uppercase font-extrabold block">{{ t.roster.hud_hand_ratio }}</span>
-                                    <span class="font-impact text-lg text-neonBlue-500">{{ squadStats.leftPercent }}%</span> <span class="text-[10px] text-ink-400">LH</span>
+                                    <span class="text-[10px] text-ink-400 uppercase font-black block">{{ t.roster.hud_hand_ratio }}</span>
+                                    <span class="font-black text-lg text-neonBlue-500">{{ squadStats.leftPercent }}%</span> <span class="text-[10px] text-ink-400">LH</span>
                                 </div>
                                 <div class="h-6 w-[1.5px] bg-neonBlue-200"></div>
                                 <div>
-                                    <span class="text-[10px] text-ink-400 uppercase font-extrabold block">{{ t.roster.hud_squad_size }}</span>
-                                    <span class="font-impact text-lg text-ink-900">{{ squadStats.count }}</span>
+                                    <span class="text-[10px] text-ink-400 uppercase font-black block">{{ t.roster.hud_squad_size }}</span>
+                                    <span class="font-black text-lg text-ink-900">{{ squadStats.count }}</span>
                                 </div>
                             </div>
                         </div>
@@ -490,17 +493,17 @@
                         <div class="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
                             <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
                                 <button @click="rosterDivision = 'men'" 
-                                        class="px-5 py-2 rounded-full font-extrabold text-xs tracking-wider uppercase transition-all shadow-sm"
+                                        class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all shadow-sm"
                                         :class="rosterDivision === 'men' ? 'bg-neonBlue-400 text-white shadow-neon-blue' : 'bg-neonBlue-50 text-ink-600 hover:bg-neonBlue-100'">
                                     🏀 {{ t.roster.men_league }}
                                 </button>
                                 <button @click="rosterDivision = 'women'" 
-                                        class="px-5 py-2 rounded-full font-extrabold text-xs tracking-wider uppercase transition-all shadow-sm"
+                                        class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all shadow-sm"
                                         :class="rosterDivision === 'women' ? 'bg-neonPink-400 text-white shadow-neon-pink' : 'bg-neonBlue-50 text-ink-600 hover:bg-neonBlue-100'">
                                     🏀 {{ t.roster.women_league }}
                                 </button>
                                 <button @click="toggleAlumni" 
-                                        class="px-5 py-2 rounded-full font-extrabold text-xs tracking-wider uppercase transition-all border shadow-sm"
+                                        class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all border shadow-sm"
                                         :class="rosterStatus === 'alumni' ? 'bg-ink-900 text-white border-ink-900 shadow-md' : 'bg-white text-ink-600 border-neonBlue-200 hover:border-neonPink-300'">
                                     🌟 {{ rosterStatus === 'alumni' ? t.roster.alumni_unit : t.roster.active_unit }}
                                 </button>
@@ -510,7 +513,7 @@
                                 <div class="flex items-center bg-neonBlue-50 p-1 rounded-full border border-neonBlue-200">
                                     <button v-for="pos in ['ALL', 'GUARD', 'FORWARD', 'CENTER']" :key="pos"
                                             @click="positionFilter = pos"
-                                            class="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase transition-all"
+                                            class="px-3 py-1 rounded-full text-[11px] font-black uppercase transition-all"
                                             :class="positionFilter === pos ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-400 hover:text-ink-700'">
                                         {{ t.roster.filter_labels[pos] || pos }}
                                     </button>
@@ -532,10 +535,10 @@
                              class="bubble-card relative p-6 cursor-pointer group flex flex-col justify-between overflow-hidden bg-white hover:border-neonPink-300">
                             
                             <div class="flex items-center justify-between gap-2 z-10">
-                                <span class="px-2.5 py-1 rounded-full bg-neonBlue-100 text-neonBlue-600 font-extrabold text-[10px] tracking-wider uppercase whitespace-nowrap">
+                                <span class="px-2.5 py-1 rounded-full bg-neonBlue-100 text-neonBlue-600 font-black text-[10px] tracking-wider uppercase whitespace-nowrap">
                                     {{ t.roster.filter_labels[p.role] || p.role }} // {{ p.pos }}
                                 </span>
-                                <span v-if="p.badge" class="px-2.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-extrabold text-[10px] uppercase whitespace-nowrap shadow-sm">
+                                <span v-if="p.badge" class="px-2.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-black text-[10px] uppercase whitespace-nowrap shadow-sm">
                                     {{ p.badge[lang] }}
                                 </span>
                             </div>
@@ -545,17 +548,17 @@
                                     #{{ p.n }}
                                 </div>
                                 <div class="text-right z-10">
-                                    <div class="font-impact text-3xl text-ink-900 group-hover:text-neonBlue-500 transition-colors">
+                                    <div class="font-black text-3xl text-ink-900 group-hover:text-neonBlue-500 transition-colors">
                                         {{ p.h }} <span class="text-xs font-bold text-ink-400">CM</span>
                                     </div>
-                                    <div class="text-[10px] font-extrabold text-ink-400 uppercase tracking-widest">
+                                    <div class="text-[10px] font-black text-ink-400 uppercase tracking-widest">
                                         {{ p.hand === 'LEFT' ? (lang === 'en' ? 'LEFT HAND' : 'SOLAK') : (lang === 'en' ? 'RIGHT HAND' : 'SAĞ EL') }}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="z-10 pt-3 border-t border-neonBlue-100">
-                                <h3 class="font-display font-black text-xl text-ink-900 uppercase group-hover:text-neonPink-500 transition-colors leading-tight">
+                                <h3 class="font-black text-xl text-ink-900 uppercase group-hover:text-neonPink-500 transition-colors leading-tight tracking-tight">
                                     {{ formatDisplayName(p.name) }}
                                 </h3>
                                 <p class="text-xs text-ink-500 mt-1 line-clamp-2 leading-relaxed font-medium">
@@ -563,7 +566,7 @@
                                 </p>
                             </div>
 
-                            <div class="mt-4 pt-3 flex items-center justify-between text-[11px] font-extrabold text-neonBlue-500 group-hover:text-neonPink-500 transition-colors">
+                            <div class="mt-4 pt-3 flex items-center justify-between text-[11px] font-black text-neonBlue-500 group-hover:text-neonPink-500 transition-colors">
                                 <span>{{ t.roster.view_sheet }}</span>
                                 <span class="transform group-hover:translate-x-1.5 transition-transform">→</span>
                             </div>
@@ -572,8 +575,8 @@
 
                     <div v-else class="bubble-card p-12 text-center bg-white/70">
                         <span class="text-4xl animate-bounce inline-block">🔍</span>
-                        <h3 class="font-display font-black text-xl text-ink-900 mt-3 uppercase">{{ t.roster.empty_msg }}</h3>
-                        <button @click="resetFilters" class="mt-4 px-6 py-2 rounded-full bg-neonBlue-400 text-white font-extrabold text-xs uppercase shadow-neon-blue hover:bg-neonBlue-500">
+                        <h3 class="font-black text-xl text-ink-900 mt-3 uppercase tracking-tight">{{ t.roster.empty_msg }}</h3>
+                        <button @click="resetFilters" class="mt-4 px-6 py-2 rounded-full bg-neonBlue-400 text-white font-black text-xs uppercase shadow-neon-blue hover:bg-neonBlue-500">
                             {{ lang === 'en' ? 'Reset All Filters' : 'Filtreleri Sıfırla' }}
                         </button>
                     </div>
@@ -582,10 +585,10 @@
                 <!-- 3. CAMPAIGNS VIEW -->
                 <section v-else-if="currentView === 'tournaments'" :key="'tournaments-' + lang" class="space-y-10">
                     <div class="text-center max-w-2xl mx-auto">
-                        <span class="px-3.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-extrabold text-xs uppercase tracking-widest shadow-sm">
+                        <span class="px-3.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-black text-xs uppercase tracking-widest shadow-sm">
                             {{ t.tournaments.title }}
                         </span>
-                        <h2 class="font-impact text-5xl sm:text-6xl text-ink-900 mt-2 uppercase tracking-tight">
+                        <h2 class="font-black text-5xl sm:text-6xl text-ink-900 mt-2 uppercase tracking-tight">
                             {{ lang === 'en' ? 'VARSITY RUNS' : 'ŞAMPİYONALAR' }}
                         </h2>
                         <p class="text-sm text-ink-500 mt-2 leading-relaxed font-medium">
@@ -599,7 +602,7 @@
                             
                             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neonBlue-100">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-14 h-14 rounded-2xl shrink-0 flex items-center justify-center font-impact text-xl shadow-md transition-transform group-hover:scale-110"
+                                    <div class="w-14 h-14 rounded-2xl shrink-0 flex items-center justify-center font-black text-lg shadow-md transition-transform group-hover:scale-110"
                                          :class="camp.metal === 'silver' 
                                             ? 'bg-gradient-to-tr from-slate-200 via-white to-slate-300 text-ink-800 border-2 border-slate-300 shadow-slate-200' 
                                             : (camp.metal === 'bronze' 
@@ -609,17 +612,17 @@
                                     </div>
                                     <div>
                                         <div class="flex items-center gap-2 text-xs font-bold text-ink-400 uppercase">
-                                            <span class="text-neonBlue-500 font-extrabold">{{ camp.edition }}</span>
+                                            <span class="text-neonBlue-500 font-black">{{ camp.edition }}</span>
                                             <span>•</span>
                                             <span>{{ camp.venue[lang] }}</span>
                                         </div>
-                                        <h3 class="font-display font-black text-2xl text-ink-900 uppercase mt-0.5">
+                                        <h3 class="font-black text-2xl text-ink-900 uppercase mt-0.5 tracking-tight">
                                             {{ camp.title[lang] }}
                                         </h3>
                                     </div>
                                 </div>
 
-                                <div class="self-start md:self-auto px-4 py-2 rounded-2xl bg-neonBlue-50 text-ink-900 font-impact text-base border border-neonBlue-200">
+                                <div class="self-start md:self-auto px-4 py-2 rounded-2xl bg-neonBlue-50 text-ink-900 font-black text-base border border-neonBlue-200">
                                     {{ camp.result[lang] }}
                                 </div>
                             </div>
@@ -629,13 +632,13 @@
                             </p>
 
                             <div class="mt-6 pt-4 border-t border-neonBlue-100">
-                                <div class="text-[11px] font-extrabold text-neonBlue-500 uppercase tracking-wider mb-2">
+                                <div class="text-[11px] font-black text-neonBlue-500 uppercase tracking-wider mb-2">
                                     {{ lang === 'en' ? 'TOURNAMENT SQUAD:' : 'MÜSABAKA KADROSU:' }}
                                 </div>
                                 <div class="flex flex-wrap items-center gap-2">
                                     <span v-for="player in camp.squadList" :key="player.name"
                                           @click="openModalByName(player.name)"
-                                          class="px-3 py-1 rounded-full bg-neonBlue-50 hover:bg-neonPink-100 text-ink-700 hover:text-neonPink-600 border border-neonBlue-200 text-xs font-extrabold transition-all duration-150 cursor-pointer hover:scale-105 active:scale-95">
+                                          class="px-3 py-1 rounded-full bg-neonBlue-50 hover:bg-neonPink-100 text-ink-700 hover:text-neonPink-600 border border-neonBlue-200 text-xs font-black transition-all duration-150 cursor-pointer hover:scale-105 active:scale-95">
                                         #{{ player.n }} {{ formatDisplayName(player.name) }}
                                     </span>
                                 </div>
@@ -645,10 +648,10 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                         <div class="bubble-card p-6 bg-gradient-to-br from-white to-neonBlue-50 border-neonBlue-200">
-                            <span class="text-xs font-extrabold text-neonBlue-600 uppercase tracking-widest block mb-1">
+                            <span class="text-xs font-black text-neonBlue-600 uppercase tracking-widest block mb-1">
                                 {{ t.tournaments.hodesk.meta }}
                             </span>
-                            <h4 class="font-display font-black text-xl text-ink-900 uppercase">
+                            <h4 class="font-black text-xl text-ink-900 uppercase tracking-tight">
                                 {{ t.tournaments.hodesk.title }}
                             </h4>
                             <p class="text-xs text-ink-500 mt-2 leading-relaxed font-medium">
@@ -657,10 +660,10 @@
                         </div>
 
                         <div class="bubble-card p-6 bg-gradient-to-br from-white to-neonPink-50 border-neonPink-200">
-                            <span class="text-xs font-extrabold text-neonPink-500 uppercase tracking-widest block mb-1">
+                            <span class="text-xs font-black text-neonPink-500 uppercase tracking-widest block mb-1">
                                 {{ t.tournaments.fest.meta }}
                             </span>
-                            <h4 class="font-display font-black text-xl text-ink-900 uppercase">
+                            <h4 class="font-black text-xl text-ink-900 uppercase tracking-tight">
                                 {{ t.tournaments.fest.title }}
                             </h4>
                             <p class="text-xs text-ink-500 mt-2 leading-relaxed font-medium">
@@ -674,10 +677,10 @@
                 <section v-else-if="currentView === 'legacy'" :key="'legacy-' + lang" class="space-y-12">
                     <div class="bubble-card p-8 sm:p-12 bg-white relative overflow-hidden">
                         <div class="max-w-3xl">
-                            <span class="px-3.5 py-1 rounded-full bg-neonBlue-100 text-neonBlue-600 font-extrabold text-xs uppercase tracking-widest shadow-sm">
+                            <span class="px-3.5 py-1 rounded-full bg-neonBlue-100 text-neonBlue-600 font-black text-xs uppercase tracking-widest shadow-sm">
                                 {{ lang === 'en' ? 'Heritage & Culture' : 'Tarihçe ve Kültür' }}
                             </span>
-                            <h2 class="font-impact text-5xl sm:text-7xl text-ink-900 mt-3 uppercase tracking-tight">
+                            <h2 class="font-black text-5xl sm:text-7xl text-ink-900 mt-3 uppercase tracking-tight">
                                 {{ t.legacy.timeline_title }}
                             </h2>
                             <p class="text-sm sm:text-base text-ink-600 mt-4 leading-relaxed font-medium">
@@ -687,14 +690,14 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8 pt-8 border-t border-neonBlue-100">
                             <div>
-                                <h4 class="font-display font-black text-lg text-neonBlue-500 uppercase">{{ t.about.culture_title }}</h4>
+                                <h4 class="font-black text-lg text-neonBlue-500 uppercase tracking-tight">{{ t.about.culture_title }}</h4>
                                 <p class="text-xs text-ink-500 mt-2 leading-relaxed font-medium">{{ t.about.culture_desc }}</p>
                             </div>
                             <div>
-                                <h4 class="font-display font-black text-lg text-neonPink-500 uppercase">{{ t.about.future_title }}</h4>
+                                <h4 class="font-black text-lg text-neonPink-500 uppercase tracking-tight">{{ t.about.future_title }}</h4>
                                 <p class="text-xs text-ink-500 mt-2 leading-relaxed font-medium">{{ t.about.future_desc }}</p>
                                 <a href="https://maps.google.com/?q=Hacettepe+Universitesi+Beytepe+Spor+Salonu" target="_blank" rel="noopener noreferrer"
-                                   class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full bg-neonBlue-100 hover:bg-neonPink-100 text-neonBlue-600 hover:text-neonPink-600 text-xs font-extrabold uppercase transition-all shadow-sm hover:scale-105">
+                                   class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full bg-neonBlue-100 hover:bg-neonPink-100 text-neonBlue-600 hover:text-neonPink-600 text-xs font-black uppercase transition-all shadow-sm hover:scale-105">
                                     <span>📍 {{ lang === 'en' ? 'View Beytepe Arena GPS' : 'Beytepe Spor Salonu Konumu' }}</span> ↗
                                 </a>
                             </div>
@@ -707,8 +710,8 @@
                             <div class="absolute -left-[35px] sm:-left-[51px] top-1 w-6 h-6 rounded-full bg-white border-4 border-neonPink-400 group-hover:scale-125 transition-transform duration-300 shadow-neon-pink"></div>
                             
                             <div class="bubble-card p-6 sm:p-8 bg-white hover:border-neonBlue-300">
-                                <span class="font-impact text-3xl text-neonBlue-500 leading-none block mb-1">{{ step.y }}</span>
-                                <h3 class="font-display font-black text-2xl text-ink-900 uppercase">{{ step.title[lang] }}</h3>
+                                <span class="font-black text-3xl text-neonBlue-500 leading-none block mb-1">{{ step.y }}</span>
+                                <h3 class="font-black text-2xl text-ink-900 uppercase tracking-tight">{{ step.title[lang] }}</h3>
                                 <p class="text-xs sm:text-sm text-ink-500 mt-2 leading-relaxed font-medium">{{ step.t[lang] }}</p>
                             </div>
                         </div>
@@ -718,10 +721,10 @@
                 <!-- 5. JOIN VIEW -->
                 <section v-else-if="currentView === 'join'" :key="'join-' + lang" class="space-y-10">
                     <div class="bubble-card p-8 sm:p-12 text-center max-w-3xl mx-auto bg-gradient-to-b from-white to-neonBlue-50">
-                        <span class="px-3.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-extrabold text-xs uppercase tracking-widest shadow-sm">
+                        <span class="px-3.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-black text-xs uppercase tracking-widest shadow-sm">
                             {{ lang === 'en' ? 'Recruitment' : 'Kadroya Katıl' }}
                         </span>
-                        <h2 class="font-impact text-5xl sm:text-7xl text-ink-900 mt-2 uppercase tracking-tight">
+                        <h2 class="font-black text-5xl sm:text-7xl text-ink-900 mt-2 uppercase tracking-tight">
                             {{ t.join.title }}
                         </h2>
                         <p class="text-sm text-ink-600 mt-3 max-w-lg mx-auto leading-relaxed font-medium">
@@ -735,8 +738,8 @@
                             <a href="https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP" target="_blank" rel="noopener noreferrer"
                                class="p-5 rounded-3xl bg-white border-2 border-emerald-200 hover:border-[#25D366] flex items-center justify-between text-left group shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all">
                                 <div>
-                                    <span class="text-[10px] font-extrabold text-[#25D366] uppercase tracking-wider block">COMMUNITY CHAT</span>
-                                    <h4 class="font-display font-black text-lg text-ink-900 group-hover:text-[#25D366] transition-colors">WHATSAPP ROSTER</h4>
+                                    <span class="text-[10px] font-black text-[#25D366] uppercase tracking-wider block">COMMUNITY CHAT</span>
+                                    <h4 class="font-black text-lg text-ink-900 group-hover:text-[#25D366] transition-colors tracking-tight">WHATSAPP ROSTER</h4>
                                 </div>
                                 <div class="w-12 h-12 rounded-2xl bg-[#e6f8ee] border border-[#25D366]/30 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-sm">
                                     <svg class="w-full h-full" viewBox="0 0 24 24">
@@ -748,8 +751,8 @@
                             <a href="https://www.instagram.com/huedbasketbol" target="_blank" rel="noopener noreferrer"
                                class="p-5 rounded-3xl bg-white border-2 border-pink-200 hover:border-neonPink-400 flex items-center justify-between text-left group shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all">
                                 <div>
-                                    <span class="text-[10px] font-extrabold text-neonPink-500 uppercase tracking-wider block">MEDIA HUB</span>
-                                    <h4 class="font-display font-black text-lg text-ink-900 group-hover:text-neonPink-500 transition-colors">OFFICIAL INSTAGRAM</h4>
+                                    <span class="text-[10px] font-black text-neonPink-500 uppercase tracking-wider block">MEDIA HUB</span>
+                                    <h4 class="font-black text-lg text-ink-900 group-hover:text-neonPink-500 transition-colors tracking-tight">OFFICIAL INSTAGRAM</h4>
                                 </div>
                                 <div class="w-12 h-12 rounded-2xl bg-[#feeef5] border border-neonPink-300/30 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-sm">
                                     <svg class="w-full h-full" viewBox="0 0 24 24">
@@ -779,15 +782,15 @@
                                     </svg>
                                 </div>
                                 <div class="text-left">
-                                    <span class="text-[10px] font-extrabold text-neonBlue-500 uppercase tracking-wider block">
+                                    <span class="text-[10px] font-black text-neonBlue-500 uppercase tracking-wider block">
                                         {{ t.join.email_label }}
                                     </span>
-                                    <h4 class="font-display font-black text-base sm:text-lg text-ink-900 group-hover:text-neonBlue-500 transition-colors">
+                                    <h4 class="font-black text-base sm:text-lg text-ink-900 group-hover:text-neonBlue-500 transition-colors tracking-tight">
                                         huedbasketbol@gmail.com
                                     </h4>
                                 </div>
                             </div>
-                            <span class="px-4 py-2 rounded-full bg-neonBlue-50 text-neonBlue-600 font-extrabold text-xs uppercase tracking-wider group-hover:bg-neonBlue-400 group-hover:text-white transition-colors">
+                            <span class="px-4 py-2 rounded-full bg-neonBlue-50 text-neonBlue-600 font-black text-xs uppercase tracking-wider group-hover:bg-neonBlue-400 group-hover:text-white transition-colors">
                                 {{ lang === 'en' ? 'COPY' : 'KOPYALA' }}
                             </span>
                         </div>
@@ -795,20 +798,20 @@
 
                     <!-- Leadership Grid -->
                     <div class="max-w-4xl mx-auto">
-                        <span class="text-xs font-extrabold text-ink-400 uppercase tracking-widest block text-center mb-6">
+                        <span class="text-xs font-black text-ink-400 uppercase tracking-widest block text-center mb-6">
                             {{ t.join.mgmt_title }}
                         </span>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div v-for="person in DATA.management" :key="person.id"
                                  class="bubble-card p-6 bg-white text-center flex flex-col items-center hover:border-neonBlue-300">
-                                <div class="w-12 h-12 rounded-full mb-3 flex items-center justify-center font-impact text-lg shadow-sm"
+                                <div class="w-12 h-12 rounded-full mb-3 flex items-center justify-center font-black text-lg shadow-sm"
                                      :class="person.theme === 'brand' ? 'bg-neonBlue-100 text-neonBlue-600' : (person.theme === 'accent' ? 'bg-neonPink-100 text-neonPink-500' : 'bg-cloud text-ink-500')">
                                     {{ person.name.charAt(0) }}
                                 </div>
-                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-neonPink-500 mb-1">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-neonPink-500 mb-1">
                                     {{ person.roleTitle[lang] }}
                                 </span>
-                                <h3 class="font-display font-black text-xl text-ink-900 uppercase leading-tight">
+                                <h3 class="font-black text-xl text-ink-900 uppercase leading-tight tracking-tight">
                                     {{ formatDisplayName(person.name) }}
                                 </h3>
                                 <span class="text-xs text-ink-400 mt-1 font-semibold">{{ person.dept[lang] }}</span>
@@ -834,13 +837,13 @@
                             #{{ activePlayer.n }}
                         </div>
                         <div>
-                            <span v-if="activePlayer.badge" class="px-2.5 py-0.5 rounded-full bg-neonPink-100 text-neonPink-500 font-extrabold text-[10px] uppercase inline-block mb-1 shadow-sm">
+                            <span v-if="activePlayer.badge" class="px-2.5 py-0.5 rounded-full bg-neonPink-100 text-neonPink-500 font-black text-[10px] uppercase inline-block mb-1 shadow-sm">
                                 {{ activePlayer.badge[lang] }}
                             </span>
-                            <h3 class="font-display font-black text-2xl sm:text-3xl text-ink-900 uppercase leading-none">
+                            <h3 class="font-black text-2xl sm:text-3xl text-ink-900 uppercase leading-none tracking-tight">
                                 {{ formatDisplayName(activePlayer.name) }}
                             </h3>
-                            <span class="text-xs font-extrabold text-neonBlue-500 uppercase mt-1 block">
+                            <span class="text-xs font-black text-neonBlue-500 uppercase mt-1 block">
                                 {{ t.roster.filter_labels[activePlayer.role] || activePlayer.role }} // {{ activePlayer.pos }}
                             </span>
                         </div>
@@ -849,18 +852,18 @@
                     <!-- Metrics -->
                     <div class="grid grid-cols-3 gap-3 my-5">
                         <div class="p-3 rounded-2xl bg-neonBlue-50 text-center border border-neonBlue-100">
-                            <span class="text-[9px] font-extrabold text-ink-400 uppercase block">{{ t.roster.modal_height }}</span>
-                            <span class="font-impact text-2xl text-ink-900">{{ activePlayer.h }}</span> <span class="text-xs font-bold text-neonBlue-500">CM</span>
+                            <span class="text-[9px] font-black text-ink-400 uppercase block">{{ t.roster.modal_height }}</span>
+                            <span class="font-black text-2xl text-ink-900">{{ activePlayer.h }}</span> <span class="text-xs font-bold text-neonBlue-500">CM</span>
                         </div>
                         <div class="p-3 rounded-2xl bg-neonPink-50 text-center border border-neonPink-100">
-                            <span class="text-[9px] font-extrabold text-ink-400 uppercase block">{{ t.roster.modal_hand }}</span>
-                            <span class="font-impact text-xl text-neonPink-500">
+                            <span class="text-[9px] font-black text-ink-400 uppercase block">{{ t.roster.modal_hand }}</span>
+                            <span class="font-black text-xl text-neonPink-500">
                                 {{ activePlayer.hand === 'LEFT' ? (lang === 'en' ? 'LEFT' : 'SOL') : (lang === 'en' ? 'RIGHT' : 'SAĞ') }}
                             </span>
                         </div>
                         <div class="p-3 rounded-2xl bg-neonBlue-50 text-center border border-neonBlue-100">
-                            <span class="text-[9px] font-extrabold text-ink-400 uppercase block">{{ t.roster.modal_status }}</span>
-                            <span class="font-impact text-lg uppercase" :class="activePlayer.status === 'ALUMNI' ? 'text-neonPink-500' : 'text-neonBlue-500'">
+                            <span class="text-[9px] font-black text-ink-400 uppercase block">{{ t.roster.modal_status }}</span>
+                            <span class="font-black text-lg uppercase" :class="activePlayer.status === 'ALUMNI' ? 'text-neonPink-500' : 'text-neonBlue-500'">
                                 {{ activePlayer.status === 'ALUMNI' ? (lang === 'en' ? 'ALUMNI' : 'MEZUN') : t.roster.modal_active }}
                             </span>
                         </div>
@@ -868,13 +871,13 @@
 
                     <div class="space-y-3">
                         <div>
-                            <span class="text-[10px] font-extrabold text-neonBlue-500 uppercase tracking-wider block mb-1">{{ t.roster.modal_archetype }}</span>
+                            <span class="text-[10px] font-black text-neonBlue-500 uppercase tracking-wider block mb-1">{{ t.roster.modal_archetype }}</span>
                             <p class="text-xs sm:text-sm text-ink-600 bg-cloud p-3.5 rounded-2xl leading-relaxed font-medium">
                                 {{ activePlayer.playstyle[lang] }}
                             </p>
                         </div>
                         <div>
-                            <span class="text-[10px] font-extrabold text-neonPink-500 uppercase tracking-wider block mb-0.5">{{ t.roster.modal_dept }}</span>
+                            <span class="text-[10px] font-black text-neonPink-500 uppercase tracking-wider block mb-0.5">{{ t.roster.modal_dept }}</span>
                             <p class="text-xs font-bold text-ink-800">
                                 {{ activePlayer.dept ? activePlayer.dept[lang] : t.hero.script }}
                             </p>
@@ -884,11 +887,11 @@
                     <!-- Modal Controls -->
                     <div class="mt-6 pt-4 border-t border-neonBlue-100 flex items-center justify-between">
                         <button @click="sharePlayer(activePlayer.id)" 
-                                class="px-4 py-2 rounded-full bg-neonBlue-50 hover:bg-neonBlue-100 text-ink-700 text-xs font-extrabold flex items-center gap-1.5 transition-colors">
+                                class="px-4 py-2 rounded-full bg-neonBlue-50 hover:bg-neonBlue-100 text-ink-700 text-xs font-black flex items-center gap-1.5 transition-colors">
                             <span>🔗</span>
                             <span>{{ lang === 'en' ? 'SHARE CARD' : 'KARTI PAYLAŞ' }}</span>
                         </button>
-                        <button @click="closeModal" class="px-6 py-2 rounded-full bg-gradient-to-r from-neonBlue-400 to-neonPink-400 text-white font-extrabold text-xs uppercase shadow-neon-pink hover:scale-105 active:scale-95 transition-transform">
+                        <button @click="closeModal" class="px-6 py-2 rounded-full bg-gradient-to-r from-neonBlue-400 to-neonPink-400 text-white font-black text-xs uppercase shadow-neon-pink hover:scale-105 active:scale-95 transition-transform">
                             {{ t.roster.modal_close }}
                         </button>
                     </div>
@@ -896,17 +899,25 @@
             </div>
         </transition>
 
-        <!-- FOOTER -->
+        <!-- FOOTER with Team Logo -->
         <footer class="mt-auto py-8 border-t border-neonBlue-200/80 bg-white/80 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-neonBlue-400 to-neonPink-400 flex items-center justify-center text-white font-impact text-xs shadow-neon-pink">HU</div>
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-neonBlue-400 to-neonPink-400 p-[1.5px] shadow-neon-pink flex items-center justify-center overflow-hidden shrink-0">
+                        <img src="./logo.png" 
+                             alt="HUED Basketball" 
+                             class="w-full h-full object-contain rounded-full bg-white p-0.5"
+                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+                        <div class="hidden w-full h-full bg-white rounded-full items-center justify-center font-black text-neonBlue-500 text-[10px]">
+                            HU
+                        </div>
+                    </div>
                     <div>
-                        <div class="font-display font-black text-sm text-ink-900 tracking-wider">HUED BASKETBALL</div>
+                        <div class="font-black text-sm text-ink-900 tracking-wider">HUED BASKETBALL</div>
                         <div class="text-[10px] font-bold text-ink-400 uppercase">Hacettepe University • {{ t.hero.script }}</div>
                     </div>
                 </div>
-                <div class="flex items-center gap-6 text-xs font-extrabold text-ink-500">
+                <div class="flex items-center gap-6 text-xs font-black text-ink-500">
                     <a href="https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP" target="_blank" rel="noopener noreferrer" class="hover:text-[#25D366] transition-colors">WHATSAPP</a>
                     <a href="https://www.instagram.com/huedbasketbol" target="_blank" rel="noopener noreferrer" class="hover:text-neonPink-500 transition-colors">INSTAGRAM</a>
                     <a href="mailto:huedbasketbol@gmail.com" class="hover:text-neonBlue-500 transition-colors">EMAIL</a>
@@ -919,7 +930,6 @@
     <script type="module">
         import { createApp, ref, computed, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js';
 
-        // Full ASCII cleaner guaranteeing all Turkish characters (especially İ/I variations) are resolved to standard Latin I
         const cleanAscii = (str) => {
             if (!str || typeof str !== 'string') return str;
             return str
@@ -948,7 +958,6 @@
             .replace(/İ/g, 'i').replace(/I/g, 'i').replace(/ı/g, 'i')
             .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
 
-        // Helper guaranteeing English strings never retain non-ASCII or Turkish characters
         const L = (en, tr) => ({ en: cleanAscii(en), tr });
 
         const mapLangTree = (obj, l) => {
@@ -1010,7 +1019,6 @@
                 const mobileMenu = ref(false);
                 const toast = ref('');
                 
-                // Roster filters
                 const rosterDivision = ref('men');
                 const rosterStatus = ref('active');
                 const positionFilter = ref('ALL');
@@ -1115,13 +1123,7 @@
 
                 const t = computed(() => mapLangTree(T_DICT, lang.value));
 
-                const formatDisplayName = (name) => {
-                    if (!name) return '';
-                    if (lang.value === 'en') {
-                        return cleanAscii(name);
-                    }
-                    return name;
-                };
+                const formatDisplayName = (name) => name || '';
 
                 const DATA = Object.freeze({
                     management: [
@@ -1224,7 +1226,7 @@
                         }
                     ],
                     timeline: [
-                        { y: '2023', title: L('Foundation of the Unit', 'Takımın Kuruluşu'), t: L('Established as a dedicated basketball team for the Faculty of Letters by Doruk Kuru, Mert Erdogdu, and Nihat Yuksel.', 'Doruk Kuru, Mert Erdoğdu ve Nihat Yüksel tarafından Edebiyat Fakültesi bünyesinde resmi basketbol takımı olarak kuruldu.') },
+                        { y: '2023', title: L('Foundation of the Unit', 'Takımın Kuruluşu'), t: L('Established as a dedicated basketball team for the Faculty of Letters by Doruk Kuru, Mert Erdoğdu, and Nihat Yüksel.', 'Doruk Kuru, Mert Erdoğdu ve Nihat Yüksel tarafından Edebiyat Fakültesi bünyesinde resmi basketbol takımı olarak kuruldu.') },
                         { y: '2024', title: L('Back-to-Back Silvers & Varsity Debut', 'Çifte Gümüş Madalya ve Şenlik Çıkışı'), t: L('Captured Silver at the inaugural 1st HODESK 3x3 with the Law cohort, debuted at the 41st Sports Festival (55-62 vs Science), and secured another Silver Medal in the 2nd HODESK tournament.', '1. HODESK 3x3 Turnuvası\'nda Gümüş Madalya kazanıldı, 41. Spor Şenliği\'nde (55-62 vs Fen) ilk kez sahaya çıkıldı ve 2. HODESK Güz turnuvasında da finale çıkılarak ikinci Gümüş Madalya elde edildi.') },
                         { y: '2025', title: L('Women\'s Unit, Bronze Podium & Dual Squads', 'Kadın Takımı, Bronz Kupa ve Çift Takım'), t: L('Founded the official Women\'s Team, captured Bronze at 3rd HODESK Spring, competed in the 42nd Sports Festival (47-85 vs Science), and fielded two concurrent rosters in the 4th HODESK tournament.', 'Kadın Basketbol Takımı kuruldu, 3. HODESK Bahar\'da Bronz Madalya kazanıldı, 42. Spor Şenliği\'nde mücadele edildi ve 4. HODESK Güz turnuvasına iki ayrı takımla katılım sağlandı.') },
                         { y: '2026', title: L('13-Man Rotation & 43rd Fest Battle', 'Geniş Kadro ve 43. Spor Şenliği'), t: L('Competed in the 43rd Hacettepe Sports Festival in a high-intensity 53-58 thriller against IIBF at SBF Sports Hall with a 13-man rotation, cementing varsity roster depth.', '43. Hacettepe Spor Şenliği\'nde SBF Salonu parkelerinde İİBF\'ye karşı 13 kişilik geniş rotasyonla son ana kadar 53-58\'lik başa baş bir mücadele sergilendi.') }
@@ -1281,6 +1283,7 @@
 
                 const toggleLang = () => {
                     lang.value = lang.value === 'tr' ? 'en' : 'tr';
+                    document.documentElement.lang = lang.value;
                     showToast(lang.value === 'en' ? 'Language switched to English' : 'Türkçe dile geçildi');
                 };
 
@@ -1334,6 +1337,7 @@
                 };
 
                 onMounted(() => {
+                    document.documentElement.lang = lang.value;
                     initInteractiveCourt();
                 });
 
