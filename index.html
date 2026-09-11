@@ -197,39 +197,39 @@
         <header class="fixed top-5 inset-x-0 mx-auto max-w-5xl w-[94%] z-40">
             <nav class="glass-pill rounded-full p-2.5 pl-4 sm:pl-6 pr-3 flex items-center justify-between transition-all duration-300 shadow-neon-combo">
                 
-                <!-- Brand Anchor with Prominent Team Logo -->
-                <button @click="setView('home')" class="flex items-center gap-3.5 sm:gap-4 group text-left focus:outline-none">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl sm:rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-[2.5px] shadow-neon-combo transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6 flex items-center justify-center overflow-hidden shrink-0">
+                <!-- Brand Anchor with Circular Reticle Fitted Logo -->
+                <button @click="setView('home')" class="flex items-center gap-3.5 sm:gap-4 group text-left focus:outline-none shrink-0">
+                    <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-[2px] shadow-neon-combo transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6 flex items-center justify-center overflow-hidden shrink-0">
                         <img src="./logo.png" 
                              alt="HUED Hoops Logo" 
-                             class="w-full h-full object-contain rounded-xl sm:rounded-full bg-white p-1"
+                             class="w-full h-full object-cover rounded-full bg-white"
                              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
-                        <div class="hidden w-full h-full bg-white rounded-xl sm:rounded-full items-center justify-center font-black text-neonBlue-500 text-sm tracking-tighter">
+                        <div class="hidden w-full h-full bg-white rounded-full items-center justify-center font-black text-neonBlue-500 text-sm tracking-tighter">
                             HU
                         </div>
                     </div>
-                    <div>
+                    <div class="min-w-[130px] sm:min-w-[155px]">
                         <div class="font-black text-base sm:text-lg md:text-xl text-ink-900 tracking-wider flex items-center gap-1.5 leading-none">
                             HUED<span class="inline-block w-2 h-2 rounded-full bg-neonPink-400 animate-ping"></span>HOOPS
                         </div>
-                        <span class="text-[10px] sm:text-xs font-bold text-neonBlue-600 uppercase tracking-widest leading-tight block mt-0.5">
+                        <span class="text-[10px] sm:text-xs font-bold text-neonBlue-600 uppercase tracking-widest leading-tight block mt-0.5 truncate">
                             {{ t.hero.script }}
                         </span>
                     </div>
                 </button>
 
-                <!-- Desktop Route Tabs -->
+                <!-- Desktop Route Tabs: Equal Width Across Both Languages to Prevent Resizing -->
                 <div class="hidden md:flex items-center gap-1 bg-neonBlue-50/80 p-1.5 rounded-full border border-neonBlue-200">
                     <button v-for="item in navItems" :key="item.id" @click="setView(item.id)"
-                            class="relative px-4 py-2 rounded-full text-xs font-black tracking-wider transition-all duration-300 focus:outline-none"
+                            class="relative w-24 lg:w-28 py-2 rounded-full text-xs font-black tracking-wider transition-all duration-300 focus:outline-none flex items-center justify-center text-center"
                             :class="currentView === item.id ? 'text-white' : 'text-ink-500 hover:text-ink-900'">
                         <span v-if="currentView === item.id" class="absolute inset-0 rounded-full bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 shadow-neon-pink"></span>
-                        <span class="relative z-10 uppercase">{{ item.label[lang] }}</span>
+                        <span class="relative z-10 uppercase truncate">{{ item.label[lang] }}</span>
                     </button>
                 </div>
 
                 <!-- Right Cluster -->
-                <div class="flex items-center gap-2.5">
+                <div class="flex items-center gap-2.5 shrink-0">
                     <button @click="toggleLang" 
                             :title="lang === 'tr' ? 'Türkçe Aktif (Click to switch to English)' : 'English Active (Türkçe\'ye geçmek için tıklayın)'" 
                             class="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-1 bg-white/95 border-2 border-neonBlue-200 hover:border-neonPink-400 shadow-sm hover:shadow-neon-pink transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center overflow-hidden focus:outline-none">
@@ -264,14 +264,13 @@
                 </div>
             </nav>
 
-            <!-- Mobile Drawer -->
+            <!-- Mobile Drawer (Cleaned without lightning bolts) -->
             <transition enter-active-class="transition duration-250 ease-out" enter-from-class="opacity-0 -translate-y-4 scale-95" enter-to-class="opacity-100 translate-y-0 scale-100" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 -translate-y-4">
                 <div v-if="mobileMenu" class="md:hidden mt-2 p-3.5 glass-pill rounded-3xl flex flex-col gap-2 shadow-2xl border-neonBlue-200">
                     <button v-for="item in navItems" :key="item.id" @click="setView(item.id)"
-                            class="w-full py-3 px-5 rounded-2xl text-sm font-black text-left transition-all flex items-center justify-between"
+                            class="w-full py-3 px-5 rounded-2xl text-sm font-black text-left transition-all flex items-center"
                             :class="currentView === item.id ? 'bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 text-white shadow-neon-pink' : 'text-ink-700 hover:bg-neonBlue-50'">
                         <span class="uppercase tracking-wider">{{ item.label[lang] }}</span>
-                        <span>⚡</span>
                     </button>
                 </div>
             </transition>
@@ -293,13 +292,13 @@
                             <span class="font-black text-neonPink-500">Est. 2023</span>
                         </div>
 
-                        <!-- HERO PROMINENT LOGO DISPLAY -->
+                        <!-- HERO PROMINENT LOGO DISPLAY (Fitted Reticle Ring) -->
                         <div class="mb-6 relative group">
-                            <div class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-3xl sm:rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-2 sm:p-2.5 shadow-neon-combo transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3 flex items-center justify-center">
-                                <div class="w-full h-full bg-white rounded-2xl sm:rounded-full p-3 sm:p-4 flex items-center justify-center shadow-inner overflow-hidden">
+                            <div class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-[3px] shadow-neon-combo transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3 flex items-center justify-center overflow-hidden">
+                                <div class="w-full h-full bg-white rounded-full flex items-center justify-center shadow-inner overflow-hidden relative">
                                     <img src="./logo.png" 
                                          alt="HUED Hoops Crest" 
-                                         class="w-full h-full object-contain filter drop-shadow-md"
+                                         class="w-full h-full object-cover scale-105 filter drop-shadow-md transition-transform duration-500 group-hover:scale-110"
                                          onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
                                     <div class="hidden w-full h-full items-center justify-center font-black text-4xl sm:text-6xl text-neonBlue-500">
                                         HU
@@ -497,7 +496,6 @@
                         <!-- Filter Controls -->
                         <div class="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
                             <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-                                <!-- Division buttons visible only during Active view; when Alumni, unified automatically -->
                                 <template v-if="rosterStatus !== 'alumni'">
                                     <button @click="rosterDivision = 'men'" 
                                             class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all shadow-sm"
@@ -916,12 +914,12 @@
         <footer class="mt-auto py-8 border-t border-neonBlue-200/80 bg-white/80 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
                 <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-r from-neonBlue-400 to-neonPink-400 p-[2px] shadow-neon-pink flex items-center justify-center overflow-hidden shrink-0">
+                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-neonBlue-400 to-neonPink-400 p-[2px] shadow-neon-pink flex items-center justify-center overflow-hidden shrink-0">
                         <img src="./logo.png" 
                              alt="HUED Basketball" 
-                             class="w-full h-full object-contain rounded-xl bg-white p-1"
+                             class="w-full h-full object-cover rounded-full bg-white"
                              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
-                        <div class="hidden w-full h-full bg-white rounded-xl items-center justify-center font-black text-neonBlue-500 text-xs">
+                        <div class="hidden w-full h-full bg-white rounded-full items-center justify-center font-black text-neonBlue-500 text-xs">
                             HU
                         </div>
                     </div>
@@ -1255,7 +1253,6 @@
                         : (lang.value === 'en' ? "Women's Division" : 'Kadın Takımı');
                 });
 
-                // Combined Men and Women alumni when viewing alumni roster
                 const currentSquadPool = computed(() => {
                     if (rosterStatus.value === 'alumni') {
                         return [...DATA.men, ...DATA.women].filter(p => p.status === 'ALUMNI');
