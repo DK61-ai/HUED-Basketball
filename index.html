@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
     <title>HUED HOOPS | Hacettepe University Basketball</title>
     <meta name="description" content="Official platform of Hacettepe University Faculty of Letters Basketball Team. Roster, Tournaments, and Legacy.">
     
@@ -61,21 +62,16 @@
                         pulseGlow: {
                             '0%, 100%': { opacity: '0.22', transform: 'scale(1)' },
                             '50%': { opacity: '0.36', transform: 'scale(1.05)' }
-                        },
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-50%)' }
                         }
                     },
                     animation: {
                         'float': 'floatSlow 5s ease-in-out infinite',
                         'pulse-glow': 'pulseGlow 6s ease-in-out infinite',
-                        'marquee': 'marquee 22s linear infinite',
                     },
                     boxShadow: {
                         'neon-blue': '0 0 25px -4px rgba(0, 210, 255, 0.4), 0 8px 20px -6px rgba(0, 210, 255, 0.25)',
                         'neon-pink': '0 0 25px -4px rgba(255, 42, 133, 0.4), 0 8px 20px -6px rgba(255, 42, 133, 0.25)',
-                        'neon-combo': '0 10px 30px -8px rgba(0, 210, 255, 0.25), 0 10px 30px -8px rgba(255, 42, 133, 0.25)',
+                        'neon-combo': '0 12px 35px -6px rgba(0, 210, 255, 0.3), 0 12px 35px -6px rgba(255, 42, 133, 0.3)',
                     }
                 }
             }
@@ -83,6 +79,10 @@
     </script>
 
     <style>
+        :root {
+            color-scheme: light;
+        }
+
         body {
             background-color: #f7fbff;
             color: #080e1a;
@@ -94,7 +94,7 @@
         [v-cloak] { display: none; }
 
         .glass-pill {
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.90);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1.5px solid rgba(255, 255, 255, 0.95);
@@ -194,25 +194,25 @@
         </transition>
 
         <!-- FLOATING NAVIGATION CAPSULE -->
-        <header class="fixed top-5 inset-x-0 mx-auto max-w-4xl w-[94%] z-40">
-            <nav class="glass-pill rounded-full p-2 pl-4 sm:pl-5 pr-2 flex items-center justify-between transition-all duration-300 shadow-neon-combo">
+        <header class="fixed top-5 inset-x-0 mx-auto max-w-5xl w-[94%] z-40">
+            <nav class="glass-pill rounded-full p-2.5 pl-4 sm:pl-6 pr-3 flex items-center justify-between transition-all duration-300 shadow-neon-combo">
                 
-                <!-- Brand Anchor with Team Logo -->
-                <button @click="setView('home')" class="flex items-center gap-3 group text-left focus:outline-none">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-[2px] shadow-sm transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 flex items-center justify-center overflow-hidden shrink-0">
+                <!-- Brand Anchor with Prominent Team Logo -->
+                <button @click="setView('home')" class="flex items-center gap-3.5 sm:gap-4 group text-left focus:outline-none">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl sm:rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-[2.5px] shadow-neon-combo transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6 flex items-center justify-center overflow-hidden shrink-0">
                         <img src="./logo.png" 
                              alt="HUED Hoops Logo" 
-                             class="w-full h-full object-contain rounded-full bg-white p-0.5"
+                             class="w-full h-full object-contain rounded-xl sm:rounded-full bg-white p-1"
                              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
-                        <div class="hidden w-full h-full bg-white rounded-full items-center justify-center font-black text-neonBlue-500 text-xs tracking-tighter">
+                        <div class="hidden w-full h-full bg-white rounded-xl sm:rounded-full items-center justify-center font-black text-neonBlue-500 text-sm tracking-tighter">
                             HU
                         </div>
                     </div>
                     <div>
-                        <div class="font-black text-sm text-ink-900 tracking-wider flex items-center gap-1.5 leading-none">
+                        <div class="font-black text-base sm:text-lg md:text-xl text-ink-900 tracking-wider flex items-center gap-1.5 leading-none">
                             HUED<span class="inline-block w-2 h-2 rounded-full bg-neonPink-400 animate-ping"></span>HOOPS
                         </div>
-                        <span class="text-[10px] font-bold text-neonBlue-600 uppercase tracking-widest leading-tight">
+                        <span class="text-[10px] sm:text-xs font-bold text-neonBlue-600 uppercase tracking-widest leading-tight block mt-0.5">
                             {{ t.hero.script }}
                         </span>
                     </div>
@@ -221,7 +221,7 @@
                 <!-- Desktop Route Tabs -->
                 <div class="hidden md:flex items-center gap-1 bg-neonBlue-50/80 p-1.5 rounded-full border border-neonBlue-200">
                     <button v-for="item in navItems" :key="item.id" @click="setView(item.id)"
-                            class="relative px-4 py-1.5 rounded-full text-xs font-black tracking-wider transition-all duration-300 focus:outline-none"
+                            class="relative px-4 py-2 rounded-full text-xs font-black tracking-wider transition-all duration-300 focus:outline-none"
                             :class="currentView === item.id ? 'text-white' : 'text-ink-500 hover:text-ink-900'">
                         <span v-if="currentView === item.id" class="absolute inset-0 rounded-full bg-gradient-to-r from-neonBlue-400 via-neonPink-400 to-neonPink-500 shadow-neon-pink"></span>
                         <span class="relative z-10 uppercase">{{ item.label[lang] }}</span>
@@ -229,10 +229,10 @@
                 </div>
 
                 <!-- Right Cluster -->
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2.5">
                     <button @click="toggleLang" 
                             :title="lang === 'tr' ? 'Türkçe Aktif (Click to switch to English)' : 'English Active (Türkçe\'ye geçmek için tıklayın)'" 
-                            class="w-10 h-10 rounded-full p-1 bg-white/95 border-2 border-neonBlue-200 hover:border-neonPink-400 shadow-sm hover:shadow-neon-pink transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center overflow-hidden focus:outline-none">
+                            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-1 bg-white/95 border-2 border-neonBlue-200 hover:border-neonPink-400 shadow-sm hover:shadow-neon-pink transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center overflow-hidden focus:outline-none">
                         <transition name="flag-rotate" mode="out-in">
                             <svg v-if="lang === 'tr'" key="flag-tr" class="w-full h-full rounded-full object-cover shadow-inner" viewBox="0 0 1200 800" aria-label="Türkçe Aktif">
                                 <rect width="1200" height="800" fill="#E30A17"/>
@@ -278,17 +278,34 @@
         </header>
 
         <!-- MAIN VIEW CONTAINER -->
-        <main class="flex-grow pt-28 pb-16 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <main class="flex-grow pt-32 sm:pt-36 pb-16 px-4 sm:px-6 max-w-7xl mx-auto w-full">
             <transition name="view-morph" mode="out-in">
                 
                 <!-- 1. HOME VIEW -->
                 <section v-if="currentView === 'home'" :key="'home-' + lang" class="space-y-14">
-                    <div class="relative pt-6 sm:pt-12 text-center flex flex-col items-center">
+                    <div class="relative pt-4 sm:pt-8 text-center flex flex-col items-center">
+                        
+                        <!-- Header Pill -->
                         <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white border border-neonBlue-200 shadow-neon-blue text-xs font-bold text-ink-700 mb-6 animate-float">
                             <span class="w-2.5 h-2.5 rounded-full bg-neonPink-400 animate-ping"></span>
                             <span class="tracking-wide uppercase text-neonBlue-600 font-black">Hacettepe Varsity Hoops</span>
                             <span class="text-ink-300">•</span>
                             <span class="font-black text-neonPink-500">Est. 2023</span>
+                        </div>
+
+                        <!-- HERO PROMINENT LOGO DISPLAY -->
+                        <div class="mb-6 relative group">
+                            <div class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-3xl sm:rounded-full bg-gradient-to-tr from-neonBlue-400 via-white to-neonPink-400 p-2 sm:p-2.5 shadow-neon-combo transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3 flex items-center justify-center">
+                                <div class="w-full h-full bg-white rounded-2xl sm:rounded-full p-3 sm:p-4 flex items-center justify-center shadow-inner overflow-hidden">
+                                    <img src="./logo.png" 
+                                         alt="HUED Hoops Crest" 
+                                         class="w-full h-full object-contain filter drop-shadow-md"
+                                         onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+                                    <div class="hidden w-full h-full items-center justify-center font-black text-4xl sm:text-6xl text-neonBlue-500">
+                                        HU
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="relative select-none max-w-5xl">
@@ -315,23 +332,6 @@
                         </div>
                     </div>
 
-                    <!-- KINETIC TICKER TAPE -->
-                    <div class="w-full overflow-hidden py-3 bg-gradient-to-r from-neonBlue-100 via-neonPink-100 to-neonBlue-100 rounded-2xl border-2 border-white rotate-[-1deg] shadow-neon-combo">
-                        <div class="flex whitespace-nowrap animate-marquee gap-8 font-black text-xs sm:text-sm uppercase tracking-widest text-ink-900">
-                            <span v-for="i in 4" :key="i" class="flex items-center gap-8">
-                                <span>🏀 {{ lang === 'en' ? 'Beytepe Tent Arena' : 'Beytepe Çadır Saha' }}</span>
-                                <span class="text-neonPink-500">★</span>
-                                <span>HODESK 3x3 {{ lang === 'en' ? 'Silver & Bronze' : 'Gümüş & Bronz' }}</span>
-                                <span class="text-neonBlue-500">★</span>
-                                <span>{{ lang === 'en' ? 'Sports Festival 53-58 Thriller' : 'Spor Şenliği 53-58 Maçı' }}</span>
-                                <span class="text-neonPink-500">★</span>
-                                <span>{{ lang === 'en' ? 'Men & Women Divisions' : 'Kadın ve Erkek Takımları' }}</span>
-                                <span class="text-neonBlue-500">★</span>
-                                <span>{{ lang === 'en' ? 'Vibrant Neon Hoops' : 'Canlı Neon Renkler' }}</span>
-                            </span>
-                        </div>
-                    </div>
-
                     <!-- SPOTLIGHT & TELEMETRY -->
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                         <div class="lg:col-span-7 bubble-card p-6 sm:p-8 relative overflow-hidden bg-gradient-to-br from-white via-white to-neonBlue-50">
@@ -345,9 +345,14 @@
                             </div>
 
                             <div class="my-6 flex items-center justify-between gap-4">
-                                <div class="text-left">
-                                    <div class="font-black text-4xl sm:text-5xl text-ink-900 tracking-tight">HUED</div>
-                                    <div class="text-xs font-black text-neonBlue-500 uppercase">{{ t.hero.script }}</div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-xl bg-white border border-neonBlue-200 p-1 shadow-sm flex items-center justify-center shrink-0">
+                                        <img src="./logo.png" alt="HUED" class="w-full h-full object-contain">
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="font-black text-3xl sm:text-5xl text-ink-900 tracking-tight leading-none">HUED</div>
+                                        <div class="text-xs font-black text-neonBlue-500 uppercase mt-0.5">{{ t.hero.script }}</div>
+                                    </div>
                                 </div>
 
                                 <div class="flex flex-col items-center">
@@ -358,8 +363,8 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <div class="font-black text-4xl sm:text-5xl text-ink-900 tracking-tight">{{ lang === 'en' ? 'FEAS' : 'İİBF' }}</div>
-                                    <div class="text-xs font-bold text-ink-400 uppercase">{{ lang === 'en' ? 'Economics & Admin' : 'İktisadi İdari Bilimler' }}</div>
+                                    <div class="font-black text-3xl sm:text-5xl text-ink-900 tracking-tight leading-none">{{ lang === 'en' ? 'FEAS' : 'İİBF' }}</div>
+                                    <div class="text-xs font-bold text-ink-400 uppercase mt-0.5">{{ lang === 'en' ? 'Economics & Admin' : 'İktisadi İdari Bilimler' }}</div>
                                 </div>
                             </div>
 
@@ -492,16 +497,24 @@
                         <!-- Filter Controls -->
                         <div class="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
                             <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-                                <button @click="rosterDivision = 'men'" 
-                                        class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all shadow-sm"
-                                        :class="rosterDivision === 'men' ? 'bg-neonBlue-400 text-white shadow-neon-blue' : 'bg-neonBlue-50 text-ink-600 hover:bg-neonBlue-100'">
-                                    🏀 {{ t.roster.men_league }}
-                                </button>
-                                <button @click="rosterDivision = 'women'" 
-                                        class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all shadow-sm"
-                                        :class="rosterDivision === 'women' ? 'bg-neonPink-400 text-white shadow-neon-pink' : 'bg-neonBlue-50 text-ink-600 hover:bg-neonBlue-100'">
-                                    🏀 {{ t.roster.women_league }}
-                                </button>
+                                <!-- Division buttons visible only during Active view; when Alumni, unified automatically -->
+                                <template v-if="rosterStatus !== 'alumni'">
+                                    <button @click="rosterDivision = 'men'" 
+                                            class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all shadow-sm"
+                                            :class="rosterDivision === 'men' ? 'bg-neonBlue-400 text-white shadow-neon-blue' : 'bg-neonBlue-50 text-ink-600 hover:bg-neonBlue-100'">
+                                        🏀 {{ t.roster.men_league }}
+                                    </button>
+                                    <button @click="rosterDivision = 'women'" 
+                                            class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all shadow-sm"
+                                            :class="rosterDivision === 'women' ? 'bg-neonPink-400 text-white shadow-neon-pink' : 'bg-neonBlue-50 text-ink-600 hover:bg-neonBlue-100'">
+                                        🏀 {{ t.roster.women_league }}
+                                    </button>
+                                </template>
+                                <div v-else class="px-4 py-2 rounded-full bg-gradient-to-r from-neonBlue-100 to-neonPink-100 border border-neonBlue-200 text-xs font-black text-ink-800 uppercase tracking-wider flex items-center gap-2 shadow-sm">
+                                    <span>👥</span>
+                                    <span>{{ lang === 'en' ? 'Combined Alumni (Men & Women)' : 'Birleşik Mezunlar (Kadın & Erkek)' }}</span>
+                                </div>
+
                                 <button @click="toggleAlumni" 
                                         class="px-5 py-2 rounded-full font-black text-xs tracking-wider uppercase transition-all border shadow-sm"
                                         :class="rosterStatus === 'alumni' ? 'bg-ink-900 text-white border-ink-900 shadow-md' : 'bg-white text-ink-600 border-neonBlue-200 hover:border-neonPink-300'">
@@ -720,14 +733,14 @@
 
                 <!-- 5. JOIN VIEW -->
                 <section v-else-if="currentView === 'join'" :key="'join-' + lang" class="space-y-10">
-                    <div class="bubble-card p-8 sm:p-12 text-center max-w-3xl mx-auto bg-gradient-to-b from-white to-neonBlue-50">
+                    <div class="bubble-card p-5 sm:p-8 md:p-12 text-center max-w-3xl mx-auto bg-gradient-to-b from-white to-neonBlue-50">
                         <span class="px-3.5 py-1 rounded-full bg-neonPink-100 text-neonPink-500 font-black text-xs uppercase tracking-widest shadow-sm">
                             {{ lang === 'en' ? 'Recruitment' : 'Kadroya Katıl' }}
                         </span>
-                        <h2 class="font-black text-5xl sm:text-7xl text-ink-900 mt-2 uppercase tracking-tight">
+                        <h2 class="font-black text-4xl sm:text-6xl md:text-7xl text-ink-900 mt-2 uppercase tracking-tight">
                             {{ t.join.title }}
                         </h2>
-                        <p class="text-sm text-ink-600 mt-3 max-w-lg mx-auto leading-relaxed font-medium">
+                        <p class="text-xs sm:text-sm text-ink-600 mt-3 max-w-lg mx-auto leading-relaxed font-medium">
                             {{ lang === 'en' 
                                 ? 'Connect with the squad via official communication channels, participate in tryouts, or join our community group.' 
                                 : 'Resmi iletişim kanallarımızdan takıma ulaşın, yeni dönem antrenmanları ve seçme duyurularından anında haberdar olun.' }}
@@ -736,12 +749,12 @@
                         <!-- Direct Channels -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                             <a href="https://chat.whatsapp.com/FEladZ8gmj0HAbbHnrYLiP" target="_blank" rel="noopener noreferrer"
-                               class="p-5 rounded-3xl bg-white border-2 border-emerald-200 hover:border-[#25D366] flex items-center justify-between text-left group shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all">
-                                <div>
+                               class="p-4 sm:p-5 rounded-3xl bg-white border-2 border-emerald-200 hover:border-[#25D366] flex items-center justify-between text-left group shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all">
+                                <div class="min-w-0">
                                     <span class="text-[10px] font-black text-[#25D366] uppercase tracking-wider block">COMMUNITY CHAT</span>
-                                    <h4 class="font-black text-lg text-ink-900 group-hover:text-[#25D366] transition-colors tracking-tight">WHATSAPP ROSTER</h4>
+                                    <h4 class="font-black text-base sm:text-lg text-ink-900 group-hover:text-[#25D366] transition-colors tracking-tight">WHATSAPP ROSTER</h4>
                                 </div>
-                                <div class="w-12 h-12 rounded-2xl bg-[#e6f8ee] border border-[#25D366]/30 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-sm">
+                                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#e6f8ee] border border-[#25D366]/30 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-sm shrink-0 ml-2">
                                     <svg class="w-full h-full" viewBox="0 0 24 24">
                                         <path fill="#25D366" d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.35.49 1.199.534 1.286.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.177.181-.076.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.176L2 22l4.954-1.398C8.423 21.494 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.2c-1.637 0-3.16-.484-4.437-1.319l-.318-.208-2.94.83.84-2.86-.226-.339A8.16 8.16 0 0 1 3.8 12c0-4.522 3.678-8.2 8.2-8.2 4.521 0 8.2 3.678 8.2 8.2 0 4.521-3.679 8.2-8.2 8.2z"/>
                                     </svg>
@@ -749,12 +762,12 @@
                             </a>
 
                             <a href="https://www.instagram.com/huedbasketbol" target="_blank" rel="noopener noreferrer"
-                               class="p-5 rounded-3xl bg-white border-2 border-pink-200 hover:border-neonPink-400 flex items-center justify-between text-left group shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all">
-                                <div>
+                               class="p-4 sm:p-5 rounded-3xl bg-white border-2 border-pink-200 hover:border-neonPink-400 flex items-center justify-between text-left group shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all">
+                                <div class="min-w-0">
                                     <span class="text-[10px] font-black text-neonPink-500 uppercase tracking-wider block">MEDIA HUB</span>
-                                    <h4 class="font-black text-lg text-ink-900 group-hover:text-neonPink-500 transition-colors tracking-tight">OFFICIAL INSTAGRAM</h4>
+                                    <h4 class="font-black text-base sm:text-lg text-ink-900 group-hover:text-neonPink-500 transition-colors tracking-tight">OFFICIAL INSTAGRAM</h4>
                                 </div>
-                                <div class="w-12 h-12 rounded-2xl bg-[#feeef5] border border-neonPink-300/30 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-sm">
+                                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#feeef5] border border-neonPink-300/30 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-sm shrink-0 ml-2">
                                     <svg class="w-full h-full" viewBox="0 0 24 24">
                                         <defs>
                                             <radialGradient id="igGlow" cx="0.2" cy="1" r="1">
@@ -769,11 +782,11 @@
                             </a>
                         </div>
 
-                        <!-- Official Google "G" Logo -->
+                        <!-- Responsive Clean Email Contact Card -->
                         <div @click="copyEmail" 
-                             class="mt-4 p-5 rounded-3xl bg-white border-2 border-slate-200/80 hover:border-neonBlue-400 flex items-center justify-between cursor-pointer group shadow-sm hover:shadow-md hover:scale-[1.01] active:scale-95 transition-all">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-[#eef3f8] border border-slate-200 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-inner">
+                             class="mt-4 p-4 sm:p-5 rounded-3xl bg-white border-2 border-slate-200/80 hover:border-neonBlue-400 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer group shadow-sm hover:shadow-md hover:scale-[1.01] active:scale-95 transition-all overflow-hidden">
+                            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#eef3f8] border border-slate-200 flex items-center justify-center p-2.5 transition-transform group-hover:scale-110 shadow-inner shrink-0">
                                     <svg class="w-full h-full" viewBox="0 0 24 24">
                                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                                         <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -781,16 +794,16 @@
                                         <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
                                     </svg>
                                 </div>
-                                <div class="text-left">
-                                    <span class="text-[10px] font-black text-neonBlue-500 uppercase tracking-wider block">
+                                <div class="text-left min-w-0">
+                                    <span class="text-[10px] font-black text-neonBlue-500 uppercase tracking-wider block truncate">
                                         {{ t.join.email_label }}
                                     </span>
-                                    <h4 class="font-black text-base sm:text-lg text-ink-900 group-hover:text-neonBlue-500 transition-colors tracking-tight">
+                                    <h4 class="font-black text-sm sm:text-base md:text-lg text-ink-900 group-hover:text-neonBlue-500 transition-colors tracking-tight break-all sm:break-normal">
                                         huedbasketbol@gmail.com
                                     </h4>
                                 </div>
                             </div>
-                            <span class="px-4 py-2 rounded-full bg-neonBlue-50 text-neonBlue-600 font-black text-xs uppercase tracking-wider group-hover:bg-neonBlue-400 group-hover:text-white transition-colors">
+                            <span class="px-4 py-2 rounded-full bg-neonBlue-50 text-neonBlue-600 font-black text-xs uppercase tracking-wider group-hover:bg-neonBlue-400 group-hover:text-white transition-colors self-end sm:self-center shrink-0">
                                 {{ lang === 'en' ? 'COPY' : 'KOPYALA' }}
                             </span>
                         </div>
@@ -902,19 +915,19 @@
         <!-- FOOTER with Team Logo -->
         <footer class="mt-auto py-8 border-t border-neonBlue-200/80 bg-white/80 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-neonBlue-400 to-neonPink-400 p-[1.5px] shadow-neon-pink flex items-center justify-center overflow-hidden shrink-0">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-r from-neonBlue-400 to-neonPink-400 p-[2px] shadow-neon-pink flex items-center justify-center overflow-hidden shrink-0">
                         <img src="./logo.png" 
                              alt="HUED Basketball" 
-                             class="w-full h-full object-contain rounded-full bg-white p-0.5"
+                             class="w-full h-full object-contain rounded-xl bg-white p-1"
                              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
-                        <div class="hidden w-full h-full bg-white rounded-full items-center justify-center font-black text-neonBlue-500 text-[10px]">
+                        <div class="hidden w-full h-full bg-white rounded-xl items-center justify-center font-black text-neonBlue-500 text-xs">
                             HU
                         </div>
                     </div>
                     <div>
-                        <div class="font-black text-sm text-ink-900 tracking-wider">HUED BASKETBALL</div>
-                        <div class="text-[10px] font-bold text-ink-400 uppercase">Hacettepe University • {{ t.hero.script }}</div>
+                        <div class="font-black text-base text-ink-900 tracking-wider">HUED BASKETBALL</div>
+                        <div class="text-[11px] font-bold text-ink-400 uppercase">Hacettepe University • {{ t.hero.script }}</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-6 text-xs font-black text-ink-500">
@@ -1234,15 +1247,20 @@
                 });
 
                 const activeDivisionLabel = computed(() => {
+                    if (rosterStatus.value === 'alumni') {
+                        return lang.value === 'en' ? 'All Divisions (Unified)' : 'Tüm Kadrolar (Birleşik)';
+                    }
                     return rosterDivision.value === 'men' 
                         ? (lang.value === 'en' ? "Men's Division" : 'Erkek Takımı') 
                         : (lang.value === 'en' ? "Women's Division" : 'Kadın Takımı');
                 });
 
+                // Combined Men and Women alumni when viewing alumni roster
                 const currentSquadPool = computed(() => {
-                    return DATA[rosterDivision.value].filter(p => 
-                        rosterStatus.value === 'alumni' ? p.status === 'ALUMNI' : p.status !== 'ALUMNI'
-                    );
+                    if (rosterStatus.value === 'alumni') {
+                        return [...DATA.men, ...DATA.women].filter(p => p.status === 'ALUMNI');
+                    }
+                    return DATA[rosterDivision.value].filter(p => p.status !== 'ALUMNI');
                 });
 
                 const filteredPlayers = computed(() => {
